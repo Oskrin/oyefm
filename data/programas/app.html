@@ -1,0 +1,165 @@
+<div class="main-content">	
+	<div class="main-content-inner">
+	    <div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="#/">Inicio</a>
+				</li>
+
+				<li class="active">Ingesos</li>
+				<li class="active">Programas</li>
+			</ul>
+
+			<div class="nav-search" id="nav-search">
+				<form class="form-search">
+					<span class="input-icon">
+						<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+						<i class="ace-icon fa fa-search nav-search-icon"></i>
+					</span>
+				</form>
+			</div>
+		</div>
+
+	    <div class="page-content">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="space"></div>
+					<form class="form-horizontal" name="form_programas" id="form_programas">
+						<div class="tabbable">
+							<ul class="nav nav-tabs padding-16">
+								<li class="active">
+									<a data-toggle="tab" href="">
+										<i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+										Información Básica
+									</a>
+								</li>
+							</ul>
+
+							<div class="tab-content profile-edit-tab-content">
+								<div id="edit-basic" class="tab-pane in active">
+									&nbsp; &nbsp;
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-xs-12 col-sm-4 center">
+												<div>
+													<span class="profile-picture">
+														<img id="avatar" class="editable img-responsive" alt="" src="dist/avatars/programas.jpg" />
+													</span>
+
+													<div class="space-4"></div>
+
+													<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+														<div class="inline position-relative">
+															<span class="white">Logo</span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-8">
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="select_tipo_programa">Tipo Programa:</label>
+													<div class="col-sm-4">
+														<select id="select_tipo_programa" name="select_tipo_programa" class="select2" data-placeholder="Tipo Programa..." >
+															<option value="">&nbsp;</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="codigo_programa">Código Programa:</label>
+													<div class="col-sm-4">
+														<input type="text" name="codigo_programa" id="codigo_programa" placeholder="Código Programa" value="" class="form-control"/>
+														<input type="hidden" name="id_programa" id="id_programa" placeholder="" value="" class=""/>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="nombre_programa">Nombre Programa:</label>
+													<div class="col-sm-4">
+														<input type="text" name="nombre_programa" id="nombre_programa" placeholder="Nombre Programa" value="" class="form-control" onkeyup="this.value = this.value.toUpperCase();" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="hora_inicio">Hora Inicio:</label>
+													<div class="col-sm-4">
+														<input type="text" name="hora_inicio" id="hora_inicio" placeholder="" value="" class="form-control" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="hora_fin">Hora Fin:</label>
+													<div class="col-sm-4">
+														<input type="text" name="hora_fin" id="hora_fin" placeholder="" value="" class="form-control" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="observaciones">Observaciones:</label>
+													<div class="col-sm-4">
+														<textarea name="observaciones" id="observaciones" class="form-control"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix form-actions">
+							<div class="col-md-offset-3 col-md-9">
+								<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+									<i class="ace-icon fa fa-save bigger-110"></i>
+									Guardar
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn btn-success" type="button" name="btn_3" id="btn_3">
+									<i class="ace-icon fa fa-pencil-square-o bigger-110"></i>
+									Modificar
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn btn-success" type="button" name="btn_2" id="btn_2" data-toggle="modal" href="#myModal">
+									<i class="ace-icon fa fa-search bigger-110"></i>
+									Buscar
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn btn-success" type="button" name="btn_1" id="btn_1">
+									<i class="ace-icon fa fa-refresh bigger-110"></i>
+									Actualizar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">BUSCAR PROGRAMAS</h4>
+        </div>
+        <div class="modal-body">
+            <table id="table"></table>
+			<div id="pager"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>

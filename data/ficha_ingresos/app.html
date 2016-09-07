@@ -1,0 +1,931 @@
+ <div class="main-content">
+	<div class="main-content-inner">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="#/">Inicio</a>
+				</li>
+
+				<li class="active">Corporativo</li>
+				<li class="active">Ingresar Fichas</li>
+			</ul>
+
+			<div class="nav-search" id="nav-search">
+				<form class="form-search">
+					<span class="input-icon">
+						<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+						<i class="ace-icon fa fa-search nav-search-icon"></i>
+					</span>
+				</form>
+			</div>
+		</div>
+
+		<div class="page-content">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="widget-box">
+						<div class="widget-header widget-header-blue widget-header-flat">
+							<h4 class="widget-title lighter">Ficha Ingreso Personal</h4>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+								<div id="fuelux-wizard-container">
+									<div>
+										<ul class="steps">
+											<li data-step="1" class="active">
+												<span class="step">1</span>
+												<span class="title">Datos Personales</span>
+											</li>
+
+											<li data-step="2" class="active">
+												<span class="step">2</span>
+												<span class="title">Datos Bancarios</span>
+											</li>
+
+											<li data-step="3" class="active">
+												<span class="step">3</span>
+												<span class="title">Datos Familiares</span>
+											</li>
+
+											<li data-step="4" class="active">
+												<span class="step">4</span>
+												<span class="title">Guardar Datos</span>
+											</li>
+										</ul>
+									</div>
+									<hr/>
+									<div class="step-content pos-rel">
+										<div class="step-pane active" data-step="1">
+											<form class="form-horizontal" id="form_personal">
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha de Aplicación:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="input-group">
+																		<input type="text" id="fecha_aplicacion" name="fecha_aplicacion" class="form-control datepicker" />
+																		<span class="input-group-addon">
+																			<i class="ace-icon fa fa-calendar"></i>
+																		</span>
+																		<input type="hidden" id="id_personal" name="id_personal" class="form-control" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Código Ficha:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="clearfix">
+																		<input type="text" name="codigo_ficha" id="codigo_ficha" class="form-control" readonly />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+																	<label>
+																		<input name="inp_relacion" id="inp_relacion" type="checkbox" value="relacion" class="ace" />
+																		<span class="lbl"> Relación Dependencia</span>
+																	</label>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-sm-12">
+														<h3 class="header smaller blue">&nbsp; Datos Personales:</h3>
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cédula de Identidad:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="clearfix">
+																		<input type="text" name="cedula" id="cedula" class="form-control" placeholder="Consultar..." />
+																	</div>
+																</div>
+																<button class="btn btn-purple btn-sm blue" id="btn_verificar" type="button" onclick="angular.element(this).scope().cargadatos('estado')"><i class="ace-icon fa fa-search"></i></button>
+															</div>
+
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Edad:</label>
+																<div class="col-xs-12 col-sm-3">
+																	<div class="clearfix">
+																		<input type="text" name="edad" id="edad" class="form-control" />
+																	</div>
+																</div>	
+															</div>
+
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Antecedentes:</label>
+																<div class="col-xs-12 col-sm-7">
+																	<div class="clearfix">
+																		<label>
+																			<input name="antecedentes" id="antecedentes" class="ace ace-switch ace-switch-5" type="checkbox" checked>
+																			<span class="lbl"></span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombres Completos:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="nombres_completos" id="nombres_completos" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Nombres completos" />
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="input-group">
+																		<span class="input-group-addon">
+																			<i class="ace-icon fa fa-phone"></i>
+																		</span>
+																		<input type="tel" id="telf_fijo" name="telf_fijo" class="form-control fijo" />
+																	</div>
+																</div>	
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha de Nacimiento:</label>
+																<div class="col-xs-12 col-sm-5">
+																	<div class="input-group">
+																		<input type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control datepicker" />
+																		<span class="input-group-addon">
+																			<i class="ace-icon fa fa-calendar"></i>
+																		</span>
+																	</div>
+																</div>
+															</div>	
+
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Celular:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="input-group">
+																		<span class="input-group-addon">
+																			<i class="ace-icon fa fa-phone"></i>
+																		</span>
+																		<input type="tel" id="telf_celular" name="telf_celular" class="form-control telefonos"/>
+																	</div>
+																</div>	
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-sm-12">
+														<h3 class="header smaller blue">&nbsp; Datos Referenciales:</h3>
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Estado Civil:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="clearfix">
+																		<select id="select_civil" name="select_civil" class="select2" data-placeholder="Estado Civil...">
+																			<option value="">&nbsp;</option>
+																			<option value="SOLTERO">Soltero</option>
+																			<option value="CASADO">Casado</option>
+																			<option value="DIVORCIADO">Divorciado</option>
+																			<option value="VIUDO">Viudo</option>
+																			<option value="UNION LIBRE">Union Libre</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-3">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cargas Familiares:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="clearfix">
+																		<input type="text" id="cargas" name="cargas" readonly class="form-control" />
+																		<div class="space-6"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-2 no-padding-right">E-mail:</label>
+																<div class="col-xs-12 col-sm-10">
+																	<div class="clearfix">
+																		<input type="email" name="email" id="email" class="form-control" placeholder="Ingrese un correo electrónico"/>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-12">
+														<h3 class="header smaller blue">&nbsp; Instrucción:</h3>
+														<div class="form-group">
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_instruccion" id="rb_primaria" value="Primaria" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Primaria</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_instruccion" id="rb_basico" value="Ciclo Basico" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Ciclo Básico</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_instruccion" id="rb_bachiller" value="Bachiller" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Bachiller</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_instruccion" id="rb_universitario" value="Universitario" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Universitario</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-4">
+																<label class="control-label col-xs-12 col-sm-3 no-padding-right">Especialidad:</label>
+																<div class="col-xs-12 col-sm-9">
+																	<div class="clearfix">
+																		<input type="text" name="especialidad" id="especialidad" placeholder="Ingrese una Especialidad" class="form-control" />
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="row" style="height: 300px">
+												<h3 class="header smaller blue">&nbsp; Cursos Realizados:</h3>
+													<div class="col-sm-12">
+														<div class="col-sm-1">
+															<button class="btn btn-purple btn-sm blue" id="btn_agregar" type="button"><i class="ace-icon fa fa-arrow-circle-o-down"></i>Agregar</button>
+														</div>
+
+														<div class="col-sm-8">
+															<table id="tbt_cursos" name="tbt_cursos" class="table table table-striped">
+																<thead>
+																	<tr>
+																		<th>Cursos realidados de</th>	
+																		<th>Establecimiento</th>
+																		<th>Tiempo</th>				
+																		<th>Proceso</th>	
+																	</tr>
+																</thead>
+																<tbody></tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-sm-12">
+														<h3 class="header smaller blue"></h3>
+														<div class="form-group">
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_vivienda" id="rb_propia" value="PROPIA" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Vivienda Propia</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_vivienda" id="rb_arriendo" value="ARRIENDO" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Vivienda en Arriendo</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_vivienda" id="rb_familiar" value="FAMILIAR" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Vivienda familiar</span>
+																	</label>
+																</div>
+															</div>
+
+															<div class="col-sm-2">
+																<div class="radio">
+																	<label>
+																		<input name="rb_vivienda" id="rb_otro" value="OTRO" type="radio" class="ace input-lg" />
+																		<span class="lbl"> Otra</span>
+																	</label>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<h3 class="header smaller blue">Localidad</h3>
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Provincia:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="provincia" id="provincia" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder= "Ingrese una Provincia" />
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Sector:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="sector" id="sector" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder = "Ingrese un Sector"/>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cantón:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="canton" id="canton" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder= "Ingrese un Cantón" />
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Dirección:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingrese una dirección" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Parroquia:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="parroquia" id="parroquia" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder= "Ingrese un Barrio" />
+																	</div>
+																</div>
+															</div>
+														</div>	
+													</div>
+												</div>
+
+												<h3 class="header smaller blue">Adicionales</h3>
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tipo de Sangre:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<select id="select_sangre" name="select_sangre" class="select2" data-placeholder="Tipo de Sangre...">
+																			<option value="">&nbsp;</option>
+																			<option value="A+">A+</option>
+																			<option value="A-">A-</option>
+																			<option value="B+">B+</option>
+																			<option value="B-">B-</option>
+																			<option value="AB+">AB+</option>
+																			<option value="AB-">AB-</option>
+																			<option value="O+">O+</option>
+																			<option value="O-">O-</option>
+																		</select>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Alérgico Antibióticos:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="alergia" id="alergia" class="form-control"  placeholder="Alergia en específica"/>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Enfermedad Específica:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="enfermedad" id="enfermedad" class="form-control" placeholder="Ingrese enfermedad específica" />
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<!-- FIN DEL PRIMER FORMULARIO DATOS PERSONALES -->
+
+										<!-- INICIO DEL SEGUNDO FORMULARIO DATOS BANCARIOS Y TRABAJOS ANTERIORES -->
+										<div class="step-pane active" data-step="2">
+											<h3 class="header smaller blue">&nbsp; Datos Bancarios:</h3>
+											<form class="form-horizontal" id="form_bancarios">
+												<!-- INICIO DEL PRIMER ROW -->
+												<div class="row">
+													<div class="col-sm-12" style="height: 180px">
+														<div class="col-sm-1">
+														<button class="btn btn-purple btn-sm blue " id="btn_agregar_cuentas"><i class="ace-icon fa fa-arrow-circle-o-down"></i>Agregar</button>
+														</div>
+														<div class="col-sm-8">
+															<table id="tbt_cuentas" name="tbt_cuentas" class="table table table-striped">
+															<thead>
+																<tr>
+																	<th>Cuenta</th>	
+																	<th style="display: none;">Id</th>
+																	<th>Banco</th>
+																	<th>Número</th>				
+																	<th>Proceso</th>	
+																</tr>
+															</thead>
+															<tbody></tbody>
+														</table>	
+														</div>
+													</div>
+												</div>
+												<!-- FIN DEL PRIMER ROW -->
+
+												<!-- INICIO DEL SEGUNDO ROW -->
+												<div class="row">
+												<h3 class="header smaller blue">&nbsp; Trabajos Anteriores:</h3>
+													<div class="col-sm-4">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre de la Empresa:</label>
+															<div class="col-xs-12 col-sm-8">
+																<div class="clearfix">
+																	<input type="text" name="empresa" id="empresa" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Nombre de la Empresa" />
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cargo:</label>
+															<div class="col-xs-12 col-sm-8">
+																<div class="clearfix">
+																	<input type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo Anterior" />
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-4">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo:</label>
+															<div class="col-xs-12 col-sm-6">
+																<div class="input-group">
+																	<span class="input-group-addon">
+																		<i class="ace-icon fa fa-phone"></i>
+																	</span>
+																	<input type="tel" id="telf_fijo_trab" name="telf_fijo_trab" class="form-control fijo" />
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Jefe:</label>
+															<div class="col-xs-12 col-sm-8">
+																<div class="clearfix">
+																	<input type="text" name="jefe" id="jefe"  class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Nombre Jefe Anterior" />
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-4">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Celular:</label>
+															<div class="col-xs-12 col-sm-6">
+																<div class="input-group">
+																	<span class="input-group-addon">
+																		<i class="ace-icon fa fa-phone"></i>
+																	</span>
+																	<input type="tel" id="telf_celular_trab" name="telf_celular_trab" class="form-control telefonos" />
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tiempo:</label>
+															<div class="col-xs-12 col-sm-8">
+																<div class="clearfix">
+																	<input class="form-control" type="text" name="tiempo_trabajo" id="tiempo_trabajo" placeholder="Tiempo laborado" />
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-8">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-2 no-padding-right">Dirección:</label>
+															<div class="col-xs-12 col-sm-10">
+																<div class="clearfix">
+																	<input type="text" name="direccion_trab" id="direccion_trab" class="form-control" placeholder="Ingrese dirección trabajo anterior" />
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-sm-4">
+														<div class="form-group">
+															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Ciudad:</label>
+															<div class="col-xs-12 col-sm-8">
+																<div class="clearfix">
+																	<input type="text" name="ciudad_trab" id="ciudad_trab" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Ingrese nombre ciudad" />
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<!-- FIN DEL SEGUNDO FORMULARIO DATOS BANCARIOS Y TRABAJOS ANTERIORES -->
+
+										<!-- INICIO DEL TERCER FORMULARIO DATOS FAMILIA -->
+										<div class="step-pane active" data-step="3">
+											<h3 class="header smaller blue">&nbsp; Datos de un familiar cercano o representante si es menor de edad con firma de autorización:</h3>
+											<form class="form-horizontal" id="form_familia">
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombres:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="nombres_familia" id="nombres_familia" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Ingrese nombre familiar" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Parentesco:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="parentesco" id="parentesco" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Ingrese parentesco" />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo o Celular:</label>
+																<div class="col-xs-12 col-sm-6">
+																	<div class="input-group">
+																		<span class="input-group-addon">
+																			<i class="ace-icon fa fa-phone"></i>
+																		</span>
+																		<input type="tel" id="telf_familia" name="telf_familia" class="form-control " />
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-8">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-2 no-padding-right">Dirección:</label>
+																<div class="col-xs-12 col-sm-10">
+																	<div class="clearfix">
+																		<input type="text" name="dir_fami" id="dir_fami" class="form-control"  placeholder="Ingrese una dirección"/>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-sm-4">
+															<div class="form-group">
+																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Ciudad:</label>
+																<div class="col-xs-12 col-sm-8">
+																	<div class="clearfix">
+																		<input type="text" name="ciudad_fami" id="ciudad_fami" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Ingrese una ciudad" />
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<br />
+													<div class="row">
+														<div class="col-sm-12">
+															<h3 class="header smaller">&nbsp; Declaro que todos los datos aquí emitidos son reales por lo tanto autorizó su verificación, aprobación y aceptación.</h3>	
+														</div>
+
+														<div class="col-sm-12">
+															<div class="col-sm-4">
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Inicio de Trabajo:</label>
+																	<div class="col-xs-12 col-sm-6">
+																		<div class="input-group">
+																			<input type="text" id="ini_trab" name="ini_trab" class="form-control datepicker" />
+																			<span class="input-group-addon">
+																				<i class="ace-icon fa fa-calendar"></i>
+																			</span>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Horas Laborar:</label>
+																	<div class="col-xs-12 col-sm-6">
+																		<div class="input-group">
+																			<input type="text" id="horas_laborar" name="horas_laborar" class="form-control" readonly />
+																		</div>
+																	</div>
+																</div>		
+															</div>
+
+															<div class="col-sm-4">
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Area:</label>
+																	<div class="col-xs-12 col-sm-6">
+																		<div class="clearfix">
+																			<select id="select_areas" name="select_areas" class="select2" data-placeholder="Area...">
+																			</select>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Sueldo:</label>
+																	<div class="col-xs-12 col-sm-6">
+																		<div class="input-group">
+																			<input type="text" id="sueldo" name="sueldo" class="form-control" value="0.000" />
+																		</div>
+																	</div>
+																</div>	
+															</div>
+
+															<div class="col-sm-4">
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Función o Cargo:</label>
+																	<div class="col-xs-12 col-sm-8">
+																		<div class="clearfix">
+																			<select id="select_cargo" name="select_cargo" class="select2" data-placeholder="Area...">
+																			</select>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Abreviatura Rol:</label>
+																	<div class="col-xs-12 col-sm-6">
+																		<div class="input-group">
+																			<input type="text" id="abreviatura" name="abreviatura" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" maxlength="2" />
+																		</div>
+																	</div>
+																</div>	
+															</div>
+														</div>
+
+														<div class="col-sm-12">
+															<div class="col-sm-4">
+																<h4 class="header red" align="center">Cargo netamente inicial y referencial, pudiendo ser removido reemplazado o reubicado de acuerdo a las necesidades de la empresa y sobre todo a sus actitudes y habilidades que demuestre.</h4>	
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<!-- FIN DEL TERCER FORMULARIO DATOS FAMILIA -->
+										<div class="step-pane active" data-step="4">
+											<div class="center">
+												<h3 class="green">Felicidades!</h3>
+												Presione Finalizar para poder Guardar!
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<hr />
+								<div class="wizard-actions">
+									<button class="btn btn-prev">
+										<i class="ace-icon fa fa-arrow-left"></i>
+										Atras
+									</button>
+
+									<button class="btn btn-success btn-next" data-last="Guardar" id="btn_0">
+										Siguiente
+										<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal-cursos-realizados" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header no-padding">
+				<div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					Agregar Cursos 
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12">
+						<form class="form-horizontal" id="form_modal_cursos">
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Curso realizado:</label>
+									<div class="col-xs-12 col-sm-8">
+										<div class="clearfix">
+											<input type="text" name="nombre_curso" id="nombre_curso" class="form-control" placeholder="Ingrese curso realizado"/>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Establecimiento:</label>
+									<div class="col-xs-12 col-sm-8">
+										<div class="clearfix">										
+											<input type="tel" id="establecimiento_curso" name="establecimiento_curso" class="form-control" placeholder="Ingrese establecimiento"/>
+										</div>
+									</div>	
+								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tiempo</label>
+									<div class="col-xs-12 col-sm-8">
+										<div class="clearfix">
+											<input class="form-control" type="text" name="tiempo_curso" id="tiempo_curso" placeholder="Ingrese tiempo curso"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+				<button name="btn_cargar" id="btn_cargar" class="btn btn-sm btn-success pull-right">
+					<i class="ace-icon fa fa-check"></i>
+					Cargar
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+
+<div id="modal-cuentas-bancarias" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header no-padding">
+				<div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					Agregar Cuentas bancarias
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-sm-12">
+						<form class="form-horizontal" id="form_modal_cuentas">
+							<div class="col-sm-11">
+								<div class="form-group">
+									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cuenta:</label>
+									<div class="col-xs-12 col-sm-8">
+										<div class="clearfix">
+											<select id="select_cuenta" name="select_cuenta" class="select2" data-placeholder="Cuenta...">
+												<option value="">&nbsp;</option>
+												<option value="CUENTA CORRIENTE">Cuenta Corriente</option>
+												<option value="CUENTA DE AHORROS">Cuenta de Ahorros</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Banco:</label>
+									<div class="col-xs-12 col-sm-8">
+										<div class="clearfix">
+											<select id="select_banco" name="select_banco" class="select2" data-placeholder="Banco...">
+												<option value="">&nbsp;</option>	
+											</select>
+										</div>
+									</div>	
+								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Número</label>
+									<div class="col-xs-12 col-sm-8">
+										<div class="clearfix">
+											<input type="text" name="numero_cuenta" id="numero_cuenta" class="form-control numero" placeholder="Ingrese un número de cuenta" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+				<button name="btn_cargar" id="btn_cargar_cuentas" class="btn btn-sm btn-success pull-right">
+					<i class="ace-icon fa fa-check"></i>
+					Cargar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+	        <div class="modal-header widget-header-blue">
+	          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	          <h4 class="modal-title">Fichas de Ingreso</h4>
+	        </div>
+
+	        <div class="modal-body">
+				<div class="clearfix">
+					<div class="pull-right tableTools-container"></div>
+				</div>
+
+				<div class="table-header">
+					Resultados para "Fichas de Ingreso"
+				</div>
+
+				<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>IDENTIFICACIÓN</th>
+							<th>NOMBRES COMPLETOS</th>
+							<th>FECHA APLICACIÓN</th>
+							<th>ACCIÓN</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+	        </div>
+	        <div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-rigth" data-dismiss="modal">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+			</div>
+        </div>
+    </div>
+</div>
+
+

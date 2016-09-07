@@ -1,0 +1,255 @@
+<div class="main-content">	
+	<div class="main-content-inner">
+	    <div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="#/">Inicio</a>
+				</li>
+
+				<li class="active">Ingesos</li>
+				<li class="active">Empresa</li>
+			</ul>
+
+			<div class="nav-search" id="nav-search">
+				<form class="form-search">
+					<span class="input-icon">
+						<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+						<i class="ace-icon fa fa-search nav-search-icon"></i>
+					</span>
+				</form>
+			</div>
+		</div>
+
+	    <div class="page-content">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="space"></div>
+					<form class="form-horizontal" name="form_empresa" id="form_empresa">
+						<div class="tabbable">
+							<ul class="nav nav-tabs padding-16">
+								<li class="active">
+									<a data-toggle="tab" href="">
+										<i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+										Información Básica
+									</a>
+								</li>
+							</ul>
+
+							<div class="tab-content profile-edit-tab-content">
+								<div id="edit-basic" class="tab-pane in active">
+									&nbsp; &nbsp;
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">RUC Empresa:</label>
+													<div class="col-sm-4">
+														<div class="clearfix">
+															<input type="text" name="identificacion" id="identificacion" placeholder="Consultar..." class="form-control" />
+															<input type="hidden" name="id_empresa" id="id_empresa" class="form-control" />
+														</div>
+													</div>
+													<button class="btn btn-purple btn-sm blue" id="btn_verificar" type="button" onclick="angular.element(this).scope().cargadatos('estado')"><i class="ace-icon fa fa-search"></i></button>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Nombre Comercial:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="nombre_empresa" id="nombre_empresa" placeholder="Nombre Comercial" class="form-control" onkeyup="this.value = this.value.toUpperCase();" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Teléfono:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<span class="block input-icon">
+																<input type="text" name="telefono1" id="telefono1" placeholder="Teléfono" value="" class="form-control" />
+																<i class="ace-icon fa fa-phone"></i>
+												            </span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Ciudad:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="ciudad" id="ciudad" placeholder="Ciudad" class="form-control" onkeyup="this.value = this.value.toUpperCase();" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Correo:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<span class="block input-icon">
+																<input type="text" name="correo" id="correo" placeholder="Correo" class="form-control" />
+																<i class="ace-icon fa fa-envelope"></i>
+												            </span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Sitio Web:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<span class="block input-icon">
+																<input type="text" name="sitio_web" id="sitio_web" placeholder="Sitio Web" class="form-control" />
+																<i class="ace-icon fa fa-globe"></i>
+												            </span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Factura Preimpresa:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="inicio_fac_preimpresa" id="inicio_fac_preimpresa" class="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Observaciones:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<textarea name="observaciones" id="observaciones" class="form-control"></textarea>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Razón Social:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="propietario" id="propietario" placeholder="Razón Social" class="form-control" onkeyup="this.value = this.value.toUpperCase();" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Slogan:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="slogan" id="slogan" placeholder="Slogan" class="form-control"  />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Celular:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<span class="block input-icon">
+																<input type="text" name="telefono2" id="telefono2" placeholder="Celular" value="" class="form-control" />
+																<i class="ace-icon fa fa-mobile"></i>
+												            </span>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Dirección:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="direccion" id="direccion" placeholder="Dirección" class="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Fax:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="fax" id="fax" placeholder="Fax" class="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">Autorización SRI:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="autorizacion_sri" id="autorizacion_sri" placeholder="Autorización SRI" class="form-control"  />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-sm-4 no-padding-right">N. Items Factura:</label>
+													<div class="col-sm-6">
+														<div class="clearfix">
+															<input type="text" name="item_factura" id="item_factura" class="form-control" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="clearfix form-actions">
+							<div class="col-md-offset-3 col-md-9">
+								<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+									<i class="ace-icon fa fa-save bigger-110"></i>
+									Guardar
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn btn-success" type="button" name="btn_3" id="btn_3">
+									<i class="ace-icon fa fa-pencil-square-o bigger-110"></i>
+									Modificar
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn btn-success" type="button" name="btn_2" id="btn_2" data-toggle="modal" href="#myModal">
+									<i class="ace-icon fa fa-search bigger-110"></i>
+									Buscar
+								</button>
+
+								&nbsp; &nbsp;
+								<button class="btn btn-success" type="button" name="btn_1" id="btn_1">
+									<i class="ace-icon fa fa-refresh bigger-110"></i>
+									Actualizar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">BUSCAR EMPRESA</h4>
+        </div>
+        <div class="modal-body">
+            <table id="table"></table>
+			<div id="pager"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>
