@@ -24,7 +24,7 @@
 
 	// consultar usuarios
 	if(isset($_POST['cargar_tabla'])){
-		$resultado = $class->consulta("SELECT id, ruc_empresa, nombre_comercial, razon_social, representante_legal, cedula_representante, estado FROM clientes");
+		$resultado = $class->consulta("SELECT id, ruc_empresa, nombre_comercial, razon_social, representante_legal, cedula_representante, estado FROM clientes WHERE estado = '1'");
 		while ($row=$class->fetch_array($resultado)) {
 			$lista[] = array('id' => $row[0],
 						'ruc_empresa' => $row['ruc_empresa'],
@@ -46,6 +46,17 @@
 			$data = array('imagen' => $row['imagen']);
 		}
 		print_r(json_encode($data));
+	}
+	//fin
+
+	//borrar clientes
+	if (isset($_POST['borrar_clientes'])) {
+		$data = "";
+		$resp = $class->consulta("UPDATE clientes set estado = '2' where id = '$_POST[id]'");
+
+
+		$data = "1";
+		echo $data;
 	}
 	//fin
 ?>

@@ -1,0 +1,110 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-briefcase blue"></i>
+					<a href="#/menu_rol_pagos">Rol Pagos</a>
+				</li>
+
+				<li class="active">Registro Rol Pagos</li>
+			</ul>
+		</div>
+		<hr />
+
+		<div class="widget-box">
+            <div class="widget-main">
+            	<form class="form-horizontal" name="form_generar" id="form_generar">
+            		&nbsp;
+                	<div class="col-sm-12">
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label class="col-sm-4 control-label no-padding-right" for="fecha_inicio">FECHA INICIO:</label>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input type="text" id="fecha_inicio" name="fecha_inicio" class="form-control datepicker" readonly />
+										<span class="input-group-addon">
+											<i class="ace-icon fa fa-calendar"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label class="col-sm-4 control-label no-padding-right" for="fecha_fin">FECHA FIN:</label>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<input type="text" id="fecha_fin" name="fecha_fin" class="form-control datepicker" readonly />
+										<span class="input-group-addon">
+											<i class="ace-icon fa fa-calendar"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label class="col-sm-4 control-label no-padding-right" for="select_areas">Sub Empresa:</label>
+								<div class="col-sm-6">
+									<select id="select_areas" name="select_areas" class="select2" data-placeholder="Sub Empresa...">
+										<option value="">&nbsp;</option>	
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-1">
+							<div class="form-group">
+								<button class="btn btn-pink btn-sm" id="btn_filtrar" name="btn_filtrar" type="button"><i class="ace-icon fa fa-calendar"></i> FILTRAR</button>
+							</div>
+						</div>
+
+						<div class="col-sm-1">
+							<div class="form-group">
+								<button class="btn btn-pink btn-sm" id="btn_limpiar" name="btn_limpiar" type="button"><i class="ace-icon fa fa-search-plus"></i> LIMPIAR</button>
+							</div>
+						</div>
+
+						<!-- <div class="col-sm-1">
+							<div class="form-group">
+								<button class="btn btn-pink btn-sm" id="btn_pdf" name="btn_pdf" type="button"><i class="ace-icon fa fa-file-excel-o"></i> PDF</button>
+							</div>
+						</div> -->
+
+						<!-- <div class="col-sm-1">
+							<div class="form-group">
+								<button class="btn btn-purple btn-sm blue" id="btn_excel" name="btn_excel" type="button"><i class="ace-icon fa fa-file-excel-o"></i> EXCEL</button>
+							</div>
+						</div> -->
+					</div>
+				</form>
+				&nbsp;
+				                          
+                <table id="grid-table"></table>
+                <div id="grid-pager"></div>
+
+            	<div class="clearfix form-actions center">
+					<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+						<i class="ace-icon fa fa-save bigger-110"></i>
+						Generar Roles
+					</button>
+
+					<button class="btn btn-success" type="button" name="btn_1" id="btn_1">
+						<i class="ace-icon fa fa-refresh bigger-110"></i>
+						Actualizar
+					</button>
+				</div>
+            </div>
+        </div>
+	</div>
+</div>
+
+
+

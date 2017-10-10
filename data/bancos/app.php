@@ -16,7 +16,7 @@
 		if ($data != 0) {
 			$data = "3";
 		} else {
-			$resp = $class->consulta("INSERT INTO corporativo.bancos VALUES ('$id_bancos','$_POST[nombre]','$_POST[telefono]','$_POST[direccion]','1','$fecha');");
+			$resp = $class->consulta("INSERT INTO corporativo.bancos VALUES ('$id_bancos','$_POST[nombre]','$_POST[telefono]','$_POST[direccion]','1','$fecha')");
 			$data = "1";
 		}
 	} else {
@@ -32,6 +32,11 @@
 		    	$resp = $class->consulta("UPDATE corporativo.bancos SET nombre = '$_POST[nombre]',telefono = '$_POST[telefono]',direccion = '$_POST[direccion]',fecha_creacion = '$fecha' WHERE id = '$_POST[id]'");
 		    	$data = "2";
 		    }
+	    } else {
+	    	if ($_POST['oper'] == "del") {
+	    		$resp = $class->consulta("UPDATE corporativo.bancos SET estado = '2' WHERE id = '$_POST[id]'");
+	    		$data = "4";	
+	    	}	
 	    }
 	}    
 	echo $data;

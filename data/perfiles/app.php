@@ -33,6 +33,11 @@
 				$resp = $class->consulta("UPDATE perfiles SET nombre = '$_POST[nombre_cargo]',fecha = '$fecha' WHERE id = '$_POST[id]'");
 	    		$data = "2";
 			}
+	    } else {
+	    	if ($_POST['oper'] == "del") {
+	    		$resp = $class->consulta("UPDATE perfiles SET estado = '2' WHERE id = '$_POST[id]'");
+	    		$data = "4";	
+	    	}	
 	    }
 	}    
 	echo $data;

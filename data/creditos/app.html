@@ -1,0 +1,188 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-gear blue"></i>
+					<a href="#/menu_empleados">Empleados</a>
+				</li>
+
+				<li class="active">Créditos Empleados</li>
+			</ul>
+		</div>
+		<hr />
+
+		<div class="widget-box">
+            <div class="widget-main">
+            	<form class="form-horizontal" name="form_creditos" id="form_creditos">
+					<div class="row">
+						&nbsp; &nbsp;
+						<div class="col-sm-12">
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="select_empleado">EMPLEADO:</label>
+									<div class="col-sm-8">
+										<select id="select_empleado" name="select_empleado" class="select2" data-placeholder="Empleado busqueda...">
+											<option value="">&nbsp;</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="fecha_credito">Fecha Crédito:</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" id="fecha_credito" name="fecha_credito" class="form-control datepicker" class="form-control" />
+											<span class="input-group-addon">
+												<i class="ace-icon fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="input_monto">Monto Crédito:</label>
+									<div class="col-sm-8">
+										<input type="number" name="input_monto" id="input_monto" class="form-control" value="" min="1" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="select_tasa_tipo">Tipo de tasa:</label>
+									<div class="col-sm-8">
+										<select id="select_tasa_tipo" name="select_tasa_tipo" class="select2" data-placeholder="Seleccione Tipo de tasa...">
+											<option value="mensual">Mensual</option>
+            								<option value="anual">Anual</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="input_cuotas">Cuotas:</label>
+									<div class="col-sm-6">
+										<input type="text" name="input_cuotas" id="input_cuotas" class="form-control" readonly />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="select_periodo">Periodo de pago:</label>
+									<div class="col-sm-8">
+										<select id="select_periodo" name="select_periodo" class="select2" data-placeholder="Seleccione Periodo Pago...">
+											<option value="diario">Diario</option>
+				                            <option value="semanal">Semanal</option>
+				                            <option value="quincenal">Quincenal</option>
+				                            <option value="mensual" selected>Mensual</option>
+				                            <option value="bimestral">Bimestral</option>
+				                            <option value="trimestral">Trimestral</option>
+				                            <option value="cuatrimestral">Cuatrimestral</option>
+				                            <option value="semestral">Semestral</option>
+				                            <option value="anual">Anual</option>
+										</select>
+									</div>
+								</div>												
+							</div>
+
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="input_tasa">Tasa de interés:</label>
+									<div class="col-sm-8">
+										<input type="number" name="input_tasa" id="input_tasa" class="form-control" value="" min="0.1" />
+									</div>
+								</div>
+
+								<div class="form-group">	
+									<label class="col-sm-4 control-label no-padding-right" for="ver"></label>
+									<div class="col-sm-8">
+										<button class="btn btn-white btn-default btn-round" type="button" name="ver" id="ver">
+											<i class="glyphicon glyphicon-picture red2"></i>   Ver 
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<h3 class="header smaller lighter green"></h3>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-8">
+										<table id="tbt_creditos" name="tbt_creditos" class="table table table-striped">
+											<thead>
+												<tr>
+													<th>N°-</th>
+													<th>Fecha Pago</th>
+													<th>Interés</th>
+													<th>Abono al capital</th>
+													<th>Valor de la cuota</th>
+													<th>Saldo al capital</th>						
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>	
+									</div>
+
+									<div class="col-sm-4">
+										<div>Valor de la cuota</div>
+										<div id="div-valor-cuota" style="font-weight: bold"></div>
+										<br>
+										<div style="padding: 10px; border: 1px dashed gray; background-color: #0d4393; color: white; border-radius: 10px; -webkit-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.38);
+										    -moz-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.38);
+										    box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.38);" id="div-comentario">	
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>	
+					</div>
+
+					<div class="clearfix form-actions center">
+						<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+							<i class="ace-icon fa fa-save bigger-110"></i>
+							Guardar
+						</button>
+
+						<button class="btn btn-success" type="button" name="btn_2" id="btn_2" data-toggle="modal" href="#myModal">
+							<i class="ace-icon fa fa-search bigger-110"></i>
+							Buscar
+						</button>
+
+						<button class="btn btn-success" type="button" name="btn_1" id="btn_1">
+							<i class="ace-icon fa fa-refresh bigger-110"></i>
+							Actualizar
+						</button>
+					</div>
+				</form>	                                           
+            </div>
+        </div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	    <div class="modal-dialog modal-lg">
+	      	<div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		          	<h4 class="modal-title">BUSCAR CRÉDITOS</h4>
+		        </div>
+
+		        <div class="modal-body">
+		            <table id="table"></table>
+					<div id="pager"></div>
+		        </div>
+	        
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+		        </div>
+	      	</div>
+	    </div>
+	</div>
+</div>
+
+

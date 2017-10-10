@@ -2,12 +2,112 @@
 angular.module('scotchApp').controller('tipo_programaController', function ($scope) {
 	
 	jQuery(function($) {
+		$('#form_registro').validate({
+			errorElement: 'div',
+			errorClass: 'help-block',
+			focusInvalid: false,
+			ignore: "",
+			rules: {
+				nombre: {
+					required: true			
+				},
+			},
+			messages: {
+				nombre: {
+					required: "Campo Requerido",
+				},
+			},
+			//para prender y apagar los errores
+			highlight: function (e) {
+				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+			},
+			success: function (e) {
+				$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+				$(e).remove();
+			},
+			submitHandler: function (form) {
+				
+			}
+		});
+		// Fin
+
+		// buscador registro
+		$("#buscador").keyup(function(){
+		    var campo = $('#buscador').val();
+			jQuery("#grid-table").jqGrid('setGridParam',{url:"data/tipo_programa/xml_programas.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
+		// listar registro
+		$("#btn_listar").click(function(){
+			$('#buscador').val('');
+		    var campo = $('#buscador').val();
+			jQuery("#grid-table").jqGrid('setGridParam',{url:"data/tipo_programa/xml_programas.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
+		function actualizar() {
+			$('#buscador').val('');
+		    var campo = $('#buscador').val();
+			jQuery("#grid-table").jqGrid('setGridParam',{url:"data/tipo_programa/xml_programas.php?campo="+campo,page:1}).trigger("reloadGrid");	
+		} 
+
+		// // guardar formulario
+		$('#btn_guardar').click(function() {
+			var respuesta = $('#form_registro').valid();
+
+			if (respuesta == true) {
+				var oper = "add";
+				var formulario = $("#form_registro").serialize();
+
+				$.ajax({
+			        url: "data/tipo_programa/app.php",
+			        data: formulario + "&oper=" + oper,
+			        type: "POST",
+			        async: true,
+			        success: function (data) {
+			        	var val = data;
+			        	if(data == '1') {
+			        		$.gritter.add({
+								title: 'Mensaje',
+								text: 'Registro Agregado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+								time: 1000				
+							});
+							$("#nombre").val('');
+							$("#observaciones").val('');
+							jQuery("#grid-table").jqGrid().trigger("reloadGrid");
+							$('#myModal').modal('hide');
+				    	} else {
+				    		if(data == '3') {
+				        		$.gritter.add({
+									title: 'Mensaje',
+									text: 'Error... El Registro ya esta Agregado  <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+									time: 1000				
+								});
+								$("#nombre").val('');
+					    	}
+				    	}              
+			        },
+			        error: function (xhr, status, errorThrown) {
+				        alert("Hubo un problema!");
+				        console.log("Error: " + errorThrown);
+				        console.log("Status: " + status);
+				        console.dir(xhr);
+			        }
+			    });
+			}
+		});
+		// // fin 
+	});
+
+	jQuery(function($) {
 		var grid_selector = "#grid-table";
 	    var pager_selector = "#grid-pager";
+	    var campo = $('#buscador').val();
 
 	    //cambiar el tamaño para ajustarse al tamaño de la página
 	    $(window).on('resize.jqGrid', function () {
-	        $(grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+	        $(grid_selector).jqGrid('setGridWidth', $(".widget-main").width());
 	    });
 	    //cambiar el tamaño de la barra lateral collapse/expand
 	    var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -21,16 +121,41 @@ angular.module('scotchApp').controller('tipo_programaController', function ($sco
 	    });
 
 	    jQuery(grid_selector).jqGrid({	       
-	        url: 'data/tipo_programa/xml_programas.php',
+	        url: "data/tipo_programa/xml_programas.php?campo="+campo,
 	        autoencode: false,
 	        datatype: "xml",
 	        height: 330,
-	        colNames:['ID','TIPO PROGRAMA','OBSERVACIONES','FECHA CREACIÓN'],
+	        colNames:['','ID','TIPO PROGRAMA','OBSERVACIONES','FECHA CREACIÓN'],
 	        colModel:[
+	        	{name: 'myac', width:80, fixed:true, sortable:false, resize:false, formatter:'actions',
+					formatoptions:{
+					keys:true,
+					editbutton: true,
+					onSuccess: function (response) {
+						var retorno = response.responseText;
+
+						if(retorno == '2') {
+							$.gritter.add({
+								title: 'Mensaje',
+								text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+								time: 1000				
+							});
+							return true;
+						} else {
+							if(retorno == '3') {
+								$.gritter.add({
+									title: 'Mensaje',
+									text: 'Error... El Registro ya esta Agregado  <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+									time: 1000				
+								});
+			                }	
+						}
+		            },
+				}},
 	            {name:'id',index:'id', width:60, sorttype:"int", editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-	            {name:'nombre',index:'nombre',width:150, editable:true, editoptions:{size:"20",maxlength:"30"}, editrules: {required: true}},
+	            {name:'nombre',index:'nombre',width:150, editable:true, editoptions:{size:"20",maxlength:"30"}, editrules: {required: true}, editoptions:{dataInit: function(elem){$(elem).bind("keyup", function(e) {this.value = this.value.toUpperCase(e)})}}}, 
 	            {name:'observaciones', index:'observaciones', frozen: true, editable:true, search:false, edittype:"textarea", editrules: {required: false}},
-	            {name:'fecha_creacion',index:'fecha_creacion', width:150, editable: true, search:false, editoptions:{size:"20",maxlength:"30",readonly: 'readonly'}}
+	            {name:'fecha_creacion',index:'fecha_creacion', width:150, editable: true, search:false, hidden:true, editoptions:{size:"20",maxlength:"30",readonly: 'readonly'}}
 	        ],
 	        rownumbers: true, 
 	        rowNum:10,
@@ -52,7 +177,7 @@ angular.module('scotchApp').controller('tipo_programaController', function ($sco
 	            }, 0);
 	        },
 	        editurl: "data/tipo_programa/app.php",
-	        caption: "LISTA TIPOS DE PROGRAMAS"
+	        // caption: "LISTA TIPOS DE PROGRAMAS"
 	    });
 
 	    $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
@@ -75,17 +200,17 @@ angular.module('scotchApp').controller('tipo_programaController', function ($sco
 	    //navButtons
 	    jQuery(grid_selector).jqGrid('navGrid',pager_selector,
 	    {   //navbar options
-	        edit: true,
+	        edit: false,
 	        editicon : 'ace-icon fa fa-pencil blue',
-	        add: true,
+	        add: false,
 	        addicon : 'ace-icon fa fa-plus-circle purple',
 	        del: false,
 	        delicon : 'ace-icon fa fa-trash-o red',
-	        search: true,
+	        search: false,
 	        searchicon : 'ace-icon fa fa-search orange',
-	        refresh: true,
+	        refresh: false,
 	        refreshicon : 'ace-icon fa fa-refresh green',
-	        view: true,
+	        view: false,
 	        viewicon : 'ace-icon fa fa-search-plus grey'
 	    },
 	    {

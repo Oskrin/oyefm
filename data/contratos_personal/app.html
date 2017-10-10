@@ -1,0 +1,238 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-gear blue"></i>
+					<a href="#/menu_empleados">Empleados</a>
+				</li>
+
+				<li class="active">Contratos Empleados</li>
+			</ul>
+		</div>
+		<hr />
+
+		<div class="widget-box">
+            <div class="widget-main">
+           		<form class="form-horizontal" name="form_contratos" id="form_contratos">
+					<div class="row">
+						&nbsp; &nbsp;
+						<div class="col-sm-12">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="codigo">Código del contrato:</label>
+									<div class="col-sm-6">
+										<input type="text" name="codigo" id="codigo" class="form-control" value="" readonly="" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="fecha_contrato">Fecha Contrato:</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" id="fecha_contrato" name="fecha_contrato" class="form-control datepicker" class="form-control" />
+											<span class="input-group-addon">
+												<i class="ace-icon fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="codigo">Duración del contrato:</label>
+									<div class="col-sm-6">
+										<input type="text" name="codigo" id="codigo" class="form-control" value="" />
+									</div>
+								</div>	
+							</div>
+
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="select_empleado">Empleado:</label>
+									<div class="col-sm-8">
+										<select id="select_empleado" name="select_empleado" class="select2" data-placeholder="Empleado...">
+											<option value="">&nbsp;</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="fecha_inicio">Fecha Inicio:</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" id="fecha_inicio" name="fecha_inicio" class="form-control datepicker" class="form-control" />
+											<span class="input-group-addon">
+												<i class="ace-icon fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>	
+							</div>
+
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="select_tipo_contrato">Tipo de Contrato:</label>
+									<div class="col-sm-8">
+										<select id="select_tipo_contrato" name="select_tipo_contrato" class="select2" data-placeholder="Tipo Contrato...">
+											<option value="">&nbsp;</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-4 control-label no-padding-right" for="fecha_fin">Fecha Fin:</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" id="fecha_fin" name="fecha_fin" class="form-control datepicker" class="form-control" />
+											<span class="input-group-addon">
+												<i class="ace-icon fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<h3 class="header smaller lighter blue">Detalle Contrato</h3>
+							<div class="widget-box widget-color-blue">
+								<div class="widget-header widget-header-small"></div>
+								<div class="widget-body">
+									<div class="widget-main no-padding">
+										<div class="wysiwyg-editor" id="editor2">
+											<h2 align="center" id='titulo'>CONTRATO DE TRABAJO A TIEMPO PARCIAL</h2>
+											<p><b>COMPARECIENTES:</b></p>
+
+											<p>En la ciudad de Ibarra a los treinta días del mes de noviembre del dos mil dieciséis comparecen a la celebración del presente contrato de trabajo, capaz, libre y voluntariamente por una parte, la empresa CONCEPTUAL BUSINESS GROUP con RUC 1091756060001, representada por la Srta. CARLA ESTEFANIA MONTESDEOCA LOPEZ, en calidad de GERENTE GENERAL y Representante legal, a quien en lo sucesivo se denominará LA EMPLEADORA; y, de otra parte <b id='representante'></b>, con C.I. N° <b id = 'ci'></b>, quien en lo sucesivo será el/la TRABAJADOR(A) bajo las siguientes clausulas:</p>
+
+											<p><b>PRIMERA: ANTECEDENTE.- LA EMPLEADORA:</b> es una persona jurídica de derecho privado, somos una empresa productora y promotora especializada en la organización de todo tipo de eventos, Actividades afines a la publicidad, y la comunicación, convirtiéndonos en la empresa franquiciante más sólida en el norte del País. Con diversos brazos de negocios, además nos desempeñamos como administradores y facilitadores de negocios con productos y Servicios Empresariales, Actividades de Construcción, Actividades de Bienes Raíces, Servicios de desarrollo de sistemas en la Web, estamos domiciliados en la ciudad de Ibarra en la Av. Jaime Rivadeneira No. 6-100 intersección Av. Mariano Acosta, Imbabura-Ecuador.</p>
+
+											<p><b>SEGUNDA: CLASE DE CONTRATO.-</b> Este contrato es de tiempo parcial conforme lo establece el Mandato 8. EL TRABAJADOR se obliga a prestar sus servicios lícitos y personales al EMPLEADOR, desempeñando el cargo de RELACIONES PÚBLICAS, quien cumplirá fiel y diligentemente, de conformidad a lo que establece el presente contrato, el Código de Trabajo y demás normas en materia laboral.</p>
+
+											<p><b>TERCERA.- OBLIGACIONES DEL TRABAJADOR.-</b> son obligaciones del trabajador cumplir a cabalidad sus obligaciones laborales encomendadas, según el Art.45 del Código del Trabajo y las obligaciones que legalmente le corresponden por mandato del Código del Trabajo que son los siguientes:</p>
+
+											<p>
+												<ol>
+													<li>Concurrir a su lugar de trabajo o de permanecer en él, según lo que requiere su empleador.</li>
+													<li>Asistir con absoluta puntualidad a su lugar de trabajo.</li>
+													<li>Tratar con cortesía y respeto a sus compañeros</li>
+													<li>Cuidar su presencia en lo referente al aseo personal.</li>
+													<li>Cumplir y hacer cumplir las normas, políticas, reglamentos y demás leyes internas de la empresa.</li>
+													<li>No podrá suspender o abandonar el trabajo sin autorización previa de sus superiores.  De ocurrir este hecho, será sancionado conforme lo que establece el presente contrato, el Reglamento Interno de la Empresa  y el Código de Trabajo.</li>
+												</ol>
+											</p>
+
+											<p><b>A.- ACTIVIDADES EN EL TRABAJO.-</b>EL TRABAJADOR prestara sus servicios para CONCEPTUAL BUSINESS GROUP, dentro y fuera de la ciudad de Ibarra, en horarios que llegará a establecer el empleador de acuerdo con sus necesidades que se detallan como anexo. Sujetándose a las CUARENTA (40) horas semanales como máximo, el trabajador se obliga a no tener durante las horas de trabajo, asuntos y obligaciones distintas a las inherentes a su cargo y de las actividades y funciones a las que le fue encomendada por la empresa.</p>
+
+											<p>De igual forma el trabajador se compromete expresamente a prestar sus servicios exclusivos para CONCEPTUAL BUSINESS GROUP y en horas que excedan a la jornada pactada cuando así lo requiera por escrito el empleador, por tal trabajo será retribuido con el pago correspondiente por horas suplementarias o extraordinarias según sea el caso.</p>
+
+											<p><b>B. LUGAR EN EL QUE SE EJECUTARÁ EL TRABAJO.- </b>El trabajo contratado será prestado por el trabajador en cualquier lugar que el caso lo amerite, sin que ello pueda ser interpretado como despido intempestivo o cambio de ocupación.</p>
+
+											<b>CUARTA: OBLIGACIONES DEL EMPLEADOR</b>
+
+											<p><b>A.-</b>El empleador se compromete a pagar al TRABAJADOR por la prestación de sus servicios la cantidad ESTABLECIDA COMO EL SALARIO BÁSICO VIGENTE que será entregada al trabajador al final de cada mes, correspondiente a tiempo parcial de las horas semanales trabajadas que constaran reflejadas en el ROL DE PAGOS.</p>
+
+											<p>De este valor se descontará el pago del Seguro Social IESS de acuerdo a la ley.</p>
+
+											<p><b>B.- BENEFICIOS SOCIALES.-</b>Además el empleador pagará al trabajador las remuneraciones adicionales a las que tenga derecho de conformidad con la ley.</p>
+
+											<p><b>C.- HORARIO.-</b>El trabajador se compromete a concurrir al lugar de trabajo en las horas y horarios establecidos y acordados por las partes que no excederán las 40 horas de trabajo semanales, en el caso de festivos se descontara en el día que previo las partes así lo establezcan.</p>
+
+											<p><b>QUINTA: PLAZO DE VIGENCIA.-</b>El presente contrato se entenderá de prueba por el lapso de 90 días contados a partir de la fecha de subscripción, durante este periodo de tiempo cualquiera de las partes pueden dar por terminado el mismo, si vencidos los 90 días ninguna de las partes hubiere manifestado su deseo de dar por terminada la relación laboral, este contrato de trabajo se extenderá como Contrato de Trabajo a Tiempo Indefinido.</p>
+
+											<p><b>SEXTA: TERMINACION ANTICIPADA DEL CONTRATO.-</b>No obstante lo manifestado en la cláusula anterior, las partes pueden dar por terminado anticipadamente el contrato en los siguientes casos:</p>
+
+											<p>
+												<ol>
+													<li type="A">Cuando la empresa cesara en sus funciones o dejara de existir.</li>
+													<li type="A">Por fuerza mayor no imputable a ninguna de las partes contratadas.</li>
+													<li type="A">Por acuerdo entre las partes, el mismo que debe ser manifestado por escrito con una antelación mínimo de 15 días a la fecha efectiva de terminación.</li>
+													<li type="A">Por irregularidades, faltas graves e incumplimiento de políticas o reglamento interno del la empresa, cometidas por el trabajador.</li>
+												</ol>
+											</p>
+
+											<b>SÉPTIMA: TERMINACIÓN DEL CONTRATO POR PARTE DEL EMPLEADOR</b>
+
+											<p>El presente contrato también puede terminar por el empleador de conformidad a las causales establecidas en el Art. 172 del Código de Trabajo, previa el visto bueno y las Garantías del Debido Proceso establecido en la Constitución de la República.</p> 
+
+											<p><b>OCTAVA: CONFIDENCIALIDAD DE INFORMACIÓN.-</b> El trabajador no revelará bajo ninguna circunstancia, ya sea durante la vigencia de este contrato o con posterioridad a la terminación del mismo, ninguna información con relación a  los negocios de la empresa, excepto cuando lo autorice expresamente el empleador por escrito y según sus instrucciones, cuando sea requerido por autoridad judicial competente.</p>
+
+											<b>NOVENA.- NORMAS SUPLETORIAS</b>
+
+											<p>Las partes declaran que todos los términos, palabras, frases, formulas o definiciones, conceptos, derechos y obligaciones son absolutamente claros o conocidos por ellos, en su sentido y alcance gramatical por lo que bajo ninguna circunstancia podrán los contratantes manifestar que desconocen los contenidos.</p>
+
+											<b>DÉCIMA: ÁMBITO</b>
+
+											<p>En todo lo que no estuviese previsto en el presente contrato las partes se sujetarán a las disposiciones generales del Código del Trabajo. Codificado en actual vigencia, de manera especial a las relativas a los contratos a prueba.</p>
+
+											<b>DÉCIMA PRIMERA: JURISDICCIÓN Y COMPETENCIA.</b>
+
+											<p>En caso de Controversia las partes se someterán al centro de mediación y arbitraje de la Cámara de Comercio de la ciudad de Ibarra, sin perjuicio de recurrir a los jueces competentes que las normas contenidas en el Código Orgánico General de Procesos (COGEP) y las demás leyes vigentes.</p>
+
+											<p>Para constancia como los comparecientes firman por triplicado ante el señor inspector de trabajo de la ciudad de Ibarra que certifica en la ciudad de Ibarra, a los siete días del mes de septiembre del año 2016.</p>
+
+
+										</div>
+									</div>
+
+									<div class="widget-toolbox padding-4 clearfix">
+										<div class="btn-group pull-right">
+											<button class="btn btn-sm btn-success btn-white btn-round" id="btn_vizualizar">
+												<i class="ace-icon fa fa-globe bigger-125"></i>
+												Vizualizar
+												<i class="ace-icon fa fa-arrow-right icon-on-right bigger-125"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+					</div>
+					
+					<div class="clearfix form-actions center">
+						<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+							<i class="ace-icon fa fa-save bigger-110"></i>
+							Guardar
+						</button>
+
+						<button class="btn btn-success" type="button" name="btn_2" id="btn_2" data-toggle="modal" href="#myModal">
+							<i class="ace-icon fa fa-search bigger-110"></i>
+							Buscar
+						</button>
+
+						<button class="btn btn-success" type="button" name="btn_1" id="btn_1">
+							<i class="ace-icon fa fa-refresh bigger-110"></i>
+							Actualizar
+						</button>
+					</div>
+				</form>	                                            
+            </div>
+        </div>
+	</div>
+	
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	    <div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+		        <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title">BUSCAR CONTRATOS</h4>
+		        </div>
+
+		        <div class="modal-body">
+		            <table id="table"></table>
+					<div id="pager"></div>
+		        </div>
+
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+		        </div>
+	      	</div>
+	    </div>
+	</div>
+</div>
+
+

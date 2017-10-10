@@ -1,7 +1,7 @@
 <?php
 	// if ('localhost'==$_SERVER['SERVER_NAME']||'localhost:8080'==$_SERVER['SERVER_NAME']||'192.168.1.30'==$_SERVER['SERVER_NAME']) {
 		// ------------------------ Informacion base de datos local------------------------------//
-		define("BD","oye");
+		define("BD","oye_respaldo");
 		define("SERVIDOR","localhost");
 		define("USUARIO","postgres");
 		define("CLAVE","rootdow");

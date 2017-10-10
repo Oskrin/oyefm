@@ -1,0 +1,229 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-folder-open-o blue"></i>
+					<a href="#/menu_corporativo">Corporativo</a>
+				</li>
+
+				<li class="active">Registro Multas</li>
+			</ul>
+		</div>
+		<hr />
+
+		<div class="widget-box">
+            <div class="widget-main">
+            	<div class="control">
+            		<div class="col-sm-3">
+						<div class="clearfix">
+							<span class="block input-icon input-icon-right">
+								<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="Buscar....." onKeyUp="this.value = this.value.toUpperCase();" />
+								<i class="ace-icon fa fa-search blue"></i>
+				            </span>
+						</div>
+					</div>
+
+					<button class="btn btn-primary btn-pink posicion" id="btn_abrir" name="btn_abrir" type="button" data-toggle="modal" href="#myModal"><i class="fa fa-plus-circle"></i> NUEVO</button>
+				</div>
+				&nbsp;
+				                          
+                <table id="table"></table>
+                <div id="pager"></div>                                             
+            </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+			        <div class="table-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							<span class="white">&times;</span>
+						</button>
+						AGREGAR REGISTRO
+					</div>
+					&nbsp;
+
+			        <div class="modal-body">
+			        	<form class="form-horizontal" name="form_anticipos" id="form_anticipos">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label class="control-label col-xs-12 col-sm-4 no-padding-right">Serie Multa:</label>
+											<div class="col-sm-6">
+												<input type="text" name="serie_multa" id="serie_multa" class="form-control" />
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-4 control-label no-padding-right" for="select_tipo_multa ">Tipo Multa:</label>
+											<div class="col-sm-6">
+												<select id="select_tipo_multa" name="select_tipo_multa" class="select2" data-placeholder="Tipo Multa...">
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha Multa:</label>
+											<div class="col-sm-6">
+												<div class="input-group">
+													<input type="text" id="fecha_multa" name="fecha_multa" class="form-control datepicker" />
+													<span class="input-group-addon">
+														<i class="ace-icon fa fa-calendar"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label class="col-sm-4 control-label no-padding-right" for="select_empleado">Empleado:</label>
+											<div class="col-sm-8">
+												<select id="select_empleado" name="select_empleado" class="select2" data-placeholder="Empleado multas...">
+													<option value="">&nbsp;</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-sm-4 no-padding-right">Motivo:</label>
+											<div class="col-sm-6">
+												<input type="text" id="motivo" name="motivo" placeholder="Motivo" class="form-control" />
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="control-label col-xs-12 col-sm-4 no-padding-right">¿Justificado?</label>
+											<div class="col-xs-12 col-sm-7">
+												<div class="clearfix">
+													<label>
+														<input name="justificado" id="justificado" class="ace ace-switch ace-switch-5" type="checkbox" checked>
+														<span class="lbl"></span>
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+			        </div>
+
+			        <div class="modal-footer no-margin-top">
+						<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+							<i class="ace-icon fa fa-times"></i>
+							Cerrar
+						</button>
+
+						<button name="btn_0" id="btn_0" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Registro">
+							<i class="ace-icon fa fa-save"></i>
+							Guardar
+						</button>
+					</div>
+		      	</div>
+		    </div>
+		</div>
+
+		<!-- <form class="form-horizontal" name="form_multas" id="form_multas">
+			<div class="tabbable">
+				<div class="tab-content profile-edit-tab-content">
+					<div id="edit-basic" class="tab-pane in active">
+						&nbsp; &nbsp;
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Serie Multa:</label>
+										<div class="col-sm-6">
+											<input type="text" name="serie_multa" id="serie_multa" class="form-control" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="select_tipo_multa ">Tipo Multa:</label>
+										<div class="col-sm-6">
+											<select id="select_tipo_multa" name="select_tipo_multa" class="select2" data-placeholder="Tipo Multa...">
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="select_empleado">Empleado:</label>
+										<div class="col-sm-8">
+											<select id="select_empleado" name="select_empleado" class="select2" data-placeholder="Empleado multas...">
+												<option value="">&nbsp;</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Motivo:</label>
+										<div class="col-sm-6">
+											<input type="text" id="motivo" name="motivo" placeholder="Motivo" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha Multa:</label>
+										<div class="col-sm-6">
+											<div class="input-group">
+												<input type="text" id="fecha_multa" name="fecha_multa" class="form-control datepicker" />
+												<span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">¿Justificado?</label>
+										<div class="col-xs-12 col-sm-7">
+											<div class="clearfix">
+												<label>
+													<input name="justificado" id="justificado" class="ace ace-switch ace-switch-5" type="checkbox" checked>
+													<span class="lbl"></span>
+												</label>
+											</div>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="clearfix form-actions center">
+				<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+					<i class="ace-icon fa fa-save bigger-110"></i>
+					Guardar
+				</button>
+
+				<button class="btn btn-success" type="button" name="btn_3" id="btn_3">
+					<i class="ace-icon fa fa-pencil-square-o bigger-110"></i>
+					Modificar
+				</button>
+
+				<button class="btn btn-success" type="button" name="btn_2" id="btn_2" data-toggle="modal" href="#myModal">
+					<i class="ace-icon fa fa-search bigger-110"></i>
+					Buscar
+				</button>
+
+				<button class="btn btn-success" type="button" name="btn_1" id="btn_1">
+					<i class="ace-icon fa fa-refresh bigger-110"></i>
+					Actualizar
+				</button>
+			</div>
+		</form> -->
+	</div>
+</div>

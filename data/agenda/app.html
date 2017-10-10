@@ -1,0 +1,172 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-book blue"></i>
+					<a href="#/menu_agenda">Agenda</a>
+				</li>
+
+				<li class="active">Registro Agenda</li>
+			</ul>
+		</div>
+		<br />
+		
+		<div class="widget-box">
+            <div class="widget-main"> 
+            	<div class="control">
+            		<div class="col-sm-3">
+						<div class="clearfix">
+							<span class="block input-icon input-icon-right">
+								<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="Buscar....." onKeyUp="this.value = this.value.toUpperCase();" />
+								<i class="ace-icon fa fa-search blue"></i>
+				            </span>
+						</div>
+					</div>
+
+					<button class="btn  btn-primary btn-pink posicion" id="btn_abrir" name="btn_abrir" type="button" data-toggle="modal" href="#myModal"><i class="fa fa-plus-circle"></i> NUEVO</button>
+				</div>
+				&nbsp;
+
+                <table id="table"></table>
+                <div id="pager"></div>                                             
+            </div>
+        </div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	    <div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+		        <div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					AGREGAR REGISTRO
+				</div>
+				&nbsp;
+
+		        <div class="modal-body">
+		        	<form class="form-horizontal" name="form_agenda" id="form_agenda">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Título Agenda:</label>
+										<div class="col-sm-8">
+											<div class="clearfix">
+												<input type="text" name="titulo_agenda" id="titulo_agenda" placeholder="Título Agenda" class="form-control" />
+												<input type="hidden" name="id_agenda" id="id_agenda" placeholder="Id Agenda" class="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right" for="select_programa">Programa:</label>
+										<div class="col-sm-8">
+											<select id="select_programa" name="select_programa" class="select2" data-placeholder="Programa...">
+												
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right" for="fecha_evento">Fecha:</label>
+										<div class="col-sm-6">
+											<div class="input-group">
+												<input type="text" id="fecha_evento" name="fecha_evento" class="form-control datepicker" />
+												<span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Hora Final:</label>
+										<div class="col-sm-6">
+							                <div class="input-group">
+							                    <input type="text" id="hora_final" name="hora_final" value="00:00" class="form-control datetimepicker" />
+							                    <span class="input-group-addon">
+							                        <i class="glyphicon glyphicon-time"></i>
+							                    </span>
+							                </div>
+							            </div>
+						            </div>
+
+						            <div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Observaciones:</label>
+										<div class="col-sm-8">
+											<div class="clearfix">
+												<textarea name="observaciones" id="observaciones" class="form-control"></textarea>
+											</div>
+										</div>
+									</div>												
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Nombre Invitado:</label>
+										<div class="col-sm-8">
+											<div class="clearfix">
+												<input type="text" name="nombres_invitado" id="nombres_invitado" placeholder="Nombre Invitado" class="form-control" onkeyup="this.value = this.value.toUpperCase();" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Tema:</label>
+										<div class="col-sm-8">
+											<div class="clearfix">
+												<input type="text" name="tema" id="tema" placeholder="Tema Tratar" class="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Horas Inicio:</label>
+										<div class="col-sm-6">
+							                <div class="input-group">
+							                    <input type="text" id="hora_inicio" name="hora_inicio" value="00:00" class="form-control datetimepicker" />
+							                    <span class="input-group-addon">
+							                        <i class="glyphicon glyphicon-time"></i>
+							                    </span>
+							                </div>
+							            </div>
+						            </div>	
+
+						            <div class="form-group">
+										<label class="control-label col-sm-4 no-padding-right">Confirmación:</label>
+										<div class="col-sm-8">
+											<div class="clearfix">
+												<select id="select_confirmacion" name="select_confirmacion" class="select2" data-placeholder="Seleccione un cargo...">
+													<option value="Confirmado">Confirmado</option>
+													<option value="Cancelado">Cancelado</option>
+												</select>
+											</div>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</form>
+		        </div>
+
+		        <div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+						<i class="ace-icon fa fa-times"></i>
+						Cerrar
+					</button>
+
+					<button name="btn_0" id="btn_0" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Registro">
+						<i class="ace-icon fa fa-save"></i>
+						Guardar
+					</button>
+				</div>
+	      	</div>
+	    </div>
+	</div>
+</div>

@@ -9,25 +9,63 @@ angular.module('scotchApp').controller('empresaController', function ($scope, $l
 		$('#telefono2').mask('(999) 999-9999');
 
 	    // validaciones tipos documentos
-	    $("#identificacion").keyup(function() {
+	    function cargar_empresa() {
 	        $.ajax({
 	            type: "POST",
 	            url: "data/empresa/app.php",
-	            data: {comparar_identificacion:'comparar_identificacion',identificacion: $("#identificacion").val()},
+	            data: {cargar_empresa:'cargar_empresa'},
+	            dataType: 'json',
+	            success: function (data) {
+	            	if(data != null) {
+		                $('#id_empresa').val(data.id);
+		            	$('#identificacion').val(data.ruc_empresa);
+		            	$('#propietario').val(data.propietario);
+		            	$('#nombre_empresa').val(data.nombre_empresa);
+		            	$('#slogan').val(data.slogan);
+		            	$('#telefono1').val(data.telefono1);
+		            	$('#telefono2').val(data.telefono2);
+		            	$('#ciudad').val(data.ciudad);
+		            	$('#direccion').val(data.direccion);
+		            	$('#correo').val(data.correo);
+		            	$('#fax').val(data.fax);
+		            	$('#sitio_web').val(data.sitio_web);
+		            	$('#autorizacion_sri').val(data.autorizacion_sri);
+		            	$('#inicio_fac_preimpresa').val(data.inicio_fac_preimpresa);
+		            	$('#item_factura').val(data.item_factura);
+		            	$('#observaciones').val(data.observaciones);
+		            } else {
+		            	$.gritter.add({
+							title: 'Error... La empresa no se encuentra registrada',
+							class_name: 'gritter-error gritter-center',
+							time: 1000,
+						});	
+		            }
+	            }
+	        });
+	    };
+		// fin
+
+		// validación ruc
+		$("#ruc_empresa").keyup(function() {
+	        $.ajax({
+	            type: "POST",
+	            url: "data/clientes/app.php",
+	            data: {comparar_ruc:'comparar_ruc',ruc: $("#ruc_empresa").val()},
+	            dataType: 'json',
 	            success: function(data) {
 	                var val = data;
 	                if (val == 1) {
-	                    $("#identificacion").val('');
-	                    $("#identificacion").focus();
+	                    $("#ruc_empresa").val("");
+	                    $("#ruc_empresa").focus();
 	                    $.gritter.add({
-							title: 'Error... La empresa ya se encuentra registrada',
+							title: 'Error... El cliente ya fue registrado',
 							class_name: 'gritter-error gritter-center',
 							time: 1000,
 						});	
 					}
 	            }
 	        });
-	    });
+    	});
 		// fin
 
 		//validacion formulario usuarios
@@ -202,7 +240,8 @@ angular.module('scotchApp').controller('empresaController', function ($scope, $l
 		// fin
 
 		// validaciones al iniciar
-		$('#btn_3').attr('disabled', true);
+		cargar_empresa();
+		// $('#btn_3').attr('disabled', true);
 		$('#identificacion').focus();
 		$("#identificacion").attr("maxlength", "13");
     	$("#identificacion").keypress(ValidNum);

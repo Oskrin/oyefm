@@ -1,0 +1,261 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-desktop blue"></i>
+					<a href="#/menu_pagos">Pagos</a>
+				</li>
+
+				<li class="active">Solicitud Pagos</li>
+			</ul>
+		</div>
+		&nbsp;
+
+		<div class="widget-box">
+            <div class="widget-main"> 
+            	<div class="control">
+            		<div class="col-sm-3">
+						<div class="clearfix">
+							<span class="block input-icon input-icon-right">
+								<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="Buscar....." onKeyUp="this.value = this.value.toUpperCase();" />
+								<i class="ace-icon fa fa-search blue"></i>
+				            </span>
+						</div>
+					</div>
+
+					<button class="btn  btn-primary btn-pink posicion" id="btn_abrir" name="btn_abrir" type="button" data-toggle="modal" href="#myModal"><i class="fa fa-plus-circle"></i> NUEVO</button>
+				</div>
+				&nbsp;
+
+				<table id="table2"></table>
+				<div id="pager2"></div>                                           
+            </div>
+        </div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg">
+      	<div class="modal-content">
+	        <div class="modal-header">
+	          	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	          	<h4 class="modal-title">AGREGAR SOLICITUD</h4>
+	        </div>
+
+	        <div class="modal-body">
+	            <form class="form-horizontal" name="form_registro" id="form_registro">
+					<div class="row">
+						&nbsp; &nbsp;
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label class="control-label col-sm-3 no-padding-right">N° Oficio:</label>
+									<div class="col-sm-7">
+										<div class="clearfix">
+											<input type="text" name="codigo" id="codigo" placeholder="" class="form-control" readonly  />
+											<input type="hidden" name="id_pago" id="id_pago" placeholder="" class="form-control"  />
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" for="select_responsable">Dirigido:</label>
+									<div class="col-sm-8">
+										<select id="select_responsable" name="select_responsable" class="select2" data-placeholder="Dirigido...">
+											<option value="">&nbsp;</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-sm-3 no-padding-right">Pago Máximo:</label>
+									<div class="col-sm-7">
+										<div class="input-group">
+											<input type="text" id="fecha_pago" name="fecha_pago" class="form-control datepicker" readonly />
+											<span class="input-group-addon">
+												<i class="ace-icon fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-6">	
+								<div class="form-group">
+									<label class="control-label col-sm-3 no-padding-right">Registro:</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<input type="text" id="fecha_registro" name="fecha_registro" class="form-control datepicker" readonly />
+											<span class="input-group-addon">
+												<i class="ace-icon fa fa-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" for="select_areas">Para:</label>
+									<div class="col-sm-9">
+										<select id="select_areas" name="select_areas" class="select2" data-placeholder="Para...">
+											<option value="">&nbsp;</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-sm-3 no-padding-right">Detalle:</label>
+									<div class="col-sm-9">
+										<div class="clearfix">
+											<textarea name="observaciones" id="observaciones" rows="5" class="form-control" maxlength="280" ></textarea>
+										</div>
+									</div>
+								</div>												
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<h3 class="header smaller lighter green">Detalle Pagos</h3>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-3">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>PROVEEDOR:</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="proveedor" id="proveedor" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-2">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>DESCRIPCIÓN:</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="descripcion" id="descripcion" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-2">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>CONCEPTO:</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="concepto" id="concepto" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-2">
+										<div class="row">
+											<div class="col-sm-12">
+												<label>CANTIDAD:</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="cantidad" id="cantidad" class="form-control" placeholder=""/>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xs-2">
+										<div class="row">
+											<div class="col-sm-12">
+												<label> PERIODO:</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<select id="select_mes" name="select_mes" class="select2" data-placeholder="Periodo...">
+													<option value="">&nbsp;</option>
+													<option value="ENERO">ENERO</option>
+													<option value="FEBRERO">FEBRERO</option>
+													<option value="MARZO">MARZO</option>
+													<option value="ABRIL">ABRIL</option>
+													<option value="MAYO">MAYO</option>
+													<option value="JUNIO">JUNIO</option>
+													<option value="JULIO">JULIO</option>
+													<option value="AGOSTO">AGOSTO</option>
+													<option value="SEPTIEMBRE">SEPTIEMBRE</option>
+													<option value="OCTUBRE">OCTUBRE</option>
+													<option value="NOVIEMBRE">NOVIEMBRE</option>
+													<option value="DICIEMBRE">DICIEMBRE</option>	
+												</select> 
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-1">
+										<div class="row">
+											<div class="col-sm-12">
+												<label> VALOR:</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="valor" id="valor" placeholder="0.000" class="form-control" />
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+							
+							&nbsp; &nbsp;
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<div id="grid_container">
+										<table id="table"></table>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="col-sm-8"></div>
+									<div class="col-sm-4">
+			                            <div class="form-group">
+											<label class="col-md-5">VALOR TOTAL:</label>
+											<div class="col-md-7">
+												<span class="input-icon">
+													<input type="text" id="valor_total" name="valor_total" class="form-control" value="0.00" readonly />
+													<i class="ace-icon fa fa fa-usd orange"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>	
+					</div>
+				</form>
+	        </div>
+
+	        <div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+
+				<button name="btn_0" id="btn_0" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Registro">
+					<i class="ace-icon fa fa-save"></i>
+					Guardar
+				</button>
+			</div>
+      	</div>
+    </div>
+</div>
+

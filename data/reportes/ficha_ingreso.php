@@ -546,6 +546,6 @@ function Header() {
     //Primera página
     $pdf->AddPage();
     $pdf->SetFont('Arial','',15);
-    $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
+    // $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
     $pdf->Output('Ficha_Personal.pdf','I');
 ?>

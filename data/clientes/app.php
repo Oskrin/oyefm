@@ -4,8 +4,9 @@
     }
 	include_once('../../admin/class.php');
 	include_once('../../admin/funciones_generales.php');
+	include_once('../../admin/datos_sri.php');
 	$class = new constante();
-	// error_reporting(0);
+	error_reporting(0);
 	
 	$fecha = $class->fecha_hora();
 	$cont = 0;
@@ -29,7 +30,7 @@
 																		'$_POST[google]',
 																		'$_POST[observaciones]',
 																		'defaul.jpg',
-																		'1', '$fecha');");	
+																		'1', '$fecha')");	
 		$data = 1;
 		echo $data;
 	}
@@ -59,7 +60,7 @@
 	//Comparar ruc repetidos
 	if (isset($_POST['comparar_ruc'])) {
 		$resultado = $class->consulta("SELECT * FROM clientes C WHERE C.ruc_empresa = '$_POST[ruc]' AND C.estado = '1'");
-		while ($row=$class->fetch_array($resultado)) {
+		while ($row = $class->fetch_array($resultado)) {
 			$cont++;
 		}
 
@@ -72,6 +73,14 @@
 	}
 	// fin
 
+	// consultar ruc
+	if (isset($_POST['consulta_ruc'])) {
+		$ruc = $_POST['txt_ruc'];
+		$servicio = new ServicioSRI();///creamos nuevo objeto de servicios SRI
+		$datosEmpresa = $servicio->consultar_ruc($ruc); ////accedemos a la funcion datosSRI
+		$establecimientos = $servicio->establecimientoSRI($ruc);
 
-
+		print_r(json_encode(['datosEmpresa'=>$datosEmpresa,'establecimientos'=>$establecimientos]));		
+	}
+	// fin
 ?>

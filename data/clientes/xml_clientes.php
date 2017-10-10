@@ -13,7 +13,7 @@
         $sidx = 1;
     
     $count = 0;
-    $resultado = $class->consulta("SELECT  COUNT(*) AS count from clientes");         
+    $resultado = $class->consulta("SELECT COUNT(*) AS count from clientes WHERE estado = '1'");         
     while ($row = $class->fetch_array($resultado)) {
         $count = $count + $row[0];    
     }    
@@ -27,47 +27,56 @@
     $start = $limit * $page - $limit;
     if ($start < 0)
         $start = 0;
-    
-    if ($search == 'false') {
-        $SQL = "SELECT * FROM clientes WHERE estado = '1' ORDER BY $sidx $sord offset $start limit $limit";
-    } else {
-        $campo = $_GET['searchField'];
-      
-        if ($_GET['searchOper'] == 'eq') {
-            $SQL = "SELECT * FROM clientes WHERE estado = '1' AND $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
-        }         
-        if ($_GET['searchOper'] == 'cn') {
-            $SQL = "SELECT * FROM clientes WHERE estado = '1' AND $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
-        }
-    }  
 
-    $resultado = $class->consulta($SQL);     
-    header("Content-Type: text/html;charset=utf-8");   
+    if ($_GET['campo'] != '') {
+        $campo = $_GET['campo'];
+        $SQL = "SELECT * FROM clientes WHERE estado = '1' AND ruc_empresa LIKE '%$_GET[campo]%'OR razon_social LIKE '%$_GET[campo]%' ORDER BY $sidx $sord offset $start limit $limit";
+    } else {
+       $SQL = "SELECT * FROM clientes WHERE estado = '1' ORDER BY $sidx $sord offset $start limit $limit";
+    } 
+    
+    // if ($search == 'false') {
+    //     $SQL = "SELECT * FROM clientes WHERE estado = '1' ORDER BY $sidx $sord offset $start limit $limit";
+    // } else {
+    //     $campo = $_GET['searchField'];
+      
+    //     if ($_GET['searchOper'] == 'eq') {
+    //         $SQL = "SELECT * FROM clientes WHERE estado = '1' AND $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+    //     }         
+    //     if ($_GET['searchOper'] == 'cn') {
+    //         $SQL = "SELECT * FROM clientes WHERE estado = '1' AND $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+    //     }
+    // }  
+
+    $resultado = $class->consulta($SQL);  
+
+    header("Content-Type: text/html; charset=utf-8");   
     $s = "<?xml version='1.0' encoding='utf-8'?>";
     $s .= "<rows>";
-        $s .= "<page>" . $page . "</page>";
-        $s .= "<total>" . $total_pages . "</total>";
-        $s .= "<records>" . $count . "</records>";
-        while ($row = $class->fetch_array($resultado)) {
-            $s .= "<row id='" . $row[0] . "'>";
-            $s .= "<cell>" . $row[0] . "</cell>";
-            $s .= "<cell>" . $row[1] . "</cell>";
-            $s .= "<cell>" . $row[2] . "</cell>";
-            $s .= "<cell>" . $row[3] . "</cell>";
-            $s .= "<cell>" . $row[4] . "</cell>";
-            $s .= "<cell>" . $row[5] . "</cell>";
-            $s .= "<cell>" . $row[6] . "</cell>";
-            $s .= "<cell>" . $row[7] . "</cell>";
-            $s .= "<cell>" . $row[8] . "</cell>";
-            $s .= "<cell>" . $row[9] . "</cell>";
-            $s .= "<cell>" . $row[10] . "</cell>";
-            $s .= "<cell>" . $row[11] . "</cell>";
-            $s .= "<cell>" . $row[12] . "</cell>";
-            $s .= "<cell>" . $row[13] . "</cell>";
-            $s .= "<cell>" . $row[14] . "</cell>";
-            $s .= "<cell>" . $row[15] . "</cell>";
-            $s .= "</row>";
-        }
+    $s .= "<page>" . $page . "</page>";
+    $s .= "<total>" . $total_pages . "</total>";
+    $s .= "<records>" . $count . "</records>";
+    while ($row = $class->fetch_array($resultado)) {
+        $s .= "<row id='" . $row[0] . "'>";
+        $s .= "<cell>" . $row[0] . "</cell>";
+        $s .= "<cell>" . $row[1]. "</cell>";
+        $s .= "<cell>" . $row[2] . "</cell>";
+        $s .= "<cell>" . $row[3] . "</cell>";
+        $s .= "<cell>" . $row[4] . "</cell>";
+        $s .= "<cell>" . $row[5] . "</cell>";
+        $s .= "<cell>" . $row[6] . "</cell>";
+        $s .= "<cell>" . $row[7] . "</cell>";
+        $s .= "<cell>" . $row[8] . "</cell>";
+        $s .= "<cell>" . $row[9] . "</cell>";
+        $s .= "<cell>" . $row[10] . "</cell>";
+        $s .= "<cell>" . $row[11] . "</cell>";
+        $s .= "<cell>" . $row[12] . "</cell>";
+        $s .= "<cell>" . $row[13] . "</cell>";
+        $s .= "<cell>" . $row[14] . "</cell>";
+        $s .= "<cell>" . $row[15] . "</cell>";
+        $s .= "</row>";
+    }
+    
     $s .= "</rows>";
     echo $s;    
 ?>

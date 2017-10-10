@@ -1,43 +1,93 @@
-<div class="main-content">	
-	<div class="main-content-inner">
-	    <div class="breadcrumbs" id="breadcrumbs">
+<div class="row">
+    <div class="col-xs-12">
+    	<div class="breadcrumbs" id="breadcrumbs">
 			<script type="text/javascript">
 				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
 			</script>
 
 			<ul class="breadcrumb">
 				<li>
-					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="#/">Inicio</a>
+					<i class="ace-icon fa fa-tasks blue"></i>
+					<a href="#/menu_ventas">Ventas</a>
 				</li>
 
-				<li class="active">Generales</li>
-				<li class="active">Tipo Vendedores</li>
-			</ul><!-- /.breadcrumb -->
-
-			<div class="nav-search" id="nav-search">
-				<form class="form-search">
-					<span class="input-icon">
-						<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-						<i class="ace-icon fa fa-search nav-search-icon"></i>
-					</span>
-				</form>
-			</div><!-- /.nav-search -->
+				<li class="active">Registro Tipo Vendedores</li>
+			</ul>
 		</div>
+		<hr />
 
-	    <div class="page-content">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 widget-container-col">
-                    <div class="widget-body">
-                        <div class="widget-main">
-                            <div class="row">                           
-                                <table id="grid-table"></table>
-                                <div id="grid-pager"></div>
-                            </div>                                              
-                        </div>
-                    </div>
-                </div>
-            </div>                          
+        <div class="widget-box">
+            <div class="widget-main">
+            	<div class="control">
+            		<div class="col-sm-3">
+						<div class="clearfix">
+							<span class="block input-icon input-icon-right">
+								<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="Buscar....." onKeyUp="this.value = this.value.toUpperCase();" />
+								<i class="ace-icon fa fa-search blue"></i>
+				            </span>
+						</div>
+					</div>
+
+					<!-- <div class="col-sm-3"> -->
+						<button class="btn btn-primary posicion btn-pink" id="btn_importar" name="btn_importar" type="button" data-toggle="modal" href="#myModal"><i class="fa fa-plus-circle"></i> NUEVO</button>
+
+						<!-- <button class="btn btn-white btn-primary btn-round dimensiones" id="btn_listar" name="btn_importar" type="button" data-toggle="tooltip" title="Listar"><i class="fa fa-refresh"></i> Listar</button> -->
+					<!-- </div> -->
+				</div>
+				&nbsp;
+
+                <table id="grid-table"></table>
+                <div id="grid-pager"></div>
+            </div>
         </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal">
+	    <div class="modal-dialog modal-sm">
+	      	<div class="modal-content">
+		        <div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					Agregar Registro
+				</div>
+
+		        <br />
+		        <form class="form-horizontal" name="form_registro" id="form_registro">
+		        	<div class="row">
+		        		<div class="form-group">
+							<label class="control-label col-sm-5 no-padding-right">Tipo Vendedor:</label>
+							<div class="col-sm-6">
+								<div class="clearfix">
+									<input type="text" name="nombre" id="nombre" placeholder="" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-sm-5 no-padding-right">Observaciones:</label>
+							<div class="col-sm-6">
+								<div class="clearfix">
+									<textarea name="observaciones" id="observaciones" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
+		        	</div>
+		        </form>
+		        
+				<br />
+		        <div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+						<i class="ace-icon fa fa-times"></i>
+						Cerrar
+					</button>
+					<button name="btn_guardar" id="btn_guardar" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar imagen">
+						<i class="ace-icon fa fa-save"></i>
+						Guardar
+					</button>
+				</div>
+	      	</div>
+	    </div>
 	</div>
-</div>	
+</div>
+

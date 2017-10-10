@@ -1,13 +1,112 @@
-// create the controller and inject Angular's $scope
-angular.module('scotchApp').controller('cargosController', function ($scope) {
+angular.module('scotchApp').controller('cargosController', function ($scope, $localStorage) {
+
+	jQuery(function($) {
+		$('#form_registro').validate({
+			errorElement: 'div',
+			errorClass: 'help-block',
+			focusInvalid: false,
+			ignore: "",
+			rules: {
+				nombre: {
+					required: true			
+				},
+			},
+			messages: {
+				nombre: {
+					required: "Campo Requerido",
+				},
+			},
+			//para prender y apagar los errores
+			highlight: function (e) {
+				$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+			},
+			success: function (e) {
+				$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+				$(e).remove();
+			},
+			submitHandler: function (form) {
+				
+			}
+		});
+		// Fin
+
+		// buscador registro
+		$("#buscador").keyup(function() {
+		    var campo = $('#buscador').val();
+			jQuery("#grid-table").jqGrid('setGridParam',{url:"data/cargos/xml_cargos.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
+		// listar registro
+		$("#btn_listar").click(function() {
+			$('#buscador').val('');
+		    var campo = $('#buscador').val();
+			jQuery("#grid-table").jqGrid('setGridParam',{url:"data/cargos/xml_cargos.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
+		function actualizar() {
+			$('#buscador').val('');
+		    var campo = $('#buscador').val();
+			jQuery("#grid-table").jqGrid('setGridParam',{url:"data/cargos/xml_cargos.php?campo="+campo,page:1}).trigger("reloadGrid");	
+		} 
+
+		// guardar formulario
+		$('#btn_guardar').click(function() {
+			var respuesta = $('#form_registro').valid();
+
+			if (respuesta == true) {
+				var oper = "add";
+				var formulario = $("#form_registro").serialize();
+
+				$.ajax({
+			        url: "data/cargos/app.php",
+			        data: formulario + "&oper=" + oper,
+			        type: "POST",
+			        async: true,
+			        success: function (data) {
+			        	var val = data;
+			        	if(data == '1') {
+			        		$.gritter.add({
+								title: 'Mensaje',
+								text: 'Registro Agregado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+								time: 1000				
+							});
+							$("#nombre").val('');
+							$("#responsabilidad").val('');
+							jQuery("#grid-table").jqGrid().trigger("reloadGrid");
+							$('#myModal').modal('hide');
+				    	} else {
+				    		if(data == '3') {
+				        		$.gritter.add({
+									title: 'Mensaje',
+									text: 'Error... El Registro ya esta Agregado  <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+									time: 1000				
+								});
+								$("#nombre").val('');
+					    	}
+				    	}              
+			        },
+			        error: function (xhr, status, errorThrown) {
+				        alert("Hubo un problema!");
+				        console.log("Error: " + errorThrown);
+				        console.log("Status: " + status);
+				        console.dir(xhr);
+			        }
+			    });
+			}
+		});
+	    // fin 
+	});	
 
 	jQuery(function($) {
 		var grid_selector = "#grid-table";
 	    var pager_selector = "#grid-pager";
+	    var campo = $('#buscador').val();
 
 	    //cambiar el tamaño para ajustarse al tamaño de la página
 	    $(window).on('resize.jqGrid', function () {
-	        $(grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+	        $(grid_selector).jqGrid('setGridWidth', $(".widget-main").width());
 	    });
 	    //cambiar el tamaño de la barra lateral collapse/expand
 	    var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -21,28 +120,54 @@ angular.module('scotchApp').controller('cargosController', function ($scope) {
 	    });
 
 	    jQuery(grid_selector).jqGrid({
-	        url: 'data/cargos/xml_cargos.php',
+	        url: "data/cargos/xml_cargos.php?campo="+campo,
 	        autoencode: false,
 	        datatype: "xml",
-			height: 330,
-			colNames:['ID','NOMBRE CARGO','OBSERVACIONES','FECHA CREACIÓN'],
+			colNames:['','ID','NOMBRE CARGO','RESPONSABILIDAD','FECHA CREACIÓN'],
 			colModel:[
-				{name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
-				{name:'nombre',index:'nombre',width:150, editable:true, editoptions:{size:"20", maxlength:"30"}, editrules: {required: true}},
-	            {name:'observaciones', index:'observaciones', frozen: true, editable:true, search:false, edittype:"textarea", editrules: {required: false}, width: 300},
-	            {name:'fecha_creacion',index:'fecha_creacion', width:150,editable: true, search:false, editoptions:{size:"20", maxlength:"30", readonly: 'readonly'}}
+				{name: 'myac', width:80, fixed:true, sortable:false, resize:false, formatter:'actions',
+					formatoptions:{
+					keys:true,
+					editbutton: true,
+					onSuccess: function (response) {
+						var retorno = response.responseText;
+
+						if(retorno == '2') {
+							$.gritter.add({
+								title: 'Mensaje',
+								text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+								time: 1000				
+							});
+							return true;
+						} else {
+							if(retorno == '3') {
+								$.gritter.add({
+									title: 'Mensaje',
+									text: 'Error... El Registro ya esta Agregado  <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
+									time: 1000				
+								});
+			                }	
+						}
+		            },
+				}},
+			    {name:'id',index:'id', frozen:true,align:'left',search:false,editable: true, hidden: true, editoptions: {readonly: 'readonly'}},
+				{name:'nombre',index:'nombre',width:'300px', editable:true, editoptions:{size:"", maxlength:"30"}, editrules: {required: true}, editoptions:{dataInit: function(elem){$(elem).bind("keyup", function(e) {this.value = this.value.toUpperCase(e)})}}}, 
+	            {name:'responsabilidad', index:'responsabilidad', width:'500px', frozen: true, editable:true, search:false, edittype:"textarea", editrules: {required: false}},
+	            {name:'fecha_creacion',index:'fecha_creacion', width:'',editable: true, hidden:true, search:false, editoptions:{size:"", maxlength:"30", readonly: 'readonly'}}
 			],
 	        rownumbers: true,
 	        rowNum:10,
 	        rowList:[10,20,30],
-	        pager : pager_selector,
+	        pager: pager_selector,
+	        shrinkToFit: false,
+	        height: 420,
 	        sortname: 'id',
 	        sortorder: 'asc',
 	        altRows: true,
 	        multiselect: false,
 	        multiboxonly: false,
-	        viewrecords : true,
-	        loadComplete : function() {
+	        viewrecords: true,
+	        loadComplete: function() {
 	            var table = this;
 	            setTimeout(function(){
 	                styleCheckbox(table);
@@ -51,14 +176,19 @@ angular.module('scotchApp').controller('cargosController', function ($scope) {
 	                enableTooltips(table);
 	            }, 0);
 	        },
+	        ondblClickRow: function(rowid) {     	            	            
+	            var gsr = jQuery(grid_selector).jqGrid('getGridParam','selrow');                                              
+            	var ret = jQuery(grid_selector).jqGrid('getRowData',gsr);
+            	console.log(jQuery(grid_selector));           
+	        },
 	        editurl: "data/cargos/app.php",
-	        caption: "LISTA FUNCIONES / CARGOS"
+	        // caption: "LISTA FUNCIONES / CARGOS"
 	    });
 	    $(window).triggerHandler('resize.jqGrid');//cambiar el tamaño para hacer la rejilla conseguir el tamaño correcto
 
 	    function aceSwitch( cellvalue, options, cell ) {
 	        setTimeout(function(){
-	            $(cell) .find('input[type=checkbox]')
+	            $(cell).find('input[type=checkbox]')
 	            .addClass('ace ace-switch ace-switch-5')
 	            .after('<span class="lbl"></span>');
 	        }, 0);
@@ -71,34 +201,33 @@ angular.module('scotchApp').controller('cargosController', function ($scope) {
 	        }, 0);
 	    }
 	    //navButtons
-	    jQuery(grid_selector).jqGrid('navGrid',pager_selector,
-	    {   //navbar options
-	        edit: true,
-	        editicon : 'ace-icon fa fa-pencil blue',
-	        add: true,
-	        addicon : 'ace-icon fa fa-plus-circle purple',
+	    jQuery(grid_selector).jqGrid('navGrid',pager_selector, {   //navbar options
+	        edit: false,
+	        editicon: 'ace-icon fa fa-pencil blue',
+	        add: false,
+	        addicon: 'ace-icon fa fa-plus-circle purple',
 	        del: false,
-	        delicon : 'ace-icon fa fa-trash-o red',
-	        search: true,
-	        searchicon : 'ace-icon fa fa-search orange',
+	        delicon: 'ace-icon fa fa-trash-o red',
+	        search: false,
+	        searchicon: 'ace-icon fa fa-search orange',
 	        refresh: true,
-	        refreshicon : 'ace-icon fa fa-refresh green',
-	        view: true,
-	        viewicon : 'ace-icon fa fa-search-plus grey'
+	        refreshicon: 'ace-icon fa fa-refresh green',
+	        view: false,
+	        viewicon: 'ace-icon fa fa-search-plus grey',
 	    },
 	    {
 	    	closeAfterEdit: true,
 	        recreateForm: true,
 	        viewPagerButtons: false,
-	        overlay:false,
-	        beforeShowForm : function(e) {
+	        overlay: false,
+	        beforeShowForm: function(e) {
 	            var form = $(e[0]);
 	            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 	            style_edit_form(form);
 	        },
-	        afterSubmit: function(response)  {
+	        afterSubmit: function(response) {
                 retorno = response.responseText;
-                if(retorno == '2'){
+                if(retorno == '2') {
                 	$.gritter.add({
 						title: 'Mensaje',
 						text: 'Registro Modificado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
@@ -112,19 +241,21 @@ angular.module('scotchApp').controller('cargosController', function ($scope) {
                 }
                 return [true,'',retorno];
             },
+            aftersavefunc: function (response) {
+            }
 	    },
 	    {
 	        closeAfterAdd: true,
 	        recreateForm: true,
 	        viewPagerButtons: false,
-	        overlay:false,
-	        beforeShowForm : function(e) {
+	        overlay: false,
+	        beforeShowForm: function(e) {
 	            var form = $(e[0]);
 	            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 	            .wrapInner('<div class="widget-header" />')
 	            style_edit_form(form);
 	        },
-	        afterSubmit: function(response)  {
+	        afterSubmit: function(response) {
                 retorno = response.responseText;
                 if(retorno == '1') {
                 	$.gritter.add({
@@ -153,18 +284,18 @@ angular.module('scotchApp').controller('cargosController', function ($scope) {
 	            form.data('styled', true);
 	        },
 	        onClick : function(e) {
-	      
+	      		console.log('test');
 	        }
 	    },
 	    {
 	        recreateForm: true,
-	        overlay:false,
-	        afterShowSearch: function(e){
+	        overlay: false,
+	        afterShowSearch: function(e) {
 	            var form = $(e[0]);
 	            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 	            style_search_form(form);
 	        },
-	        afterRedraw: function(){
+	        afterRedraw: function() {
 	            style_search_filters($(this));
 	        },
 	        multipleSearch: false,
@@ -175,13 +306,12 @@ angular.module('scotchApp').controller('cargosController', function ($scope) {
 	    {
 	        recreateForm: true,
 	        overlay:false,
-	        beforeShowForm: function(e){
+	        beforeShowForm: function(e) {
 	            var form = $(e[0]);
 	            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 	        }
 	    }
 	)
-
 	    function style_edit_form(form) {
 	        //enable datepicker on "sdate" field and switches for "stock" field
 	        form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})

@@ -19,6 +19,7 @@
 		$fecha = $class->fecha_hora();
 
 		$elemento_relacion='false';
+		
 		$antecedentes = "NO";
 		if(isset($_POST['inp_relacion']))
 			$elemento_relacion='true';
@@ -72,7 +73,7 @@
 																				'".$campos1[$i]->estab."',
 																				'".$campos1[$i]->tiempo."',
 																				'1', 
-																				'$fecha');");
+																				'$fecha')");
 		}
 
 		for ($i = 0; $i < count($campos2); $i++) {
@@ -83,7 +84,7 @@
 																					'".$campos2[$i]->numero_cuen."',
 																					'".$campos2[$i]->tipo_cuen."',
 																					'1', 
-																					'$fecha');");
+																					'$fecha')");
 		}
 
 		$resp = $class->consulta("INSERT INTO corporativo.trabajo_anterior VALUES (	'$id_ant_trab',
@@ -97,7 +98,7 @@
 																					'$_POST[tiempo_trabajo]',
 																					'$_POST[ciudad_trab]',
 		 																			'1', 
-																					'$fecha');");
+																					'$fecha')");
 
 
 		$resp = $class->consulta("INSERT INTO corporativo.datos_familiar VALUES (	'$id_familia',
@@ -108,7 +109,7 @@
 																					'$_POST[dir_fami]',
 																					'$_POST[ciudad_fami]',
 																					'1',
-																					'$fecha');");
+																					'$fecha')");
 
 
 		$resp = $class->consulta("INSERT INTO corporativo.cargos_asignacion VALUES ('$id_cargos',
@@ -116,14 +117,14 @@
 																					'$id_personal',
 																					'$_POST[select_cargo]',
 																					'1', 
-																					'$fecha');");
+																					'$fecha')");
 
 	
 		$resp = $class->consulta("INSERT INTO rol_pagos.codigo_rol VALUES  (		'$id_codigo_rol',
 																					'$id_personal',
 																					'$_POST[abreviatura]',
 																					'1', 
-																					'$fecha');");
+																					'$fecha')");
 		$data = $id_personal;
 		echo $data;
 	}
@@ -185,11 +186,11 @@
 																			where id_personal = '$_POST[id_personal]'");
 
 		$resp = $class->consulta("UPDATE corporativo.cargos_asignacion set 	id_areas = '$_POST[select_areas]',
-																			id_cargo = '$_POST[select_cargo]',
+																			id_cargos = '$_POST[select_cargo]',
 																			fecha_creacion = '$fecha'
 																			where id_personal = '$_POST[id_personal]'");
 
-		$resp = $class->consulta("UPDATE rol_pagos.codigo_rol set 		codigo = '$_POST[abreviatura]',
+		$resp = $class->consulta("UPDATE rol_pagos.codigo_rol set 			codigo = '$_POST[abreviatura]',
 																			fecha_creacion = '$fecha'
 																			where id_personal = '$_POST[id_personal]'");
 
@@ -226,7 +227,7 @@
 	//LLena los bancos en el Combo
 	if (isset($_POST['llenar_bancos'])) {
 		$id = $class->idz();
-		$resultado = $class->consulta("SELECT id, nombre FROM corporativo.bancos WHERE estado='1';");
+		$resultado = $class->consulta("SELECT id, nombre FROM corporativo.bancos WHERE estado='1'");
 		print'<option value="">&nbsp;</option>';
 		while ($row=$class->fetch_array($resultado)) {
 			print '<option value="'.$row['id'].'">'.$row['nombre'].'</option>';
@@ -237,17 +238,18 @@
 	//LLena las areas en el Combo
 	if (isset($_POST['llenar_areas'])) {
 		$id = $class->idz();
-		$resultado = $class->consulta("SELECT id, nombre FROM corporativo.areas WHERE estado='1';");
+		$resultado = $class->consulta("SELECT id, nombre FROM corporativo.areas WHERE estado='1'");
 		print'<option value="">&nbsp;</option>';
 		while ($row=$class->fetch_array($resultado)) {
 			print '<option value="'.$row['id'].'">'.$row['nombre'].'</option>';
 		}
 	}
 	// fin
+	
 	//LLena las areas en el Combo
 	if (isset($_POST['llenar_cargo'])) {
 		$id = $class->idz();
-		$resultado = $class->consulta("SELECT id, nombre FROM corporativo.cargos WHERE estado='1';");
+		$resultado = $class->consulta("SELECT id, nombre FROM corporativo.cargos WHERE estado='1'");
 		print'<option value="">&nbsp;</option>';
 		while ($row=$class->fetch_array($resultado)) {
 			print '<option value="'.$row['id'].'">'.$row['nombre'].'</option>';
@@ -265,8 +267,8 @@
 	// fin
 
 	// consultar ficha de ingreso general
-	if(isset($_POST['cargar_tabla_fichas'])){
-		$resultado = $class->consulta("SELECT  P.id, P.cedula_identificacion, P.nombres_completos, P.fecha_aplicacion FROM corporativo.personal P WHERE P.estado = '1';");
+	if(isset($_POST['cargar_tabla_fichas'])) { 
+		$resultado = $class->consulta("SELECT  P.id, P.cedula_identificacion, P.nombres_completos, P.fecha_aplicacion FROM corporativo.personal P WHERE P.estado = '1'");
 		while ($row=$class->fetch_array($resultado)) {
 			$lista[] = array('id' => $row['id'],
 						'cedula_identificacion' => $row['cedula_identificacion'],

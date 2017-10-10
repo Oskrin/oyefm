@@ -1,5 +1,5 @@
 <?php 
-	if(!isset($_SESSION)){
+	if(!isset($_SESSION)) {
         session_start();        
     }
 	include_once('../../admin/class.php');
@@ -29,10 +29,16 @@
 			if ($data != 0) {
 			 	$data = "3";
 			} else {
-		    	$resp = $class->consulta("UPDATE programas.tipo_programa SET nombre = '$_POST[nombre]',observaciones = '$_POST[observaciones]',fecha_creacion = '$fecha' WHERE id = '$_POST[id]'");
+		    	$resp = $class->consulta("UPDATE programas.tipo_programa SET nombre = '$_POST[nombre]', observaciones = '$_POST[observaciones]',fecha_creacion = '$fecha' WHERE id = '$_POST[id]'");
 		    	$data = "2";
 		    }
+	    } else {
+	    	if ($_POST['oper'] == "del") {
+	    		$resp = $class->consulta("UPDATE programas.tipo_programa SET estado = '2' WHERE id = '$_POST[id]'");
+	    		$data = "4";	
+	    	}
 	    }
-	}    
+	}
+	    
 	echo $data;
 ?>

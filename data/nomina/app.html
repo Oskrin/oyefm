@@ -1,0 +1,925 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-pencil-square-o blue"></i>
+					<a href="#/menu_nomina">Nómina</a>
+				</li>
+
+				<li class="active">Registro Nómina</li>
+			</ul>
+		</div>
+		<hr />
+
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div id="fuelux-wizard-container">
+						<div>
+							<ul class="steps">
+								<li data-step="1" class="active">
+									<span class="step">1</span>
+									<span class="title">Datos Personal</span>
+								</li>
+
+								<li data-step="2" class="active">
+									<span class="step">2</span>
+									<span class="title">Datos Anticipos</span>
+								</li>
+
+								<li data-step="3" class="active">
+									<span class="step">3</span>
+									<span class="title">Datos Permisos</span>
+								</li>
+
+								<li data-step="4" class="active">
+									<span class="step">4</span>
+									<span class="title">Multas</span>
+								</li>
+
+								<li data-step="5" class="active">
+									<span class="step">5</span>
+									<span class="title">Guardar Nómina</span>
+								</li>
+							</ul>
+						</div>
+						<hr/>
+
+						<div class="step-content pos-rel">
+							<div class="step-pane active" data-step="1">
+								<form class="form-horizontal" id="form_personal">
+									<div class="row">
+										&nbsp; &nbsp;
+										<div class="col-sm-12">
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="codigo">Código Nómina:</label>
+													<div class="col-sm-6">
+														<input type="text" name="codigo" id="codigo" class="form-control" placeholder="Código Nómina" />
+														<input type="hidden" name="codigo_general" id="codigo_general" readonly class="col-xs-12 col-sm-10" />
+														<input type="hidden" name="id_empleado" id="id_empleado" class="form-control" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="sueldo">Sueldo:</label>
+													<div class="col-sm-6">
+														<input type="text" name="sueldo" id="sueldo" value="0.000" class="form-control" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="select_mes">Mes:</label>
+													<div class="col-sm-6">
+														<select id="select_mes" name="select_mes" class="select2" data-placeholder="Mes...">
+															<option value="">&nbsp;</option>
+															<option value="ENERO">ENERO</option>
+															<option value="FEBRERO">FEBRERO</option>
+															<option value="MARZO">MARZO</option>
+															<option value="ABRIL">ABRIL</option>
+															<option value="MAYO">MAYO</option>
+															<option value="JUNIO">JUNIO</option>
+															<option value="JULIO">JULIO</option>
+															<option value="AGOSTO">AGOSTO</option>
+															<option value="SEPTIEMBRE">SEPTIEMBRE</option>
+															<option value="OCTUBRE">OCTUBRE</option>
+															<option value="NOVIEMBRE">NOVIEMBRE</option>
+															<option value="DICIEMBRE">DICIEMBRE</option>	
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="identificacion">Identificación:</label>
+													<div class="col-sm-6">
+														<input type="text" name="identificacion" id="identificacion" class="form-control" placeholder="Identificación" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="select_cargo">Cargo:</label>
+													<div class="col-sm-6">
+														<input type="text" name="cargo" id="cargo" readonly placeholder="Cargo" class="form-control" />
+													</div>
+												</div>												
+											</div>
+
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="nombres_completos">Nombres Completos:</label>
+													<div class="col-sm-8">
+														<input type="text" name="nombres_completos" id="nombres_completos" class="form-control" placeholder="Nombres Completos" />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="txt_mes">Fecha Nómina:</label>
+													<div class="col-sm-6">
+														<div class="input-group">
+															<input type="text" id="txt_mes" name="txt_mes" class="form-control datepicker" />
+															<span class="input-group-addon">
+																<i class="ace-icon fa fa-calendar"></i>
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<h4 class="header blue bolder smaller center"></h4>
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Horas Laborar:</label>
+													<div class="col-sm-6">
+										                <div class="input-group">
+										                    <input type="text" id="tiempo_horas" name="tiempo_horas" value="00:00" class="form-control" />
+										                    <span class="input-group-addon">
+										                        <i class="glyphicon glyphicon-time"></i>
+										                    </span>
+										                </div>
+										            </div>
+									            </div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="dias_laborados">Días Laborados:</label>
+													<div class="col-sm-6">
+														<input type="text" name="dias_laborados" id="dias_laborados" class="form-control"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="no_laborado">Días no Laborados:</label>
+													<div class="col-sm-6">
+														<input type="text" name="no_laborado" id="no_laborado" class="form-control"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="extras">Horas Extras:</label>
+													<div class="col-sm-6">
+														<input type="text" name="extras" id="extras" class="form-control"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Comisiones:</label>
+													<div class="col-sm-6">
+										                <input type="text" id="asignar_comisiones" name="asignar_comisiones" value="0.00" class="form-control" />
+										            </div>
+									            </div>
+
+									            <div class="form-group">
+													<label class="col-sm-4 control-label no-padding-right" for="select_tipo_servicio">Tipo Servicio:</label>
+													<div class="col-sm-6">
+														<select id="select_tipo_servicio" name="select_tipo_servicio" class="select2" data-placeholder="Tipo Servicio...">
+															<option value="">&nbsp;</option>	
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="multas_atrasos">Atrasos:</label>
+													<div class="col-sm-6">
+														<input type="text" name="multas_atrasos" id="multas_atrasos" value="0.00" class="form-control"/>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="monto_servicio">Monto servicio:</label>
+													<div class="col-sm-6">
+														<input type="text" name="monto_servicio" id="monto_servicio" value="0.00" class="form-control"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="prestamos">Prestamos:</label>
+													<div class="col-sm-6">
+														<input type="text" name="prestamos" id="prestamos" value="0.00" class="form-control"/>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="acumulable">Acumulable:</label>
+													<div class="col-sm-6">
+														<label>
+															<input name="acumulable" id="acumulable" class="ace ace-switch ace-switch-5" type="checkbox" checked>
+															<span class="lbl"></span>
+														</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-3">
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="quirografarios">Quirografarios:</label>
+													<div class="col-sm-6">
+														<input type="text" name="quirografarios" id="quirografarios" value="0.00" class="form-control"/>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-6 control-label no-padding-right" for="select_facturable">Facturable:</label>
+													<div class="col-sm-6">
+														<select id="select_facturable" name="select_facturable" class="select2" data-placeholder="Facturable...">
+															<option value="NO" selected>No Factura</option>
+															<option value="SI">Si Factura</option>
+														</select>
+													</div>
+												</div>
+
+												<!-- <div class="form-group">	
+													<label class="col-sm-6 control-label no-padding-right" for="imagen"></label>
+													<div class="col-sm-6">
+														<button class="btn btn-white btn-default btn-round" type="button" id="imagen" data-toggle="modal" href="#myModal3">
+															<i class="glyphicon glyphicon-picture red2"></i>   Imagen 
+														</button>
+													</div>
+												</div> -->
+											</div>
+										</div>	
+									</div>
+
+									<div class="col-sm-12">
+										<div class="clearfix form-actions center">
+											<button class="btn btn-success" type="button" name="btn_buscar" id="btn_buscar" data-toggle="modal" href="#myModal">
+												<i class="ace-icon fa fa-file bigger-110"></i>
+												Buscar Empleados
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div class="step-pane active" data-step="2">
+								<form class="form-horizontal" id="form_anticipos">
+									<div class="row">
+										<div class="col-sm-12">
+											<table id="table3"></table>
+											<div id="pager3"></div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div class="step-pane active" data-step="3">
+								<form class="form-horizontal" id="form_permisos">
+									<div class="row">
+										<div class="col-sm-12">
+											<table id="table4"></table>
+											<div id="pager4"></div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+								<div class="step-pane active" data-step="4">
+								<form class="form-horizontal" id="form_multas">
+									<div class="col-sm-12">
+										<div class="col-sm-4">
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="select_tipo_multa">Tipo Multa:</label>
+												<div class="col-sm-8">
+													<select id="select_tipo_multa" name="select_tipo_multa" class="select2" data-placeholder="Tipo Multa...">
+														<option value="">&nbsp;</option>	
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label class="col-sm-6 control-label no-padding-right" for="cantidad">Cantidad:</label>
+												<div class="col-sm-6">
+													<input type="text" name="cantidad" id="cantidad" class="form-control"/>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="descripcion">Descripción:</label>
+												<div class="col-sm-8">
+													<input type="text" name="descripcion" id="descripcion" class="form-control"/>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-1">
+											<button class="btn btn-purple btn-sm blue " id="btn_agregar_multas"><i class="ace-icon fa fa-arrow-circle-o-down"></i>Agregar</button>
+										</div>	
+									</div>
+
+									<div class="col-sm-12" style="height: 180px">
+										<div class="col-sm-8">
+												<table id="tbt_multas" name="tbt_multas" class="table table table-striped">
+												<thead>
+													<tr>
+														<th style="display: none;">Id</th>
+														<th>Tipo Multa</th>
+														<th>Descipción</th>		
+														<th>Cantidad</th>
+														<th>Total Multa</th>				
+														<th>Proceso</th>	
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>	
+										</div>
+									</div>
+								</form>	
+							</div>
+
+							<div class="step-pane active" data-step="5">
+								<form class="form-horizontal" id="form_datos">
+									<div class="col-sm-12">
+										<div class="col-sm-4">
+											<h4 class="header blue bolder smaller center">INGRESOS</h4>
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="sueldo_basico">Sueldo Mes:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="sueldo_basico" name="sueldo_basico" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="horas_extras">Horas Extras:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="horas_extras" name="horas_extras" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="comisiones">Comisiones:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="comisiones" name="comisiones" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="decimo_tercero">Décimo Tercero:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="decimo_tercero" name="decimo_tercero" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="decimo_cuarto">Décimo Cuarto:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="decimo_cuarto" name="decimo_cuarto" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="servicios">Servicios Prestados:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="servicios" name="servicios" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-4 control-label no-padding-right" for="total_ingresos">Total Ingresos:</label>
+												<div class="col-sm-8">
+													<span class="input-icon">
+														<input type="text" id="total_ingresos" name="total_ingresos" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-4">
+											<h4 class="header blue bolder smaller center">DESCUENTOS</h4>
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="aporte_iess">Aporte al IESS:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="aporte_iess" name="aporte_iess" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="pres_quirografarios">Préstamos quirografarios:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="pres_quirografarios" name="pres_quirografarios" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="pres">Préstamos:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="pres" name="pres" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="anti">Anticipos:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="anti" name="anti" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="atrasos">Atrasos:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="atrasos" name="atrasos" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="permisos">Permisos:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="permisos" name="permisos" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="faltas">Faltas:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="faltas" name="faltas" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="faltas">Multas:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="multas" name="multas" class="form-control" value="0.00" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="total_descuentos">Total Descuentos:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="total_descuentos" name="total_descuentos" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>	
+										</div>
+
+										<div class="col-sm-4">
+											<h4 class="header blue bolder smaller center">TOTAL A PAGAR</h4>
+											<div class="form-group">
+												<label class="col-sm-5 control-label no-padding-right" for="neto_pagar">Neto a Pagar:</label>
+												<div class="col-sm-7">
+													<span class="input-icon">
+														<input type="text" id="neto_pagar" name="neto_pagar" class="form-control" value="0.000" />
+														<i class="ace-icon fa fa fa-usd orange"></i>
+													</span>
+												</div>
+											</div>	
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<hr />
+					<div class="wizard-actions">
+						<button class="btn btn-prev">
+							<i class="ace-icon fa fa-arrow-left"></i>
+							Atras
+						</button>
+
+						<button class="btn btn-success btn-next" data-last="Guardar" id="btn_0">
+							Siguiente
+							<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">BUSCAR PERSONAL</h4>
+        </div>
+        <div class="modal-body">
+        	<div class="control">
+        		<div class="col-sm-3">
+					<div class="clearfix">
+						<span class="block input-icon input-icon-right">
+							<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="C.I. / Nombres" onKeyUp="this.value = this.value.toUpperCase();" />
+							<i class="ace-icon fa fa-search blue"></i>
+			            </span>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<button class="btn btn-white btn-primary btn-round dimensiones" id="btn_listar" name="btn_importar" type="button" data-toggle="tooltip" title="Listar"><i class="fa fa-refresh"></i> Listar</button>
+				</div>
+			</div>
+			&nbsp;
+
+            <table id="table2"></table>
+			<div id="pager2"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div id="modal-anticipos" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header no-padding">
+				<div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					ANTICIPO AL PAGO
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="widget-box transparent">
+							<div class="widget-header widget-header-large">
+								<h3 class="widget-title green lighter">
+									<i class="ace-icon fa fa-music green"></i>
+									OYEFM
+								</h3>
+
+								<div class="widget-toolbar no-border invoice-info">
+									<h4><span class="red" id='serie'></span></h4>
+
+									<span class="invoice-info-label">Fecha:</span>
+									<span class="blue" id='fecha'></span>
+								</div>
+
+								<div class="widget-toolbar hidden-480">
+									<a href="">
+									</a>
+								</div>
+							</div>
+							&nbsp;
+
+							<div class="col-xs-12">
+								<div class="col-xs-8">
+									<p align="justify">Yo <b id='nombres'></b> con C.C. N° <b id='cedula'></b>, que me desempeño como <b id='cargo_anticipo'></b>, solicito, se me conceda un anticipo a mi remuneración por el monto de <b id='monto'></b>, para un periodo de <b id='mes_anticipo'></b> mes(es); y autorizo para que en la liquidación de mis haberes en caso de separación definitiva, se incluyan en los saldos pendientes de pago originados como anticipos recibidos.</p>
+								</div>
+
+								<div class="col-xs-4">
+									<h5>Recibir: <span class="red" id="total_monto"><i class="ace-icon fa fa-usd icon-animated-hand-pointer"></i></span></h5>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_efectivo" id="check_efectivo" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> EFECTIVO</span>
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_cheque" id="check_cheque" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> CHEQUE</span>
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_tarjeta" id="check_tarjeta" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> TARJETA</span>
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_deposito" id="check_deposito" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> DEPÓSITO</span>
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_tranferencia" id="check_tranferencia" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> TRANSFERENCIA</span>
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="col-xs-4">
+									<p>CHEQUE N°:</p>
+									<p id="cheque_anticipo"></p>
+								</div>
+
+								<div class="col-xs-4">
+									<p>BANCO:</p>
+									<p id="banco_anticipo"></p>
+								</div>
+
+								<div class="col-xs-4">
+									<p>CUENTA:</p>
+									<p id="cuenta_anticipo"></p>
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="hr hr8 hr-double hr-dotted"></div>
+								<div class="col-xs-4">
+									<p>ELABORADO</p>
+									<p id="elaborado_por"></p>
+									<p id="ci_elaborado"></p>
+								</div>
+
+								<div class="col-xs-4">
+									<p>APROBADO</p>
+									<p></p>
+									<p>C.I.</p>
+								</div>
+
+								<div class="col-xs-4">
+									<p>SOLICITANTE</p>
+									<p id="solicitado_por"></p>
+									<p id="ci_solicitado"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal-permisos" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header no-padding">
+				<div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					PERMISO DE SALIDA TEMPORAL
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="widget-box transparent">
+							<div class="widget-header widget-header-large">
+								<h3 class="widget-title green lighter">
+									<i class="ace-icon fa fa-music green"></i>
+									OYEFM
+								</h3>
+
+								<div class="widget-toolbar no-border invoice-info">
+									<h4><span class="red" id='p_serie_permiso'></span></h4>
+
+									<span class="invoice-info-label">Fecha:</span>
+									<span class="blue" id='p_permiso'></span>
+								</div>
+
+								<div class="widget-toolbar hidden-480">
+									<a href="">
+									</a>
+								</div>
+							</div>
+							&nbsp;
+
+							<div class="col-xs-12">
+								<p>Me dirijo a Usted: <b id="p_dirigido"></b>	</p>
+								<p>Yo, <b id="p_yo"></b> ,solicito de usted, para ausentarme de mis labores cotidianas, durante: <b id="p_horas"></b> Horas <b id="p_dias"></b> Día(s).</p>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="hr hr8 hr-dotted"></div>
+								<div class="col-xs-3">
+									<p>HORA SALIDA</p>
+									<b id="b_hora_salida"></b>
+								</div>
+
+								<div class="col-xs-2">
+									<p>¿REGRESÓ?</p>
+									<b id="b_regreso"></b>
+									<div class="clearfix">
+										<label>
+											<input name="p_regreso" id="p_regreso" class="ace ace-switch ace-switch-5" type="checkbox" checked>
+											<span class="lbl"></span>
+										</label>
+									</div>
+								</div>
+
+								<div class="col-xs-3">
+									<p>HORA RETORNO</p>
+									<b id="p_retorno"></b>
+								</div>
+
+								<div class="col-xs-4">
+									<p>TIEMPO SALIDA</p>
+									<b id="p_tiempo_salida"></b>
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="col-xs-6">
+									<p>Asunto: <b id="p_asunto"></b></p>	
+								</div>
+
+								<div class="col-xs-6">
+									<p>Lugar: <b id="p_lugar"></b></p>		
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="hr hr8 hr-dotted"></div>
+								<div class="col-xs-6">
+									<p align="center">POR PARTE DE:</p>
+									<div class="checkbox">
+										<label>
+											<input name="check_comision_oficial" id="check_comision_oficial" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> COMISIÓN OFICIAL</span>
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input name="check_asunto_particular" id="check_asunto_particular" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> ASUNTO PARTICULAR</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="col-xs-6">
+									<p align="center">CON CARGOS A:</p>
+									<div class="checkbox">
+										<label>
+											<input name="check_descuentos" id="check_descuentos" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> DESCUENTOS</span>
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_vacaciones" id="check_vacaciones" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> VACACIONES</span>
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input name="check_ninguno" id="check_ninguno" type="checkbox" class="ace ace-checkbox-2" />
+											<span class="lbl"> NINGUNO</span>
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-12">
+								<div class="hr hr8 hr-double hr-dotted"></div>
+								<div class="col-xs-4">
+									<p>SOLICITANTE</p>
+									<p id="p_solicitante"></p>
+									<p id="p_cedula"></p>
+								</div>
+
+								<div class="col-xs-4">
+									<p>JEFE PERSONAL</p>
+									<!-- <p></p>
+									<p>C.I.</p> -->
+								</div>
+
+								<div class="col-xs-4">
+									<p>TALENTO HUMANO</p>
+									<p id="p_talento"></p>
+									<p id="p_cedula_talento"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal2">
+    <div class="modal-dialog modal-lg">
+      	<div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	          <h4 class="modal-title">BUSCAR NÓMINA</h4>
+	        </div>
+
+	        <div class="modal-body">
+				<table id="table"></table>
+				<div id="pager"></div>	
+	        </div>
+
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+	        </div>
+      	</div>
+    </div>
+</div>
+ -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal3">
+    <div class="modal-dialog modal-sm">
+      	<div class="modal-content">
+	        <div class="table-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<span class="white">&times;</span>
+				</button>
+				Personal
+			</div>
+	        <br />
+	        <form class="form-horizontal" name="form_imagen" id="form_imagen">
+	        	<input type="hidden" name="id_personal" id="id_personal" class="form-control" />
+	        	<div class="row center">
+	        		<span class="profile-picture">
+						<img id="avatar" class="editable img-responsive" alt="" src="dist/avatars/profile-pic.jpg" />
+					</span>
+
+					<div class="space-4"></div>
+					<div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+						<div class="inline position-relative">
+							<span class="white">Foto Personal</span>
+						</div>
+					</div>
+				</div>
+	        </form>
+	        
+			<br />
+	        <div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-right" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+			</div>
+     	 </div>
+    </div>
+</div>
+

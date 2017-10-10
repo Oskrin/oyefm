@@ -1,5 +1,5 @@
 <?php 
-	if(!isset($_SESSION)){
+	if(!isset($_SESSION)) {
         session_start();        
     }
 	include_once('../../admin/class.php');
@@ -32,7 +32,13 @@
 				$resp = $class->consulta("UPDATE tipo_paquetes SET nombre_paquete = '$_POST[nombre_paquete]',observaciones = '$_POST[observaciones]',fecha_creacion = '$fecha' WHERE id = '$_POST[id]'");
 	    		$data = "2";
 			}
+	    } else {
+	    	if ($_POST['oper'] == "del") {
+	    		$resp = $class->consulta("UPDATE tipo_paquetes SET estado = '2' WHERE id = '$_POST[id]'");
+	    		$data = "4";	
+	    	}	
 	    }
-	}    
+	}
+	    
 	echo $data;
 ?>

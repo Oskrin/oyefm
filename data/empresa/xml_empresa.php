@@ -41,8 +41,7 @@
         }
     }  
 
-    $resultado = $class->consulta($SQL);  
-
+    $resultado = $class->consulta($SQL);
     header("Content-Type: text/html;charset=utf-8");   
     $s = "<?xml version='1.0' encoding='utf-8'?>";
     $s .= "<rows>";

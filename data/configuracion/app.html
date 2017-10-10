@@ -1,0 +1,173 @@
+<style type="text/css">
+	.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:500px;
+  height:350px;
+}
+</style>
+
+<div class="main-content">	
+	<div class="main-content-inner">
+	    <div class="page-content">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="well well-sm">
+						<h3 class=" center red">MI CUENTA</h3>
+					</div>
+
+						<div class="tabbable">
+							<div class="tab-content profile-edit-tab-content">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="space-12"></div>
+										<div>
+											<div id="user-profile-1" class="user-profile row">
+												<div class="col-xs-12 col-sm-4 center">
+													<div data-ng-controller="configuracionController">
+													<input type="file" file-model="myFile"/>
+    												<button ng-click="uploadFile()">upload me</button>
+														<!-- <form name="upload" ng-submit="uploadFile()">
+															<div class="inline position-relative">
+															  	<div class="cropArea">
+															    	<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+															  	</div>
+															  	<input type="file" id="fileInput" uploader-model="file" />
+															</div>
+														  	<div>Visualizar:</div>
+														  	<div><img ng-src="{{myCroppedImage}}" /></div>
+
+															<div class="space-4"></div>
+															<input type="submit" value="Enviar">
+															<div class="space-4"></div>
+														</form> -->
+													</div>
+
+													<div class="space-6"></div>
+													<div class="hr hr12 dotted"></div>
+												</div>
+
+												<div class="col-xs-12 col-sm-5">
+													<div class="profile-user-info profile-user-info-striped">
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Identificación </div>
+
+															<div class="profile-info-value">
+																<span class="editable">{{identificacion}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Nombres</div>
+
+															<div class="profile-info-value">
+																<span class="editable">{{nombres}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Teléfono</div>
+
+															<div class="profile-info-value">
+																<span class="editable" id="telefono">{{telefono}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Celular</div>
+
+															<div class="profile-info-value">
+																<span class="editable" id="celular">{{celular}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Correo</div>
+
+															<div class="profile-info-value">
+																<span class="editable" id="correo">{{correo}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Ciudad</div>
+
+															<div class="profile-info-value">
+																<span class="editable" id="ciudad">{{ciudad}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Dirección</div>
+
+															<div class="profile-info-value">
+																<span class="editable" id="direccion">{{direccion}}</span>
+															</div>
+														</div>
+
+														<div class="profile-info-row">
+															<div class="profile-info-name"> Usuario</div>
+
+															<div class="profile-info-value">
+																<span class="editable" id="usuario">{{usuario}}</span>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-xs-12 col-sm-3">
+													<div class="center">
+														<h4>CAMBIO CONTRASEÑA</h4>
+														<form class="form-horizontal" name="form_pass" id="form_pass">
+															<div class="form-group">
+																<label class="col-sm-6 control-label " for="actual">Contraseña Actual:</label>
+																<div class="col-sm-6">
+																	<input type="password" name="actual" id="actual" class="form-control" value="" min="1" />
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="col-sm-6 control-label" for="nueva">Nueva Contraseña:</label>
+																<div class="col-sm-6">
+																	<input type="password" name="nueva" id="nueva" class="form-control" value="" min="1" />
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="col-sm-6 control-label" for="confirme">Confirme Contraseña:</label>
+																<div class="col-sm-6">
+																	<input type="password" name="confirme" id="confirme" class="form-control" value="" min="1" />
+																</div>
+															</div>
+														</form>	
+
+														<button type="button" class="btn btn-sm btn-primary btn-white btn-round" id="btn_0" name="btn_0">
+															<i class="ace-icon fa fa-rss bigger-150 middle orange2"></i>
+															<span class="bigger-110">Cambiar</span>
+														</button>
+													</div>	
+												</div>
+											</div>
+											<br>
+											<br>
+
+											<!-- <div class="container">
+												<div>Select an image file: <input type="file" id="fileInput" /></div>
+											  	<div class="cropArea">
+											    	<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+											  	</div>
+											  	<div>Cropped Image:</div>
+											  	<div><img ng-src="{{myCroppedImage}}" /></div>
+											</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+

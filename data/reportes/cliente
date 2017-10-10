@@ -1,0 +1,556 @@
+<?php
+include_once('../../fpdf/rotation.php');
+include_once('../../admin/class.php');
+include_once('../../admin/convertir.php');
+include_once('../../admin/funciones_generales.php');
+date_default_timezone_set('America/Guayaquil');
+setlocale (LC_TIME,"spanish");
+session_start();
+    
+class PDF extends PDF_Rotate {
+var $widths;
+var $aligns;
+function SetWidths($w) {            
+    $this->widths=$w;
+}
+        
+function RotatedText($x, $y, $txt, $angle) {
+    $this->Rotate($angle, $x, $y);
+    $this->Text($x, $y, $txt);
+    $this->Rotate(0);
+}
+
+function RotatedImage($file, $x, $y, $w, $h, $angle) {
+    $this->Rotate($angle, $x, $y);
+    $this->Image($file, $x, $y, $w, $h);
+    $this->Rotate(0);
+}  
+
+function RoundedRect($x, $y, $w, $h, $r, $style = '') {
+    $k = $this->k;
+    $hp = $this->h;
+    if($style == 'F')
+        $op='f';
+    elseif($style == 'FD' || $style == 'DF')
+        $op ='B';
+    else
+        $op ='S';
+    $MyArc = 4/3 * (sqrt(2) - 1);
+    $this->_out(sprintf('%.2F %.2F m',($x+$r)*$k,($hp-$y)*$k ));
+    $xc = $x+$w-$r ;
+    $yc = $y+$r;
+    $this->_out(sprintf('%.2F %.2F l', $xc*$k,($hp-$y)*$k ));
+
+    $this->_Arc($xc + $r*$MyArc, $yc - $r, $xc + $r, $yc - $r*$MyArc, $xc + $r, $yc);
+    $xc = $x+$w-$r ;
+    $yc = $y+$h-$r;
+    $this->_out(sprintf('%.2F %.2F l',($x+$w)*$k,($hp-$yc)*$k));
+    $this->_Arc($xc + $r, $yc + $r*$MyArc, $xc + $r*$MyArc, $yc + $r, $xc, $yc + $r);
+    $xc = $x+$r ;
+    $yc = $y+$h-$r;
+    $this->_out(sprintf('%.2F %.2F l',$xc*$k,($hp-($y+$h))*$k));
+    $this->_Arc($xc - $r*$MyArc, $yc + $r, $xc - $r, $yc + $r*$MyArc, $xc - $r, $yc);
+    $xc = $x+$r ;
+    $yc = $y+$r;
+    $this->_out(sprintf('%.2F %.2F l',($x)*$k,($hp-$yc)*$k ));
+    $this->_Arc($xc - $r, $yc - $r*$MyArc, $xc - $r*$MyArc, $yc - $r, $xc, $yc - $r);
+    $this->_out($op);
+}
+
+function _Arc($x1, $y1, $x2, $y2, $x3, $y3) {
+    $h = $this->h;
+    $this->_out(sprintf('%.2F %.2F %.2F %.2F %.2F %.2F c ', $x1*$this->k, ($h-$y1)*$this->k,
+        $x2*$this->k, ($h-$y2)*$this->k, $x3*$this->k, ($h-$y3)*$this->k));
+}
+
+function SetLineStyle($style) {
+    extract($style);
+    if (isset($width)) {
+        $width_prev = $this->LineWidth;
+        $this->SetLineWidth($width);
+        $this->LineWidth = $width_prev;
+    }
+    if (isset($cap)) {
+        $ca = array('butt' => 0, 'round'=> 1, 'square' => 2);
+        if (isset($ca[$cap]))
+            $this->_out($ca[$cap] . ' J');
+    }
+    if (isset($join)) {
+        $ja = array('miter' => 0, 'round' => 1, 'bevel' => 2);
+        if (isset($ja[$join]))
+            $this->_out($ja[$join] . ' j');
+    }
+    if (isset($dash)) {
+        $dash_string = '';
+        if ($dash) {
+            $tab = explode(', ', $dash);
+            $dash_string = '';
+            foreach ($tab as $i => $v) {
+                if ($i > 0)
+                    $dash_string .= ' ';
+                $dash_string .= sprintf('%.2F', $v);
+            }
+        }
+        if (!isset($phase) || !$dash)
+            $phase = 0;
+        $this->_out(sprintf('[%s] %.2F d', $dash_string, $phase));
+    }
+    if (isset($color)) {
+        list($r, $g, $b) = $color;
+        $this->SetDrawColor($r, $g, $b);
+    }
+} 
+
+function Line($x1, $y1, $x2, $y2, $style = null) {
+    if ($style)
+        $this->SetLineStyle($style);
+    parent::Line($x1, $y1, $x2, $y2);
+}
+
+function SetDash($black=false, $white=false) {
+    if($black and $white)
+        $s = sprintf('[%.3f %.3f] 0 d', $black*$this->k, $white*$this->k);
+    else
+        $s = '[] 0 d';
+    $this->_out($s);
+}
+
+//Cabecera de página
+function Header() {
+    $class = new constante();
+    $letras = new EnLetras();
+    $resp = $class->consulta("SELECT I.codigo_ci, I.ciudad, I.fecha, I.nombre_cliente, I.valor, C.nombre_comercial, C.direccion, I.concepto_pago, I.id_tipo_pago, I.imagen FROM comprobante_ingreso I, clientes C WHERE I.id_cliente = C.id AND  I.id = '2017100311203159d3b8cf24f11'");
+    while ($row = $class->fetch_array($resp)) {
+        $codigo_ci = $row[0];
+        $ciudad = $row[1];
+        $fecha = $row[2];
+        $nombre_cliente = $row[3];
+        $valor = $row[4];
+        $nombre_comercial = $row[5];
+        $direccion = $row[6];
+        $concepto_pago = $row[7];
+        $forma_pago = $row[8];
+        $imagen = $row[9];
+
+        $anio = substr($row[2], 0, 4);
+        $mes = substr($row[2], 5, -3);
+        $dia = substr($row[2], 8, 8);
+    }
+
+    // $resp = $class->consulta("SELECT E.propietario, E.nombre_empresa, E.ruc_empresa, E.autorizacion_sri, E.propietario FROM empresa E WHERE E.estado = '1'");
+    // while ($row = $class->fetch_array($resp)) {
+    //     $propietario = $row[0];
+    //     $nombre_empresa = $row[1];
+    //     $ruc_empresa = $row[2];
+    //     $autorizacion = $row[3];
+    //     $propietario = $row[4];
+    // }
+
+    $this->SetTextColor(0,0,0);
+
+    //Logo cabezera
+    $this->Image('logo_conceptual.jpg',7,6,55);
+
+    $this->SetFont('Arial','B',11);
+    $this->Text(75, 13, 'COMPROBANTE DE INGRESO',1, 'L');
+
+    // $this->SetFont('Arial','',7);
+    // $this->Text(108, 60, utf8_decode('EFECTIVO'),1, 'L');
+    // if($forma_pago == 'EFECTIVO') {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(25,25,25);
+    //     $this->RoundedRect(123, 57, 4, 4, 0, 'DF');    
+    // } else {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(255,255,255);
+    //     $this->RoundedRect(123, 57, 4, 4, 0, 'DF');
+    // }
+
+    // $this->Text(110, 65, utf8_decode('CHEQUE'),1, 'L');
+    // if($forma_pago == 'CHEQUE') {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(25,25,25);
+    //     $this->RoundedRect(123, 62, 4, 4, 0, 'DF');    
+    // } else {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(255,255,255);
+    //     $this->RoundedRect(123, 62, 4, 4, 0, 'DF');
+    // }
+
+    // $this->Text(110, 70, utf8_decode('TARJETA'),1, 'L');
+    // if($forma_pago == 'TARJETA') {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(25,25,25);
+    //     $this->RoundedRect(123, 67, 4, 4, 0, 'DF');    
+    // } else {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(255,255,255);
+    //     $this->RoundedRect(123, 67, 4, 4, 0, 'DF');
+    // }
+
+    // $this->Text(108, 75, utf8_decode('DEPÓSITO'),1, 'L');
+    // if($forma_pago == 'DEPÓSITO') {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(25,25,25);
+    //     $this->RoundedRect(123, 72, 4, 4, 0, 'DF');    
+    // } else {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(255,255,255);
+    //     $this->RoundedRect(123, 72, 4, 4, 0, 'DF');
+    // }
+
+    // $this->Text(100, 80, utf8_decode('TRANSFERENCIA'),1, 'L');
+    // if($forma_pago == 'TRANSFERENCIA') {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(25,25,25);
+    //     $this->RoundedRect(123, 77, 4, 4, 0, 'DF');    
+    // } else {
+    //     $this->SetLineWidth(0.3);
+    //     $this->SetFillColor(255,255,255);
+    //     $this->RoundedRect(123, 77, 4, 4, 0, 'DF');
+    // }
+
+    $this->SetLineWidth(0.3);
+    $this->SetFillColor(255,255,255);
+    $this->RoundedRect(86, 14, 45, 8, 1, 'DF');
+
+    $this->SetLineWidth(0.3);
+    $this->SetFillColor(255,255,255);
+    $this->RoundedRect(135, 15, 70, 98, 3, 'DF');
+
+    $this->setTextColor(255,87,51);
+    $this->Text(87, 19, utf8_decode('N°- '.$codigo_ci) ,1, 'L');
+
+    $this->setTextColor(25,25,25);
+    $this->SetFont('Arial','',8);
+    $this->SetY(23);
+    $this->SetX(10);
+    $this->multiCell(35, 6, utf8_decode('CIUDAD: '. $ciudad),1,'L');
+
+    $this->SetY(23);
+    $this->SetX(45);
+    $this->multiCell(14, 6, utf8_decode('FECHA'),1,'L');
+
+    $this->SetY(23);
+    $this->SetX(59);
+    $this->multiCell(9, 6, utf8_decode('D '.$dia),1,'L');
+
+    $this->SetY(23);
+    $this->SetX(68);
+    $this->multiCell(9, 6, utf8_decode('M '.$mes),1,'L');
+
+    $this->SetY(23);
+    $this->SetX(77);
+    $this->multiCell(12, 6, utf8_decode('A '.$anio),1,'L');
+
+    $this->SetY(23);
+    $this->SetX(89);
+    $this->multiCell(42, 6, utf8_decode('PDC - N°.'),1,'L');
+
+    $this->SetY(29);
+    $this->SetX(10);
+    $this->multiCell(35, 6, utf8_decode('RECIBIDO DE'),1,'L');
+
+    $this->SetY(29);
+    $this->SetX(45);
+    $this->multiCell(60, 6, utf8_decode($nombre_cliente),1,'L');
+
+    $this->SetY(29);
+    $this->SetX(105);
+    $this->multiCell(26, 6, utf8_decode('$ '.$valor),1,'L');
+
+    $this->SetY(35);
+    $this->SetX(10);
+    $this->multiCell(35, 6, utf8_decode('REPRESENTANTE DE'),1,'L');
+
+    $this->SetY(35);
+    $this->SetX(45);
+    $this->multiCell(86, 6, utf8_decode($nombre_comercial),1,'L');
+
+    $this->SetY(41);
+    $this->SetX(10);
+    $this->multiCell(121, 6, utf8_decode('DIRECCIÓN: ' .$direccion),1,'L');
+
+    $this->SetY(48);
+    $this->SetX(10);
+    $this->multiCell(121, 6, utf8_decode('SON: ' .$letras->ValorEnLetras($valor, 'dolares')),1,'L');
+
+    $this->SetY(54);
+    $this->SetX(10);
+    $this->multiCell(88, 6, utf8_decode('POR CONCEPTO DE: ' . $concepto_pago),1,'L');
+
+    $this->SetY(60);
+    $this->SetX(10);
+    $this->multiCell(88, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(54);
+    $this->SetX(98);
+    $this->multiCell(33, 30, utf8_decode(''),1,'L');
+
+    $this->SetFont('Arial','',7);
+    $this->SetY(66);
+    $this->SetX(10);
+    $this->multiCell(17, 6, utf8_decode('SUBTOTAL'),1,'L');
+
+    $this->SetY(72);
+    $this->SetX(10);
+    $this->multiCell(17, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(66);
+    $this->SetX(27);
+    $this->multiCell(11, 6, utf8_decode('IVA_%'),1,'L');
+
+    $this->SetY(72);
+    $this->SetX(27);
+    $this->multiCell(11, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(66);
+    $this->SetX(38);
+    $this->multiCell(19, 6, utf8_decode('RETENCIÓN'),1,'L');
+
+    $this->SetY(72);
+    $this->SetX(38);
+    $this->multiCell(19, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(66);
+    $this->SetX(57);
+    $this->multiCell(13, 6, utf8_decode('TOTAL'),1,'L');
+
+    $this->SetY(72);
+    $this->SetX(57);
+    $this->multiCell(13, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(66);
+    $this->SetX(70);
+    $this->multiCell(16, 6, utf8_decode('RECIBIDO'),1,'L');
+
+    $this->SetY(72);
+    $this->SetX(70);
+    $this->multiCell(16, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(66);
+    $this->SetX(86);
+    $this->multiCell(12, 6, utf8_decode('SALDO'),1,'L');
+
+    $this->SetY(72);
+    $this->SetX(86);
+    $this->multiCell(12, 6, utf8_decode(''),1,'L');
+
+    $this->SetY(78);
+    $this->SetX(10);
+    $this->multiCell(29, 6, utf8_decode('CHEQUE N°'),1,'L');
+
+    $this->SetY(78);
+    $this->SetX(39);
+    $this->multiCell(29, 6, utf8_decode('BANCO'),1,'L');
+
+    $this->SetY(78);
+    $this->SetX(68);
+    $this->multiCell(30, 6, utf8_decode('CUENTA'),1,'L');
+
+    $this->SetFont('Arial','',7);
+    $this->SetY(85);
+    $this->SetX(10);
+    $this->multiCell(22, 5, utf8_decode('CÓDIGO'),1,'C');
+
+    $this->SetY(90);
+    $this->SetX(10);
+    $this->multiCell(22, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(95);
+    $this->SetX(10);
+    $this->multiCell(22, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(100);
+    $this->SetX(10);
+    $this->multiCell(22, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(105);
+    $this->SetX(10);
+    $this->multiCell(22, 20, utf8_decode(''),1,'C');
+
+    $this->SetY(125);
+    $this->SetX(10);
+    $this->multiCell(22, 5, utf8_decode('PREPARADO'),1,'C');
+
+    $this->SetY(85);
+    $this->SetX(32);
+    $this->multiCell(22, 5, utf8_decode('CUENTA'),1,'C');
+
+    $this->SetY(90);
+    $this->SetX(32);
+    $this->multiCell(22, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(95);
+    $this->SetX(32);
+    $this->multiCell(22, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(100);
+    $this->SetX(32);
+    $this->multiCell(22, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(105);
+    $this->SetX(32);
+    $this->multiCell(22, 20, utf8_decode(''),1,'C');
+
+    $this->SetY(125);
+    $this->SetX(32);
+    $this->multiCell(22, 5, utf8_decode('REVISADO'),1,'C');
+
+    $this->SetY(85);
+    $this->SetX(54);
+    $this->multiCell(41, 5, utf8_decode('CONCEPTO'),1,'C');
+
+    $this->SetY(90);
+    $this->SetX(54);
+    $this->multiCell(41, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(95);
+    $this->SetX(54);
+    $this->multiCell(41, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(100);
+    $this->SetX(54);
+    $this->multiCell(41, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(105);
+    $this->SetX(54);
+    $this->multiCell(20, 20, utf8_decode(''),1,'C');
+
+    $this->SetY(125);
+    $this->SetX(54);
+    $this->multiCell(20, 5, utf8_decode('APROBADO'),1,'C');
+
+    $this->SetY(105);
+    $this->SetX(74);
+    $this->multiCell(21, 20, utf8_decode(''),1,'C');
+
+    $this->SetFont('Arial','',5);
+    $this->SetY(105);
+    $this->SetX(74);
+    $this->multiCell(21, 5, utf8_decode('FIRMA RECIBIDO'),0,'C');
+
+    $this->SetY(110);
+    $this->SetX(74);
+    $this->multiCell(21, 5, utf8_decode(''),0,'C');
+
+    $this->SetY(115);
+    $this->SetX(74);
+    $this->multiCell(21, 5, utf8_decode(''),0,'C');
+
+    $this->SetY(120);
+    $this->SetX(74);
+    $this->multiCell(21, 5, utf8_decode('N'),0,'L');
+
+    $this->SetFont('Arial','',7);
+    $this->SetY(125);
+    $this->SetX(74);
+    $this->multiCell(21, 5, utf8_decode('C.I.'),1,'L');
+
+    $this->SetY(85);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode('DÉBITO'),1,'C');
+
+    $this->SetY(90);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(95);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(100);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(105);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetFont('Arial','',5);
+    $this->SetY(110);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode('VALOR PRINCIPAL'),0,'C');
+
+    $this->SetY(115);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode('IVA____%'),0,'C');
+
+    $this->SetY(120);
+    $this->SetX(95);
+    $this->multiCell(18, 5, utf8_decode('DESCUENTO'),0,'C');
+
+    $this->SetFont('Arial','',7);
+    $this->SetY(125);
+    $this->SetX(95);
+    $this->multiCell(36, 5, utf8_decode('TOTAL   $_____________'),1,'L');
+
+    $this->SetY(85);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode('CRÉDITO'),1,'C');
+
+    $this->SetY(90);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(95);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(100);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(105);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(110);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(115);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(120);
+    $this->SetX(113);
+    $this->multiCell(18, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(115);
+    $this->SetX(135);
+    $this->multiCell(35, 5, utf8_decode('PAGO AL DOCUMENTO DE'),1,'C');
+
+    $this->SetY(115);
+    $this->SetX(170);
+    $this->multiCell(35, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(120);
+    $this->SetX(135);
+    $this->multiCell(35, 5, utf8_decode('FECHA DEPÓSITO PAGO'),1,'C');
+
+    $this->SetY(120);
+    $this->SetX(170);
+    $this->multiCell(35, 5, utf8_decode(''),1,'C');
+
+    $this->SetY(125);
+    $this->SetX(135);
+    $this->multiCell(35, 5, utf8_decode('FECHA DE EFECTIVIZADO'),1,'C');
+
+    $this->SetY(125);
+    $this->SetX(170);
+    $this->multiCell(35, 5, utf8_decode(''),1,'C');
+
+    $this->Image('../cuentas_cobrar/img_comprobantes/'.$imagen, 135, 15, 70, 100);
+    }
+}
+    // $pdf = new PDF();
+    $pdf = new PDF('L','mm','A5');
+    $pdf->AliasNbPages();
+
+    //Primera página
+    $pdf->AddPage();
+    $pdf->SetFont('Arial','',15);
+    // $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
+    $pdf->Output('factura oye fm.pdf','I');
+?>

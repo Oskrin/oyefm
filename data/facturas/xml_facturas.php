@@ -13,7 +13,7 @@
         $sidx = 1;
     
     $count = 0;
-    $resultado = $class->consulta("SELECT  COUNT(*) AS count FROM factura_venta");         
+    $resultado = $class->consulta("SELECT  COUNT(*) AS count from factura_venta");         
     while ($row = $class->fetch_array($resultado)) {
         $count = $count + $row[0];    
     }    
@@ -29,38 +29,38 @@
         $start = 0;
     
     if ($search == 'false') {
-        $SQL = "SELECT F.id, C.ruc_empresa, C.nombre_comercial, C.direccion, F.fecha_actual, F.total_pagar  FROM factura_venta F, clientes C WHERE F.id_clientes = C.id ORDER BY $sidx $sord offset $start limit $limit";
+        $SQL = "SELECT F.id, C.ruc_empresa, C.razon_social, F.serie, F.fecha_actual, F.total_pagar FROM factura_venta F, clientes C WHERE F.id_clientes = C.id ORDER BY $sidx $sord offset $start limit $limit";
     } else {
         $campo = $_GET['searchField'];
       
         if ($_GET['searchOper'] == 'eq') {
-            $SQL = "SELECT F.id, C.ruc_empresa, C.nombre_comercial, C.direccion, F.fecha_actual, F.total_pagar  FROM factura_venta F, clientes C WHERE F.id_clientes = C.id AND $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
+            $SQL = "SELECT F.id, C.ruc_empresa, C.razon_social, C.direccion, F.fecha_actual, F.total_pagar FROM factura_venta F, clientes C WHERE F.id_clientes = C.id AND $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
         }         
         if ($_GET['searchOper'] == 'cn') {
-            $SQL = "SELECT F.id, C.ruc_empresa, C.nombre_comercial, C.direccion, F.fecha_actual, F.total_pagar  FROM factura_venta F, clientes C WHERE F.id_clientes = C.id AND $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
+            $SQL = "SELECT F.id, C.ruc_empresa, C.razon_social, C.direccion, F.fecha_actual, F.total_pagar FROM factura_venta F, clientes C WHERE F.id_clientes = C.id AND $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
         }
     }  
 
     $resultado = $class->consulta($SQL);  
-    $ss ='';
-    
     header("Content-Type: text/html;charset=utf-8");   
     $s = "<?xml version='1.0' encoding='utf-8'?>";
     $s .= "<rows>";
-        $s .= "<page>" . $page . "</page>";
-        $s .= "<total>" . $total_pages . "</total>";
-        $s .= "<records>" . $count . "</records>";
-        while ($row = $class->fetch_array($resultado)) {
-            $s .= "<row id='" . $row[0] . "'>";
-            $s .= "<cell>" . $row[0] . "</cell>";
-            $s .= "<cell>" . $row[1] . "</cell>";
-            $s .= "<cell>" . $row[2] . "</cell>";
-            $s .= "<cell>" . $row[3] . "</cell>";
-            $s .= "<cell>" . $row[4] . "</cell>";
-            $s .= "<cell>" . $row[5] . "</cell>";
-            $s .= "<cell></cell>";
-            $s .= "</row>";
-        }
+    $s .= "<page>" . $page . "</page>";
+    $s .= "<total>" . $total_pages . "</total>";
+    $s .= "<records>" . $count . "</records>";
+    while ($row = $class->fetch_array($resultado)) {
+        $s .= "<row id='" . $row[0] . "'>";
+        $s .= "<cell>" . $row[0] . "</cell>";
+        $s .= "<cell>" . $row[1] . "</cell>";
+        $s .= "<cell>" . $row[2] . "</cell>";
+        $s .= "<cell>" . $row[3] . "</cell>";
+        $s .= "<cell>" . $row[4] . "</cell>";
+        $s .= "<cell>" . $row[5] . "</cell>";
+        $s .= "<cell></cell>";
+        $s .= "<cell></cell>";
+        $s .= "</row>";
+    }
+    
     $s .= "</rows>";
-    echo $s;    
+    echo $s;
 ?>

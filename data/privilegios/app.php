@@ -25,7 +25,7 @@
 		$id = $class->idz();
 		$resultado = $class->consulta("SELECT * FROM usuarios WHERE estado = '1' order by id asc");
 		print'<option value="">&nbsp;</option>';
-		while ($row=$class->fetch_array($resultado)) {
+		while ($row = $class->fetch_array($resultado)) {
 			print '<option value="'.$row['id'].'">'.$row['nombres_completos'].'</option>';
 		}
 	}
@@ -182,6 +182,16 @@
 								array(
 									'item-selected' => buscarstatus($sum,'vendedores')
 								)
+							),
+							'Creditos'=> 
+							array(
+								'text' => 'Creditos', 
+								'type' => 'item',
+								'id' => 'creditos',
+								'additionalParameters' => 
+								array(
+									'item-selected' => buscarstatus($sum,'creditos')
+								)
 							)									
 						)
 					)
@@ -218,6 +228,28 @@
 						)
 					)
 				),
+			'Orden_trabajo' => 
+				array(
+				'text' => 'Orden Trabajo',
+				'type' => 'folder',
+				'additionalParameters' => 
+					array(
+						'id' => 1,
+						'children' => 
+						array(
+							'Clientes'=> 
+							array(
+								'text' => 'Orden Trabajo', 
+								'type' => 'item',
+								'id' => 'orden_trabajo',
+								'additionalParameters' => 
+								array(
+									'item-selected' => buscarstatus($sum,'orden_trabajo')
+								)
+							),								
+						)
+					)
+				),
 			'Corporativo' => 
 				array(
 				'text' => 'Corporativo',
@@ -245,6 +277,16 @@
 								'additionalParameters' => 
 								array(
 									'item-selected' => buscarstatus($sum,'fotos_personal')
+								)
+							),
+						'ContratosPersonal'=> 
+							array(
+								'text' => 'Contratos Personal', 
+								'type' => 'item',
+								'id' => 'contratos_personal',
+								'additionalParameters' => 
+								array(
+									'item-selected' => buscarstatus($sum,'contratos_personal')
 								)
 							),
 						)
@@ -366,6 +408,26 @@
 					'id' => 1,
 					'children' => 
 						array(
+						'Permisos'=> 
+							array(
+								'text' => 'Permisos', 
+								'type' => 'item',
+								'id' => 'permisos',
+								'additionalParameters' => 
+								array(
+									'item-selected' => buscarstatus($sum,'permisos')
+								)
+							),
+						'Anticipos'=> 
+							array(
+								'text' => 'Anticipos', 
+								'type' => 'item',
+								'id' => 'anticipos',
+								'additionalParameters' => 
+								array(
+									'item-selected' => buscarstatus($sum,'anticipos')
+								)
+							),
 						'IngresoRoles'=> 
 							array(
 								'text' => 'Ingreso Roles', 
@@ -377,7 +439,7 @@
 								)
 							),
 						)
-					)
+					),
 				),
 			'Usuarios' => 
 				array(

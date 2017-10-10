@@ -1,5 +1,4 @@
-// create the controller and inject Angular's $scope
-var app = angular.module('scotchApp').controller('invitadosController', function ($scope) {
+var app = angular.module('scotchApp').controller('ficha_invitadosController', function ($scope) {
     jQuery(function($) {
     $('#archivos').fileinput({
         uploadUrl: '#',
@@ -511,7 +510,6 @@ var app = angular.module('scotchApp').controller('invitadosController', function
 	// fin	
 		
 	function proceso_guardar () {
-
 	    var formObj1 = document.getElementById("form_proceso1");
 	    var formObj2 = document.getElementById("form_proceso2");
 	    var formObj3 = document.getElementById("form_proceso3");

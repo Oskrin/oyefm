@@ -1,6 +1,18 @@
 angular.module('scotchApp').controller('usuariosController', function ($scope, $route, $location,loaddatosSRI) {
 	
 	$scope.$route = $route;
+	// procesos tab
+	$scope.tab = 1;
+	var finaliza_facturero = 0;
+
+    $scope.setTab = function(newTab) {
+      $scope.tab = newTab;
+    };
+
+    $scope.isSet = function(tabNum) {
+      return $scope.tab === tabNum;
+    };
+    // fin
 
 	jQuery(function($) {
 		$('[data-toggle="tooltip"]').tooltip(); 
@@ -36,9 +48,13 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 				nombres_completos: {
 					required: true				
 				},
-				telefono2: {
+				celular: {
 					required: true,
 					minlength: 10				
+				},
+				correo: {
+					required: true,
+					email: true				
 				},
 				ciudad: {
 					required: true				
@@ -48,15 +64,6 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 				},
 				usuario: {
 					required: true				
-				},
-				clave: {
-					required: true,
-					minlength: 5
-				},
-				clave2: {
-					required: true,
-					minlength: 5,
-					equalTo: "#clave"
 				},
 				select_cargo: {
 				required: true
@@ -70,9 +77,13 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 				nombres_completos: { 	
 					required: "Por favor, Indique nombres completos",			
 				},
-				telefono2: {
+				celular: {
 					required: "Por favor, Indique número celular",
 					minlength: "Por favor, Especifique mínimo 10 digitos"
+				},
+				correo: {
+					required: "Por favor, Ingrese un correo",
+					email: "Por favor, Ingrese un correo valido"
 				},
 				ciudad: {
 					required: "Por favor, Indique una ciudad",
@@ -82,15 +93,6 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 				},
 				usuario: {
 					required: "Por favor, Indique un usuario",
-				},
-				clave: {
-					required: "Por favor, Especificar una contraseña",
-					minlength: "Por favor, introduzca al menos 5 caracteres"
-				},
-				clave2: {
-					required: "Por favor, Indique una contraseña",
-					minlength: "Por favor, introduzca al menos 5 caracteres",
-					equalTo: "Por favor, introduzca el mismo valor de nuevo"
 				},
 				select_cargo: {
 					required: "Por favor, Especifique el cargo",
@@ -144,7 +146,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		    }
 
 		    if (key < 48 || key > 57) {
-		        if (key === 46 || key === 8)     {
+		        if (key === 46 || key === 8) {
 		            return true;
 		        } else {
 		            return false;
@@ -218,6 +220,14 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		}
 		// fin
 
+		// recargar formulario
+		function redireccionar2() {
+			setTimeout(function() {
+			    location.reload(true);
+			}, 0);
+		}
+		// fin
+
 		// llenar combo cargos
 		function llenar_select_cargo() {
 			$.ajax({
@@ -231,6 +241,21 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		}
 		// fin
 
+		// buscador registro
+		$("#buscador").keyup(function() {
+		    var campo = $('#buscador').val();
+			jQuery("#table").jqGrid('setGridParam',{url:"data/usuarios/xml_usuarios.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
+		// listar registro
+		$("#btn_listar").click(function(){
+			$('#buscador').val('');
+		    var campo = $('#buscador').val();
+			jQuery("#table").jqGrid('setGridParam',{url:"data/usuarios/xml_usuarios.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
 		llenar_select_cargo();
 		$('#btn_3').attr('disabled', true);
 		$('#identificacion').focus();
@@ -242,7 +267,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 			
 			if (respuesta == true) {
 				$('#btn_0').attr('disabled', true);
-				var submit = "btn_gardar";
+				var submit = "btn_guardar";
 				var formulario = $("#form_usuarios").serialize();
 
 				$.ajax({
@@ -250,16 +275,29 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 			        data: formulario + "&btn_guardar=" + submit,
 			        type: "POST",
 			        async: true,
+			        beforeSend: function(data) {
+			        	$.blockUI({ 
+			        		css: { backgroundColor: 'background: rgba(255,255,255,0.2);', color: '#fff', border:'2px'},
+			        		message: '<h3>Enviando información, Por favor espere un momento...'
+	                                        +'<span class="loader animated fadeIn handle ui-sortable-handle">'
+	                                        +'<span class="spinner">'
+	                                            +'<i class="fa fa-spinner fa-spin"></i>'
+	                                        +'</span>'
+	                                        +'</span>'
+	                                  +'</h3>'
+			        	});
+			        },
 			        success: function (data) {
-			        	var val = data;
-			        	if(data == '1') {
-			        		$.gritter.add({
-								title: 'Mensaje',
-								text: 'Registro Agregado correctamente <i class="ace-icon fa fa-spinner fa-spin green bigger-125"></i>',
-								time: 1000				
+			        	// var val = data;
+			        	// if(data == '1') {
+			        		swal({
+							    title: "Buen trabajo! estimado/a",
+							    text: "Por favor verifique su correo electrónico para recuperar su contraseña",
+							    type: "success"
+							},function () {
+								location.reload(true);
 							});
-							redireccionar();
-				    	}              
+				    	// }              
 			        },
 			        error: function (xhr, status, errorThrown) {
 				        alert("Hubo un problema!");
@@ -322,6 +360,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		jQuery(function($) {
 		    var grid_selector = "#table";
 		    var pager_selector = "#pager";
+		    var campo = $('#buscador').val();
 		    
 		    //cambiar el tamaño para ajustarse al tamaño de la página
 		    $(window).on('resize.jqGrid', function () {
@@ -342,7 +381,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		    // buscador clientes
 		    jQuery(grid_selector).jqGrid({	        
 		        datatype: "xml",
-		        url: 'data/usuarios/xml_usuarios.php',        
+		        url: "data/usuarios/xml_usuarios.php?campo="+campo,        
 		        colNames: ['ID','IDENTIFICACIÓN','NOMBRES COMPELTOS','TELÉFONO','CELULAR','CORREO','CIUDAD','DIRECCIÓN','USUARIO','CLAVE','ID_CARGO','CARGO'],
 		        colModel:[      
 		            {name:'id',index:'id', frozen:true, align:'left', search:false, hidden: true},
@@ -361,7 +400,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		        rowNum: 10,       
 		        width:600,
 		        shrinkToFit: false,
-		        height:200,
+		        height:340,
 		        rowList: [10,20,30],
 		        pager: pager_selector,        
 		        sortname: 'id',
@@ -370,6 +409,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		        multiselect: false,
 		        multiboxonly: true,
 		        viewrecords : true,
+		        editurl: "data/usuarios/app.php",
 		        loadComplete : function() {
 		            var table = this;
 		            setTimeout(function(){
@@ -422,7 +462,7 @@ angular.module('scotchApp').controller('usuariosController', function ($scope, $
 		        editicon : 'ace-icon fa fa-pencil blue',
 		        add: false,
 		        addicon : 'ace-icon fa fa-plus-circle purple',
-		        del: false,
+		        del: true,
 		        delicon : 'ace-icon fa fa-trash-o red',
 		        search: true,
 		        searchicon : 'ace-icon fa fa-search orange',

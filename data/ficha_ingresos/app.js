@@ -3,8 +3,12 @@ var app = angular.module('scotchApp').controller('fichaingresosController', func
     jQuery(function($) {
 			// estilo spinner
 			$('#cargas').ace_spinner({value:0,min:0,max:100,step:1, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
-	    	$('#horas_laborar').ace_spinner({value:0,min:0,max:100,step:1, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
 	    	// fin
+
+			$('#horas_laborar').datetimepicker({
+                pickDate: false,
+                format: 'HH:mm'
+            });
 
 	    	$('#btn_agregar').click(function () {
 				$('#modal-cursos-realizados').modal('show');
@@ -860,300 +864,300 @@ var app = angular.module('scotchApp').controller('fichaingresosController', func
 		}
 		// fin
 
-	// guardar fichas
-	function proceso_guardar() {
-		$('#dynamic-table').dataTable().fnClearTable();
-		var form_uno=$("#form_personal").serialize();
-		var form_dos= $("#form_bancarios").serialize();
-		var form_tres= $("#form_familia").serialize();
-		var submit = "btn_guardar";
+		// guardar fichas
+		function proceso_guardar() {
+			$('#dynamic-table').dataTable().fnClearTable();
+			var form_uno=$("#form_personal").serialize();
+			var form_dos= $("#form_bancarios").serialize();
+			var form_tres= $("#form_familia").serialize();
+			var submit = "btn_guardar";
 
-		//varibles cursos realizados
-		var cursos = [];
-       	$("#tbt_cursos tbody tr").each(function (index) {  
-       		var element = {};
-	        $(this).children("td").each(function (index) {                               
-	            switch (index) {                                            
-	                case 0:
-	                	element.curso = $(this).text();
-	                    break; 
-	                case 1:
-	                    element.estab = $(this).text();
-	                    break; 
-	                case 2:
-	                    element.tiempo = $(this).text();
-	                    break;
-	            }	            
-	        });
-	        cursos.push(element);
-	    });
-	    // fin variables cursos
-
-	    //varibles cuentas
-	    var cuentas = [];
-	    $("#tbt_cuentas tbody tr").each(function (index) {  
-       		var element = {};
-	        $(this).children("td").each(function (index) {                               
-	            switch (index) {                                            
-	                case 0:
-	                	element.tipo_cuen = $(this).text();
-	                    break; 
-	                case 1:
-	                    element.id_cuen = $(this).text();
-	                    break; 
-	                case 3:
-	                    element.numero_cuen = $(this).text();
-	                    break;
-	            }	            
-	        });
-	        cuentas.push(element);
-	    });
-	    // fin variables cuentas
-
-		$.ajax({
-	        url: "data/ficha_ingresos/app.php",
-	        data: form_uno+"&"+form_dos+"&"+form_tres+"&btn_guardar=" +submit+"&campos1="+JSON.stringify(cursos)+"&campos2="+JSON.stringify(cuentas),
-	        type: "POST",
-	        success: function (data) {
-	        	var val = data;
-	        	if(data != '') {
-					bootbox.alert("Gracias! Por su Información Datos Correctamente Guardados!", function() {
-					  var myWindow = window.open("data/reportes/ficha_ingreso.php?hoja=A4&id="+val,'_blank'); 
-					  location.reload();
-					});
-					llenar_tabla_fichas();
-		    	}
-	        },
-	        error: function (xhr, status, errorThrown) {
-		        alert("Hubo un problema!");
-		        console.log("Error: " + errorThrown);
-		        console.log("Status: " + status);
-		        console.dir(xhr);
-	        }
-	    });
-	}
-	// fin
-
-	// modificar las fichas
-	function proceso_modificar() {
-		$('#dynamic-table').dataTable().fnClearTable();
-		var form_uno = $("#form_personal").serialize();
-		var form_dos = $("#form_bancarios").serialize();
-		var form_tres = $("#form_familia").serialize();
-		var submit = "btn_modificar";
-
-		//varibles cursos realizados
-		var cursos = [];
-       	$("#tbt_cursos tbody tr").each(function (index) {  
-       		var element = {};
-	        $(this).children("td").each(function (index) {                               
-	            switch (index) {                                            
-	                case 0:
-	                	element.curso = $(this).text();
-	                    break; 
-	                case 1:
-	                    element.estab = $(this).text();
-	                    break; 
-	                case 2:
-	                    element.tiempo = $(this).text();
-	                    break;
-	            }	            
-	        });
-	        cursos.push(element);
-	    });
-	    // fin variables cursos
-
-	    //varibles cuentas
-	    var cuentas = [];
-	    $("#tbt_cuentas tbody tr").each(function (index) {  
-       		var element = {};
-	        $(this).children("td").each(function (index) {                               
-	            switch (index) {                                            
-	                case 0:
-	                	element.tipo_cuen = $(this).text();
-	                    break; 
-	                case 1:
-	                    element.id_cuen = $(this).text();
-	                    break; 
-	                case 3:
-	                    element.numero_cuen = $(this).text();
-	                    break;
-	            }	            
-	        });
-	        cuentas.push(element);
-	    });
-	    // fin variables cuentas
-
-	    $.ajax({
-	        url: "data/ficha_ingresos/app.php",
-	        data: form_uno+"&"+form_dos+"&"+form_tres+"&btn_modificar=" +submit+"&campos1="+JSON.stringify(cursos)+"&campos2="+JSON.stringify(cuentas),
-	        type: "POST",
-	        success: function (data) {
-	        	var val = data;
-	        	if(data != '') {
-	        		bootbox.alert("Gracias! Por su Información Datos Correctamente Modificados!", function() {
-					  var myWindow = window.open("data/reportes/ficha_ingreso.php?hoja=A4&id="+val,'_blank'); 
-					  location.reload();
-					});
-					llenar_tabla_fichas();
-		    	}                                                
-	        },
-	        error: function (xhr, status, errorThrown) {
-		        alert("Hubo un problema!");
-		        console.log("Error: " + errorThrown);
-		        console.log("Status: " + status);
-		        console.dir(xhr);
-	        }
-	    });
-	}
-	// fin
-
-	// abrir buscador fichas de ingreso
-	$('#abrir_buscador').click(function() {
-		abrir_buscador();
-	});
-	// fin
-
-	// cargar datos a la tabla de cursos realizados
-	$('#btn_cargar').click(function() {
-		var respuesta = $('#form_modal_cursos').valid();
-		var celdas = document.getElementById("tbt_cursos").rows.length;
-		var vector = new Array();
-		var cont = 0;
-		var repe = 0;
-
-		if (respuesta == true) {
-			if(celdas != '5') {
-				$("#tbt_cursos tbody tr").each(function (index) {                                                                 
-		            $(this).children("td").each(function (index) {                               
-		                switch (index) {                                            
-		                    case 0:
-		                    vector[cont] = $(this).text();   
-		                    break;                                                                                                                               
-		                }                                         
-		            });
-		            cont++;
+			//varibles cursos realizados
+			var cursos = [];
+	       	$("#tbt_cursos tbody tr").each(function (index) {  
+	       		var element = {};
+		        $(this).children("td").each(function (index) {                               
+		            switch (index) {                                            
+		                case 0:
+		                	element.curso = $(this).text();
+		                    break; 
+		                case 1:
+		                    element.estab = $(this).text();
+		                    break; 
+		                case 2:
+		                    element.tiempo = $(this).text();
+		                    break;
+		            }	            
 		        });
+		        cursos.push(element);
+		    });
+		    // fin variables cursos
 
-		        for(var i=0 ; i<vector.length; i++) {
-		            if(vector[i] == $('#txt_nombre_curso').val()) {
-		                repe++;
-		            }
-		        }
-
-		        if(repe == '0') {
-				var html_fila = '<tr>'
-						+'<td>'+$('#nombre_curso').val()+'</td>'
-						+'<td>'+$('#establecimiento_curso').val()+'</td>'
-						+'<td>'+$('#tiempo_curso').val()+'</td>'
-						+'<td>'+"<div class='hidden-sm hidden-xs action-buttons'><a class='red dc_btn_accion tooltip-error' data-rel='tooltip' data-original-title='Eliminar'><i class='ace-icon fa fa-trash-o bigger-130' onclick=\"angular.element(this).scope().methodseliminar(event)\"></i></a></div>"+'</td>'
-					+'</tr>'
-
-				$('#tbt_cursos tbody').append(html_fila);	
-				$('#nombre_curso').val('');
-				$('#establecimiento_curso').val('');
-				$('#tiempo_curso').val('');
-				$('#modal-cursos-realizados').modal('hide');
-				} else {
-					if(repe == '1') {
-						$.gritter.add({
-							title: 'El curso ya esta ingresado',
-							class_name: 'gritter-error gritter-center',
-							time: 1000,
-						});
-						$('#txt_nombre_curso').val('');
-					}
-				}
-			} else {
-				$.gritter.add({
-					title: 'Alcanzo límite de cursos permitidos',
-					class_name: 'gritter-error gritter-center',
-					time: 1000,
-				});
-			}
-		}
-	});
-	// fin
-
-	// cargar datos a la tabla de cuentas
-	$('#btn_cargar_cuentas').click(function() {
-		var respuesta = $('#form_modal_cuentas').valid();
-		var combo = document.getElementById("select_banco");
-		var celdas = document.getElementById("tbt_cuentas").rows.length;
-		var vector = new Array();
-		var cont = 0;
-		var repe = 0;
-
-		if (respuesta == true) {
-			if(celdas != '3') {
-				$("#tbt_cuentas tbody tr").each(function (index) {                                                                 
-		            $(this).children("td").each(function (index) {                               
-		                switch (index) {                                            
-		                    case 0:
-		                    vector[cont] = $(this).text();   
-		                    break;                                                                                                                               
-		                }                                         
-		            });
-		            cont++;
+		    //varibles cuentas
+		    var cuentas = [];
+		    $("#tbt_cuentas tbody tr").each(function (index) {  
+	       		var element = {};
+		        $(this).children("td").each(function (index) {                               
+		            switch (index) {                                            
+		                case 0:
+		                	element.tipo_cuen = $(this).text();
+		                    break; 
+		                case 1:
+		                    element.id_cuen = $(this).text();
+		                    break; 
+		                case 3:
+		                    element.numero_cuen = $(this).text();
+		                    break;
+		            }	            
 		        });
+		        cuentas.push(element);
+		    });
+		    // fin variables cuentas
 
-		        for(var i=0 ; i<vector.length; i++) {
-		            if(vector[i] == $('#select_cuenta').val()) {
-		                repe++;
-		            }
-		        }
-
-		        if(repe == '0') {
-				var html_fila = '<tr>'
-						+'<td>'+$('#select_cuenta').val()+'</td>'
-						+'<td style="display: none;">'+$('#select_banco').val()+'</td>'
-						+'<td>'+combo.options[combo.selectedIndex].text+'</td>'
-						+'<td>'+$('#numero_cuenta').val()+'</td>'
-						+'<td>'+"<div class='hidden-sm hidden-xs action-buttons'><a class='red dc_btn_accion2 tooltip-error' data-rel='tooltip' data-original-title='Eliminar'><i class='ace-icon fa fa-trash-o bigger-130' onclick=\"angular.element(this).scope().methodseliminar2(event)\"></i></a></div>"+'</td>'
-					+'</tr>'
-
-				$('#tbt_cuentas tbody').append(html_fila);	
-				$('#numero_cuenta').val('');
-				$('#modal-cuentas-bancarias').modal('hide');
-				llenar_select_bancos();
-				$("#select_cuenta").select2('val', 'All');
-				} else {
-					if(repe == '1') {
-						$.gritter.add({
-							title: 'El tipo de cuenta ya esta ingresada',
-							class_name: 'gritter-error gritter-center',
-							time: 1000,
+			$.ajax({
+		        url: "data/ficha_ingresos/app.php",
+		        data: form_uno+"&"+form_dos+"&"+form_tres+"&btn_guardar=" +submit+"&campos1="+JSON.stringify(cursos)+"&campos2="+JSON.stringify(cuentas),
+		        type: "POST",
+		        success: function (data) {
+		        	var val = data;
+		        	if(data != '') {
+						bootbox.alert("Gracias! Por su Información Datos Correctamente Guardados!", function() {
+						  var myWindow = window.open("data/reportes/ficha_ingreso.php?hoja=A4&id="+val,'_blank'); 
+						  location.reload();
 						});
-						$("#select_cuenta").select2('val', 'All');
-					}
-				}
-			} else {
-				$.gritter.add({
-					title: 'Alcanzo límite de cuentas permitidas',
-					class_name: 'gritter-error gritter-center',
-					time: 1000,
-				});
-			}
+						llenar_tabla_fichas();
+			    	}
+		        },
+		        error: function (xhr, status, errorThrown) {
+			        alert("Hubo un problema!");
+			        console.log("Error: " + errorThrown);
+			        console.log("Status: " + status);
+			        console.dir(xhr);
+		        }
+		    });
 		}
-	});
-	// fin
+		// fin
 
-	// id general
-	function equipo(id) {
-		var data_global;
-		$.ajax({
-			url: 'data/ficha_programas/app.php',
-			type: 'post',
-			dataType: 'json',
-			data: {consultar_id_cargo:'consultar_id_cargo', id:id},
-			async:false,
-			success: function (data) {
-				data_global = data.nombre
+		// modificar las fichas
+		function proceso_modificar() {
+			$('#dynamic-table').dataTable().fnClearTable();
+			var form_uno = $("#form_personal").serialize();
+			var form_dos = $("#form_bancarios").serialize();
+			var form_tres = $("#form_familia").serialize();
+			var submit = "btn_modificar";
+
+			//varibles cursos realizados
+			var cursos = [];
+	       	$("#tbt_cursos tbody tr").each(function (index) {  
+	       		var element = {};
+		        $(this).children("td").each(function (index) {                               
+		            switch (index) {                                            
+		                case 0:
+		                	element.curso = $(this).text();
+		                    break; 
+		                case 1:
+		                    element.estab = $(this).text();
+		                    break; 
+		                case 2:
+		                    element.tiempo = $(this).text();
+		                    break;
+		            }	            
+		        });
+		        cursos.push(element);
+		    });
+		    // fin variables cursos
+
+		    //varibles cuentas
+		    var cuentas = [];
+		    $("#tbt_cuentas tbody tr").each(function (index) {  
+	       		var element = {};
+		        $(this).children("td").each(function (index) {                               
+		            switch (index) {                                            
+		                case 0:
+		                	element.tipo_cuen = $(this).text();
+		                    break; 
+		                case 1:
+		                    element.id_cuen = $(this).text();
+		                    break; 
+		                case 3:
+		                    element.numero_cuen = $(this).text();
+		                    break;
+		            }	            
+		        });
+		        cuentas.push(element);
+		    });
+		    // fin variables cuentas
+
+		    $.ajax({
+		        url: "data/ficha_ingresos/app.php",
+		        data: form_uno+"&"+form_dos+"&"+form_tres+"&btn_modificar=" +submit+"&campos1="+JSON.stringify(cursos)+"&campos2="+JSON.stringify(cuentas),
+		        type: "POST",
+		        success: function (data) {
+		        	var val = data;
+		        	if(data != '') {
+		        		bootbox.alert("Gracias! Por su Información Datos Correctamente Modificados!", function() {
+						  var myWindow = window.open("data/reportes/ficha_ingreso.php?hoja=A4&id="+val,'_blank'); 
+						  location.reload();
+						});
+						llenar_tabla_fichas();
+			    	}                                                
+		        },
+		        error: function (xhr, status, errorThrown) {
+			        alert("Hubo un problema!");
+			        console.log("Error: " + errorThrown);
+			        console.log("Status: " + status);
+			        console.dir(xhr);
+		        }
+		    });
+		}
+		// fin
+
+		// abrir buscador fichas de ingreso
+		$('#abrir_buscador').click(function() {
+			abrir_buscador();
+		});
+		// fin
+
+		// cargar datos a la tabla de cursos realizados
+		$('#btn_cargar').click(function() {
+			var respuesta = $('#form_modal_cursos').valid();
+			var celdas = document.getElementById("tbt_cursos").rows.length;
+			var vector = new Array();
+			var cont = 0;
+			var repe = 0;
+
+			if (respuesta == true) {
+				if(celdas != '5') {
+					$("#tbt_cursos tbody tr").each(function (index) {                                                                 
+			            $(this).children("td").each(function (index) {                               
+			                switch (index) {                                            
+			                    case 0:
+			                    vector[cont] = $(this).text();   
+			                    break;                                                                                                                               
+			                }                                         
+			            });
+			            cont++;
+			        });
+
+			        for(var i=0 ; i<vector.length; i++) {
+			            if(vector[i] == $('#txt_nombre_curso').val()) {
+			                repe++;
+			            }
+			        }
+
+			        if(repe == '0') {
+					var html_fila = '<tr>'
+							+'<td>'+$('#nombre_curso').val()+'</td>'
+							+'<td>'+$('#establecimiento_curso').val()+'</td>'
+							+'<td>'+$('#tiempo_curso').val()+'</td>'
+							+'<td>'+"<div class='hidden-sm hidden-xs action-buttons'><a class='red dc_btn_accion tooltip-error' data-rel='tooltip' data-original-title='Eliminar'><i class='ace-icon fa fa-trash-o bigger-130' onclick=\"angular.element(this).scope().methodseliminar(event)\"></i></a></div>"+'</td>'
+						+'</tr>'
+
+					$('#tbt_cursos tbody').append(html_fila);	
+					$('#nombre_curso').val('');
+					$('#establecimiento_curso').val('');
+					$('#tiempo_curso').val('');
+					$('#modal-cursos-realizados').modal('hide');
+					} else {
+						if(repe == '1') {
+							$.gritter.add({
+								title: 'El curso ya esta ingresado',
+								class_name: 'gritter-error gritter-center',
+								time: 1000,
+							});
+							$('#txt_nombre_curso').val('');
+						}
+					}
+				} else {
+					$.gritter.add({
+						title: 'Alcanzo límite de cursos permitidos',
+						class_name: 'gritter-error gritter-center',
+						time: 1000,
+					});
+				}
 			}
 		});
-		return data_global;
-	}
-	// fin
+		// fin
+
+		// cargar datos a la tabla de cuentas
+		$('#btn_cargar_cuentas').click(function() {
+			var respuesta = $('#form_modal_cuentas').valid();
+			var combo = document.getElementById("select_banco");
+			var celdas = document.getElementById("tbt_cuentas").rows.length;
+			var vector = new Array();
+			var cont = 0;
+			var repe = 0;
+
+			if (respuesta == true) {
+				if(celdas != '3') {
+					$("#tbt_cuentas tbody tr").each(function (index) {                                                                 
+			            $(this).children("td").each(function (index) {                               
+			                switch (index) {                                            
+			                    case 0:
+			                    vector[cont] = $(this).text();   
+			                    break;                                                                                                                               
+			                }                                         
+			            });
+			            cont++;
+			        });
+
+			        for(var i=0 ; i<vector.length; i++) {
+			            if(vector[i] == $('#select_cuenta').val()) {
+			                repe++;
+			            }
+			        }
+
+			        if(repe == '0') {
+					var html_fila = '<tr>'
+							+'<td>'+$('#select_cuenta').val()+'</td>'
+							+'<td style="display: none;">'+$('#select_banco').val()+'</td>'
+							+'<td>'+combo.options[combo.selectedIndex].text+'</td>'
+							+'<td>'+$('#numero_cuenta').val()+'</td>'
+							+'<td>'+"<div class='hidden-sm hidden-xs action-buttons'><a class='red dc_btn_accion2 tooltip-error' data-rel='tooltip' data-original-title='Eliminar'><i class='ace-icon fa fa-trash-o bigger-130' onclick=\"angular.element(this).scope().methodseliminar2(event)\"></i></a></div>"+'</td>'
+						+'</tr>'
+
+					$('#tbt_cuentas tbody').append(html_fila);	
+					$('#numero_cuenta').val('');
+					$('#modal-cuentas-bancarias').modal('hide');
+					llenar_select_bancos();
+					$("#select_cuenta").select2('val', 'All');
+					} else {
+						if(repe == '1') {
+							$.gritter.add({
+								title: 'El tipo de cuenta ya esta ingresada',
+								class_name: 'gritter-error gritter-center',
+								time: 1000,
+							});
+							$("#select_cuenta").select2('val', 'All');
+						}
+					}
+				} else {
+					$.gritter.add({
+						title: 'Alcanzo límite de cuentas permitidas',
+						class_name: 'gritter-error gritter-center',
+						time: 1000,
+					});
+				}
+			}
+		});
+		// fin
+
+		// id general
+		function equipo(id) {
+			var data_global;
+			$.ajax({
+				url: 'data/ficha_programas/app.php',
+				type: 'post',
+				dataType: 'json',
+				data: {consultar_id_cargo:'consultar_id_cargo', id:id},
+				async:false,
+				success: function (data) {
+					data_global = data.nombre
+				}
+			});
+			return data_global;
+		}
+		// fin
 
 		$('#modal-wizard-container').ace_wizard();
 		$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');

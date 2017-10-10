@@ -69,13 +69,26 @@
 
 
 			$resp = $class->consulta("UPDATE contratos.detalle_cuentas_cobrar SET estado = '2' where id = '".$arreglo8[$i]."'");
-
 	    }
 
 		$data = $id_facturas;
 		echo $data;
 	}
 	// fin
+
+	//cargar datos facturero
+	if (isset($_POST['cargar_facturero'])) {
+		$resultado = $class->consulta("SELECT * FROM facturero WHERE estado = '1' GROUP BY id ORDER BY id asc");
+		while ($row = $class->fetch_array($resultado)) {
+			$data = array(	'id' => $row[0],
+							'fecha_inicio' => $row[1],
+							'fecha_caducidad' => $row[2],
+							'inicio_facturero' => $row[3],
+							'finaliza_facturero' => $row[4]);
+		}
+		print_r(json_encode($data));
+	}
+	//fin
 
 	// anular facturas
 	if (isset($_POST['anular_factura'])) {
@@ -149,6 +162,7 @@
 		echo json_encode($arr_data);
 	}
 	//fin
+	
 	// busqueda por ruc cliente
 	if($_GET['tipo_busqueda'] == 'ruc') {
 		$texto = $_GET['term'];

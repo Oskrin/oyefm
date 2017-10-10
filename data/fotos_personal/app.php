@@ -49,4 +49,15 @@
 		print_r(json_encode($data));
 	}
 	//fin
+
+	//cargar imagen corporativo.personal
+	if (isset($_POST['borrar_personal'])) {
+		$data = "";
+		$resp = $class->consulta("UPDATE corporativo.personal set estado = '2' where id = '$_POST[id]'");
+
+
+		$data = "1";
+		echo $data;
+	}
+	//fin
 ?>

@@ -1,0 +1,202 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-folder-open-o blue"></i>
+					<a href="#/menu_corporativo">Corporativo</a>
+				</li>
+
+				<li class="active">Registro Anticipos</li>
+			</ul>
+		</div>
+		<hr /> 
+
+		<div class="widget-box">
+            <div class="widget-main"> 
+            	<div class="control">
+            		<div class="col-sm-3">
+						<div class="clearfix">
+							<span class="block input-icon input-icon-right">
+								<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="Buscar....." onKeyUp="this.value = this.value.toUpperCase();" />
+								<i class="ace-icon fa fa-search blue"></i>
+				            </span>
+						</div>
+					</div>
+
+					<button class="btn  btn-primary btn-pink posicion" id="btn_abrir" name="btn_abrir" type="button" data-toggle="modal" href="#myModal"><i class="fa fa-plus-circle"></i> NUEVO</button>
+				</div>
+				&nbsp;
+
+				<table id="table"></table>
+				<div id="pager"></div>                                           
+            </div>
+        </div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal" style="z-index:22">
+	    <div class="modal-dialog modal-lg">
+	      <div class="modal-content">
+		        <div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					AGREGAR REGISTRO
+				</div>
+				&nbsp;
+
+		        <div class="modal-body">
+		        	<form class="form-horizontal" name="form_anticipos" id="form_anticipos">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Serie Anticipo:</label>
+										<div class="col-sm-6">
+											<input type="text" name="serie_anticipo" id="serie_anticipo" class="form-control" />
+											<input type="hidden" name="id_anticipo" id="id_anticipo" readonly class="col-xs-12 col-sm-10" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha Anticipo:</label>
+										<div class="col-sm-6">
+											<div class="input-group">
+												<input type="text" id="fecha_anticipo" name="fecha_anticipo" class="form-control datepicker" readonly />
+												<span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Monto Anticipo:</label>
+										<div class="col-xs-12 col-sm-6">
+											<div class="clearfix">
+												<input type="text" name="monto_anticipo" id="monto_anticipo" value="0.00" class="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cheque N°:</label>
+										<div class="col-xs-12 col-sm-6">
+											<div class="clearfix">
+												<input type="text" name="cheque_numero" id="cheque_numero" class="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Cuenta:</label>
+										<div class="col-xs-12 col-sm-6">
+											<div class="clearfix">
+												<input type="text" name="cuenta" id="cuenta" class="form-control" />
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="select_empleado">Empleado:</label>
+										<div class="col-sm-8">
+											<select id="select_empleado" name="select_empleado" class="select2" data-placeholder="Empleado anticipos...">
+												<option value="">&nbsp;</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="control-label col-xs-12 col-sm-4 no-padding-right">Meses Anticipo:</label>
+										<div class="col-xs-12 col-sm-6">
+											<div class="clearfix">
+												<input type="text" name="meses_anticipo" id="meses_anticipo" class="form-control" />
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="select_forma_pago">Forma Pago:</label>
+										<div class="col-sm-6">
+											<select id="select_forma_pago" name="select_forma_pago" class="select2" data-placeholder="Seleccione forma pago...">
+												<option value="">&nbsp;</option>
+												<option value="EFECTIVO">EFECTIVO</option>
+												<option value="CHEQUE">CHEQUE</option>
+												<option value="TARJETA">TARJETA</option>
+												<option value="DEPÓSITO">DEPÓSITO</option>
+												<option value="TRANSFERENCIA">TRANSFERENCIA</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="select_banco">Banco:</label>
+										<div class="col-sm-6">
+											<select id="select_banco" name="select_banco" class="select2" data-placeholder="Banco...">
+												<option value="">&nbsp;</option>	
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+		        </div>
+
+		        <div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+						<i class="ace-icon fa fa-times"></i>
+						Cerrar
+					</button>
+
+					<button name="btn_0" id="btn_0" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Registro">
+						<i class="ace-icon fa fa-save"></i>
+						Guardar
+					</button>
+				</div>
+	      	</div>
+	    </div>
+	</div>
+
+	<div class="modal fade" role="dialog" aria-hidden="true" id="myModal2" tabindex="-1" >
+	  	<div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		      	<header class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+			        <h4 class="modal-title" id="mySmallModalLabel">Compartir</h4>
+		      	</header>
+
+			    <div class="modal-body">
+			      	<form class="form-horizontal" name="form_compartir" id="form_compartir">
+			        	<div class="row">
+			        		<div class="form-group">
+								<label class="control-label col-sm-1 no-padding-right"></label>
+								<div class="col-sm-10">
+									<div class="clearfix">
+										<input type="text" name="link" id="link" class="form-control" />
+									</div>
+								</div>
+							</div>
+			        	</div>
+			        </form>
+			    </div>
+
+		      	<div class="modal-footer">
+		        	<button class="btn btn-warning cancel" ng-click="close()">Cancelar</button>
+		    	</div>
+		    </div>
+	  	</div>
+	</div>
+</div>
+
+
+
+
+
+

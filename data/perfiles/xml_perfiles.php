@@ -13,7 +13,7 @@
         $sidx = 1;
     
     $count = 0;
-    $resultado = $class->consulta("SELECT  COUNT(*) AS count FROM perfiles");         
+    $resultado = $class->consulta("SELECT  COUNT(*) AS count FROM perfiles WHERE estado = '1'");         
     while ($row = $class->fetch_array($resultado)) {
         $count = $count + $row[0];    
     }    
@@ -27,19 +27,13 @@
     $start = $limit * $page - $limit;
     if ($start < 0)
         $start = 0;
-    
-    if ($search == 'false') {
-        $SQL = "SELECT * FROM perfiles WHERE estado = '1' ORDER BY $sidx $sord offset $start limit $limit";
+
+    if ($_GET['campo'] != '') {
+        $campo = $_GET['campo'];
+        $SQL = "SELECT * FROM perfiles WHERE estado = '1' AND nombre like '%$_GET[campo]%' ORDER BY $sidx $sord offset $start limit $limit";
     } else {
-        $campo = $_GET['searchField'];
-      
-        if ($_GET['searchOper'] == 'eq') {
-            $SQL = "SELECT * FROM perfiles WHERE estado = '1' AND $campo = '$_GET[searchString]' ORDER BY $sidx $sord offset $start limit $limit";
-        }         
-        if ($_GET['searchOper'] == 'cn') {
-            $SQL = "SELECT * FROM perfiles WHERE estado = '1' AND $campo like '%$_GET[searchString]%' ORDER BY $sidx $sord offset $start limit $limit";
-        }
-    }  
+       $SQL = "SELECT * FROM perfiles WHERE estado = '1' ORDER BY $sidx $sord offset $start limit $limit";
+    } 
 
     $resultado = $class->consulta($SQL);  
     $ss ='';
@@ -53,8 +47,9 @@
         while ($row = $class->fetch_array($resultado)) {
             $s .= "<row id='" . $row[0] . "'>";
             $s .= "<cell>" . $row[0] . "</cell>";
+            $s .= "<cell></cell>";
             $s .= "<cell>" . $row[1] . "</cell>";
-            $s .= "<cell>" . $row[3] . "</cell>";
+            // $s .= "<cell>" . $row[3] . "</cell>";
             $s .= "</row>";
         }
     $s .= "</rows>";

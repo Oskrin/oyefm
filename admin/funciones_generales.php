@@ -1,19 +1,27 @@
 <?php 
-function img_64($destino,$img_64,$extension,$nombre){
+function img_64($destino,$img_64,$extension,$nombre) {
     define('UPLOAD_DIR', $destino.'/');    
     $img_64 = str_replace('data:image/png;base64,', '', $img_64);        
     $img_64 = str_replace(' ', '+', $img_64);
     $data_img = base64_decode($img_64);
     $file = UPLOAD_DIR . $nombre . '.'.$extension;
-    if($success = file_put_contents($file, $data_img)){
+    if($success = file_put_contents($file, $data_img)) {
         return "true";
-    }else{
+    } else {
         return "false";
     }
 }
 
-function maxCaracter($texto, $cant){        
+function maxCaracter($texto, $cant) {        
     $texto = substr($texto, 0,$cant);       
     return $texto;
 }
+
+function truncateFloat($number, $digitos) {
+    $raiz = 10;
+    $multiplicador = pow ($raiz,$digitos);
+    $resultado = ((int)($number * $multiplicador)) / $multiplicador;
+    return number_format($resultado, $digitos);
+}
+
 ?>

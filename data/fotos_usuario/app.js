@@ -248,24 +248,24 @@ angular.module('scotchApp').controller('fotos_usuarioController', function ($sco
 				image: {
 					btn_choose: 'Cambiar Logo',
 					droppable: true,
-					maxSize: 990000,	
+					maxSize: 10000000,	
 					name: 'avatar',
-					on_error : function(error_type) {
-						if(last_gritter) $.gritter.remove(last_gritter);
-						if(error_type == 1) {
-							last_gritter = $.gritter.add({
-								title: 'El archivo no es una imagen!',
-							text: 'Por favor, elija un jpg | jpeg | imagen png!',
-							class_name: 'gritter-error gritter-center'
-							});
-						} else if(error_type == 2) {
-							last_gritter = $.gritter.add({
-								title: 'Archivo muy grande!',
-							text: 'Tamaño de la imagen no debe superar los 100Kb!',
-							class_name: 'gritter-error gritter-center'
-							});
-						} else {}
-					},
+					// on_error : function(error_type) {
+					// 	if(last_gritter) $.gritter.remove(last_gritter);
+					// 	if(error_type == 1) {
+					// 		last_gritter = $.gritter.add({
+					// 			title: 'El archivo no es una imagen!',
+					// 		text: 'Por favor, elija un jpg | jpeg | imagen png!',
+					// 		class_name: 'gritter-error gritter-center'
+					// 		});
+					// 	} else if(error_type == 2) {
+					// 		last_gritter = $.gritter.add({
+					// 			title: 'Archivo muy grande!',
+					// 		text: 'Tamaño de la imagen no debe superar los 100Kb!',
+					// 		class_name: 'gritter-error gritter-center'
+					// 		});
+					// 	} else {}
+					// },
 					on_success : function() {
 						$.gritter.removeAll();
 					}
@@ -331,6 +331,41 @@ angular.module('scotchApp').controller('fotos_usuarioController', function ($sco
 	} 
 	// fin
 
+	// eliminar Usuarios
+	$scope.methodborrar = function(id) { 
+		bootbox.confirm({
+			message: "Está Seguro de eliminar este Usuario?",
+			buttons: {
+			  confirm: {
+				 label: "<i class='ace-icon fa fa-check'></i>Confirmar",
+				 className: "btn-sm btn-success",
+			  },
+			  cancel: {
+				 label: "<i class='ace-icon fa fa-times'></i>Cancelar",
+				 className: "btn-sm btn-danger",
+			  }
+			},
+			callback: function(result) {
+				if(result) {
+					$.ajax({
+						url: 'data/fotos_usuario/app.php',
+						type: 'post',
+						data: {borrar_usuario:'borrar_usuario',id:id},
+						dataType: 'json',
+						async: true,
+						success: function (data) {
+							var val = data;
+							if(val == 1) {
+								llenar_tabla_fotos();	
+							}
+						}
+					});	
+				}
+			}
+		});
+	} 
+	// fin
+
 	// llenar tablas de fichas
 	function llenar_tabla_fotos() {
 		$('#dynamic-table').dataTable().fnClearTable();
@@ -343,9 +378,10 @@ angular.module('scotchApp').controller('fotos_usuarioController', function ($sco
 			success: function(response) { 
 				var tabla = $('#dynamic-table').DataTable();
 				for (var i = 0; i < response.length; i++) {
-					var vizualizar = "<button type='button' class='btn btn-white btn-primary btn-bold btn-sm' onclick=\"angular.element(this).scope().methodimagen('"+response[i].id+"')\" data-toggle='tooltip' title = 'Visualizar Imagen'><span class='glyphicon glyphicon-picture'> Imagen</button>";
+					var vizualizar = "<button type='button' class='btn btn-white btn-primary btn-bold btn-sm' onclick=\"angular.element(this).scope().methodimagen('"+response[i].id+"')\" data-toggle='tooltip' title = 'Visualizar Imagen'><span class='fa fa-file-image-o'> Foto</button>";
+					var borrar = "<button type='button' class='btn btn-white btn-pink btn-sm'  onclick=\"angular.element(this).scope().methodborrar('"+response[i].id+"')\"><span class='fa fa-trash red'> Borrar</button>";
 					var estado = "<span class='label label-success arrowed-in arrowed-in-right'>Activo</span>";
-					var acciones =  vizualizar;
+					var acciones =  vizualizar + ' ' + borrar;
 
 					tabla.row.add([
 			            response[i]['cedula'],
@@ -371,12 +407,12 @@ angular.module('scotchApp').controller('fotos_usuarioController', function ($sco
 
 	// guardar imagen
 	$('#btn_guardar_imagen').click(function() {
-		var submit = "btn_gardar";
+		var submit = "btn_guardar";
 		var formulario = $("#form_imagen").serialize();
 
 		$.ajax({
 	        url: "data/fotos_usuario/app.php",
-	        data: formulario + "&btn_guardar=" + submit+ "&img="+$("#avatar")[0].src,
+	        data: formulario + "&btn_guardar=" + submit + "&img="+$("#avatar")[0].src,
 	        type: "POST",
 	        async: true,
 	        success: function (data) {
@@ -402,6 +438,5 @@ angular.module('scotchApp').controller('fotos_usuarioController', function ($sco
 	// inicio
 	llenar_tabla_fotos();
 	// fin
-
 	});
 });

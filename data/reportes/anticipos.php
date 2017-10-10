@@ -89,7 +89,7 @@ function Line($x1, $y1, $x2, $y2, $style = null) {
     parent::Line($x1, $y1, $x2, $y2);
 }
 
-function SetDash($black=false, $white=false) {
+function SetDash($black = false, $white = false) {
     if($black and $white)
         $s = sprintf('[%.3f %.3f] 0 d', $black*$this->k, $white*$this->k);
     else
@@ -98,210 +98,206 @@ function SetDash($black=false, $white=false) {
 }
 
 //Cabecera de página
-function Header() {
+function Header() {   
     $class = new constante();
 
-    $resp = $class->consulta("SELECT P.id, P.nombres_completos, P.cedula_identificacion, R.fecha_rol, P.sueldo, R.neto_pagar, R.codigo_rol, D.horas, D.dias_laborados, D.dias_laborados, D.sueldo_mes, D.horas_extras, D.comisiones, D.decimo_tercero, D.decimo_cuarto, D.total_ingresos, D.aporte_iess, D.quirografarios, D.anticipos, D.atrasos, D.permisos, D.total_descuentos, D.faltas, R.fecha_creacion, D.dias_no_laborados FROM corporativo.personal P, rol_pagos.rol_pagos  R, rol_pagos.detalle_rol_pagos D where R.id = D.id_rol_pagos and P.id = R.id_personal and R.id = '".$_GET['id']."'");
-    while ($row = $class->fetch_array($resp)) {
-        $id_personal= $row[0];
-        $nombres= $row[1];
-        $cedula= $row[2];
-
-        $fecha = $row[3];
-        $sueldo = $row[4];
-        $neto_pagar = $row[5];
-        $codigo = $row[6];
-
-        $tiempos_horas = $row[7];
-        $dias_laborados = $row[8];
-        $horas_trabajadas = $row[9];
-        $sueldo_basico = $row[10];
-        $horas_extras = $row[11];
-        $comisiones = $row[12];
-        $decimo_tercero = $row[13];
-        $decimo_cuarto = $row[14];
-        $total_ingresos = $row[15];
-        $aporte_iess = $row[16];
-        $prestamos_qui = $row[17];
-        $prestamos_antici = $row[18];
-        $atrasos = $row[19];
-        $permisos = $row[20];
-        $total_descuentos = $row[21];
-        $faltas = $row[22];
-        $fecha_creacion = substr($row[23], 10, 9);
-        $dias_no_laborados = $row[24];
-    }
-
-    $resp = $class->consulta("SELECT C.nombre FROM corporativo.cargos_asignacion G, corporativo.cargos C, corporativo.personal P where P.id = G.id_personal and C.id = G.id_cargos  and G.id_personal = '".$id_personal."'");
-    while ($row = $class->fetch_array($resp)) {
-        $cargo = $row[0];
-    }
-
     //Logo
-    $this->Image('oye.jpg',30,7,160);
-    //Arial bold 9
-    $this->SetFont('Arial','B',14);
-    //Movernos a la derecha
-    $this->Cell(80);
-    //Título
-    $this->Cell(65,50,'ROL DE PAGOS INDIVIDUAL',0,0,'C');
-    $this->SetLineWidth(0.3);
-    $this->SetFillColor(255,255,255);
-    $this->RoundedRect(20, 31, 50, 8, 1.5, 'DF');
+    $this->Image('logo_conceptual.jpg',4,3,70);
+
+    $resp = $class->consulta("SELECT A.id, A.serie_anticipo, A.fecha_anticipo, P.nombres_completos, P.cedula_identificacion, F.nombre, A.monto_anticipo, A.meses_anticipo, A.forma_pago, A.cheque_numero, A.id_bancos, A.cuenta_anticipo, U.nombres_completos, U.cedula FROM rol_pagos.anticipos A, corporativo.personal P, usuarios U, corporativo.cargos_asignacion C, corporativo.cargos F  WHERE A.id_usuario = U.id AND A.id_personal = P.id AND C.id_personal = P.id AND C.id_cargos = F.id AND A.id = '$_GET[id]'");
+
+    while ($row = $class->fetch_array($resp)) {
+        $serie_anticipo = $row[1];
+        $fecha_anticipo = $row[2];
+        $nombres_completos = $row[3];
+        $cedula_identificacion = $row[4];
+        $cargo = $row[5];
+        $monto_anticipo = $row[6];
+        $meses_anticipo = $row[7];
+        $forma_pago = $row[8];
+        $cheque_numero = $row[9];
+        $id_bancos = $row[10];
+        $cuenta_anticipo = $row[11];
+        $usuario = $row[12];
+        $cedula = $row[13];
+
+        $anio = substr($row[2], 0, 4);
+        $mes = substr($row[2], 5, 8);
+        $dia = substr($row[2], 5, 8);
+    }
+
+    $codigo_nomina = '';
+    $resp = $class->consulta("SELECT N.codigo_nomina FROM rol_pagos.asignacion_anticipos A, rol_pagos.nomina N, rol_pagos.anticipos P WHERE A.id_nomina = N.id AND A.id_anticipos = P.id AND P.id = '$_GET[id]'");
+    while ($row = $class->fetch_array($resp)) {
+        $codigo_nomina = $row[0];
+    } 
     
-    $this->SetTextColor(255,87,51);
-    $this->Text(22, 37, utf8_decode($codigo),1,0, 'L',0);/////cargos
-
-    $this->SetTextColor(25,25,25);
-    $this->SetLineWidth(0.3);
-    $this->SetFillColor(255,255,255);
-    $this->RoundedRect(15, 45, 185, 20, 1.5, 'DF');
-
-    $this->SetFont('Arial','B',9);
-    $this->Text(18, 50, 'EMPLEADO:',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(39, 50, maxCaracter(utf8_decode($nombres),23),1,0, 'L',0);/////nombres completos
-    $this->SetFont('Arial','B',9);
-    $this->Text(18, 56, 'CARGO:',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(32, 56, utf8_decode($cargo),1,0, 'L',0);/////cargos
-    $this->SetFont('Arial','B',9);
-    $this->Text(18, 62, 'SUELDO:',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(34, 62, utf8_decode($sueldo),1, 'L');
-
-    $this->SetFont('Arial','B',9);
-    $this->Text(100, 50, 'MES:',1, 'L');
-    $this->SetFont('Arial','',9);
-    $mydate = strtotime($fecha);
-    $this->Text(109, 50, utf8_decode(strftime("%B / %Y", $mydate)),1, 'L');
-    $this->SetFont('Arial','B',9);
-    $this->Text(100, 56, 'HORA:',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(110, 56, $fecha_creacion,1, 'L');
-    $this->SetFont('Arial','B',9);
-    $this->Text(100, 62, utf8_decode('DÍAS NO LAB:'),1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(122, 62, $dias_no_laborados,1, 'L');
-
-    $this->SetFont('Arial','B',9);
-    $this->Text(145, 50, 'HORAS DIARIAS:',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(174, 50, $tiempos_horas,1, 'L');
-    $this->SetFont('Arial','B',9);
-    $this->Text(145, 56, utf8_decode('DÍAS LAB:'),1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(163, 56, $dias_laborados,1, 'L');
-    $this->SetFont('Arial','B',9);
-    $this->Text(145, 62, utf8_decode('HORAS EXTRAS:'),1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(174, 62, $horas_trabajadas,1, 'L');
-    //Salto de línea
+    $this->SetFont('Arial','B',11);
+    $this->Text(84, 11, 'CA-',1, 'L');
+    $this->Text(98, 11, 'ANTICIPOS AL PAGO',1, 'L');
+    $this->SetFont('Arial','',7);
 
     $this->SetLineWidth(0.3);
     $this->SetFillColor(255,255,255);
-    $this->RoundedRect(15, 67, 91, 42, 1.5, 'DF');
+    $this->RoundedRect(75, 12, 27, 7, 1.5, 'DF');
+    $this->Text(76, 17, utf8_decode($codigo_nomina) ,1, 'L');
 
-    $this->SetFont('Arial','B',9);
-    $this->Text(45, 72, 'INGRESOS',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(18, 77, 'Sueldo Mes', 1, 'L');
-    $this->SetY(73);
-    $this->SetX(75);
-    $this->multiCell(22, 6, '$ '.$sueldo_basico,0,'R');
-
-    $this->Text(18, 82, 'Horas Extras', 1, 'L');
-    $this->SetY(78);
-    $this->SetX(75);
-    $this->multiCell(22, 6, '$ '.$horas_extras,0,'R');
-
-    $this->Text(18, 87, 'COMISIONES', 1, 'L');
-    $this->SetY(83);
-    $this->SetX(75);
-    $this->multiCell(22, 6, '$ '.$comisiones,0,'R');
-
-    $this->Text(18, 92, utf8_decode('Décimo Tercero'), 1, 'L');
-    $this->SetY(88);
-    $this->SetX(75);
-    $this->multiCell(22, 6, '$ '.$decimo_tercero,0,'R');
-
-    $this->Text(18, 97, utf8_decode('Décimo Cuarto'), 1, 'L');
-    $this->SetY(93);
-    $this->SetX(75);
-    $this->multiCell(22, 6, '$ '.$decimo_cuarto,0,'R');
-
-    $this->SetFont('Arial','B',9);
-    $this->Text(18, 107, utf8_decode('TOTAL INGRESOS'), 1, 'L');
-    $this->SetY(103);
-    $this->SetX(75);
-    $this->multiCell(22, 6, '$ '.$total_ingresos,0,'R');
-
+    $this->SetFont('Arial','B',11);
     $this->SetLineWidth(0.3);
     $this->SetFillColor(255,255,255);
-    $this->RoundedRect(108, 67, 92, 42, 1.5, 'DF');
+    $this->RoundedRect(104, 12, 40, 7, 1.5, 'DF');
+    $this->setTextColor(255,87,51);
+    $this->Text(108, 17, utf8_decode('N°-     '.$serie_anticipo) ,1, 'L');
 
-    $this->Text(140, 72, 'DESCUENTOS',1, 'L');
-    $this->SetFont('Arial','',9);
-    $this->Text(111, 77, 'Aporte al IESS', 0, 'L');
-    $this->SetY(73);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$aporte_iess,0,'R');
-
-    $this->Text(111, 82, utf8_decode('Préstamos Quirografarios'), 1, 'L');
-    $this->SetY(78);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$prestamos_qui,0,'R');
-
-    $this->Text(111, 87, utf8_decode('Préstamos y Anticipos'), 1, 'L');
-    $this->SetY(83);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$prestamos_antici,0,'R');
-
-    $this->Text(111, 92, utf8_decode('Atrasos'), 1, 'L');
-    $this->SetY(88);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$atrasos,0,'R');
-
-    $this->Text(111, 97, utf8_decode('Permisos'), 1, 'L');
-    $this->SetY(93);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$permisos,0,'R');
-
-    $this->Text(111, 102, utf8_decode('Faltas'), 1, 'L');
-    $this->SetY(98);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$faltas,0,'R');
-
-    $this->SetFont('Arial','B',9);
-    $this->Text(111, 107, utf8_decode('TOTAL DESCUENTOS'), 1, 'L');
-    $this->SetY(103);
-    $this->SetX(168);
-    $this->multiCell(22, 6, '$ '.$total_descuentos,0,'R');
-
-    $this->SetLineWidth(0.3);
-    $this->SetFillColor(255,255,255);
-    $this->RoundedRect(15, 111, 185, 7, 1.5, 'DF');
-
-    $this->Text(60, 116, utf8_decode('NETO A PAGAR'), 1, 'L');
-    $this->Text(110, 116, utf8_decode('$ '.$neto_pagar), 1, 'L');
-    $this->SetFont('Arial','B',8);
-    $this->Text(13, 130, utf8_decode('REALIZADO POR:'), 1, 'L');
+    $this->setTextColor(25,25,25);
     $this->SetFont('Arial','',8);
-    $this->Text(39, 130, utf8_decode($_SESSION['user']['name']),1,'L');
-    $this->Text(160, 140, utf8_decode('RECIBÍ CONFORME'), 1, 'L');
-    $this->Text(163, 143, utf8_decode('C.I: '.$cedula), 1, 'L');
+    $this->SetY(21);
+    $this->SetX(6);
+    $this->multiCell(100, 6, utf8_decode('Yo,  '.$nombres_completos.', CON C.C. N° '.$cedula_identificacion.', que desempeño como '.$cargo.', solicito, se me conceda un anticipo a mi remuneración por el monto de $'.$monto_anticipo.' para un periodo de '.$meses_anticipo.' mes(es); y autorizo para que en la liquidación de mis haberes en caso de separación definitiva, se incluyan en los saldos pendientes de pago originados como anticipos recibidos.'),0);
 
-    $this->SetDash(1,1);
-    $this->Line(200,136,150,136);
+    $this->SetFont('Arial','',7);
+    $this->SetLineWidth(0.3);
+    $this->SetFillColor(255,255,255);
+    $this->RoundedRect(116, 20, 28, 7, 1.5, 'DF');
+
+    $this->SetFont('Arial','B',11);
+    $this->setTextColor(255,87,51);
+    $this->Text(118, 25, utf8_decode('$ '.$monto_anticipo) ,1, 'L');
+
+   $this->setTextColor(25,25,25);
+   $this->SetFont('Arial','',7);
+   $this->Text(125, 31, utf8_decode('EFECTIVO'),1, 'L');
+    if($forma_pago == 'EFECTIVO') {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(25,25,25);
+        $this->RoundedRect(139, 28, 5, 5, 0, 'DF');    
+    } else {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(255,255,255);
+        $this->RoundedRect(139, 28, 5, 5, 0, 'DF');
+    }
+
+    $this->Text(127, 37, utf8_decode('CHEQUE'),1, 'L');
+    if($forma_pago == 'CHEQUE') {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(25,25,25);
+        $this->RoundedRect(139, 34, 5, 5, 0, 'DF');    
+    } else {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(255,255,255);
+        $this->RoundedRect(139, 34, 5, 5, 0, 'DF');    
+    }
+
+    $this->Text(126, 43, utf8_decode('TARJETA'),1, 'L');
+    if($forma_pago == 'TARJETA') {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(25,25,25);
+        $this->RoundedRect(139, 40, 5, 5, 0, 'DF');    
+    } else {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(255,255,255);
+        $this->RoundedRect(139, 40, 5, 5, 0, 'DF');    
+    }
+
+    $this->Text(124, 49, utf8_decode('DEPÓSITO'),1, 'L');
+    if($forma_pago == 'DEPÓSITO') {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(25,25,25);
+        $this->RoundedRect(139, 46, 5, 5, 0, 'DF');        
+    } else {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(255,255,255);
+        $this->RoundedRect(139, 46, 5, 5, 0, 'DF');
+    }
+
+    $this->Text(116, 55, utf8_decode('TRANSFERENCIA'),1, 'L');
+    if($forma_pago == 'TRANSFERENCIA') {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(25,25,25);
+        $this->RoundedRect(139, 52, 5, 5, 0, 'DF');    
+    } else {
+        $this->SetLineWidth(0.3);
+        $this->SetFillColor(255,255,255);
+        $this->RoundedRect(139, 52, 5, 5, 0, 'DF'); 
+    }
+    
+    $this->SetY(63);
+    $this->SetX(6);
+    $this->multiCell(46, 6, utf8_decode('CHEQUE N°'),1, 'L');
+    // $this->Text(22, 67, utf8_decode($cedula),1, 'L');
+
+    $this->SetY(63);
+    $this->SetX(52);
+    $this->multiCell(46, 6, utf8_decode('BANCO'),1, 'L');
+    // $this->Text(63, 67, utf8_decode($cedula),1, 'L');
+
+    $this->SetY(63);
+    $this->SetX(98);
+    $this->multiCell(46, 6, utf8_decode('CUENTA'),1, 'L');
+    // $this->Text(110, 67, utf8_decode($cedula),1, 'L');
+
+    $this->SetY(69);
+    $this->SetX(6);
+    $this->multiCell(46, 16, utf8_decode(''),1, 'C');    
+
+    $this->SetY(85);
+    $this->SetX(6);
+    $this->multiCell(46, 5, utf8_decode(''),1);
+
+    $this->SetY(90);
+    $this->SetX(6);
+    $this->multiCell(46, 5, utf8_decode('C.I.'),1);
+    $this->Text(12, 93, utf8_decode($cedula),1, 'L');
+
+    $this->SetY(69);
+    $this->SetX(52);
+    $this->multiCell(46, 16, utf8_decode(''),1, 'C');
+
+    $this->SetY(85);
+    $this->SetX(52);
+    $this->multiCell(46, 5, utf8_decode(''),1);
+
+    $this->SetY(90);
+    $this->SetX(52);
+    $this->multiCell(46, 5, utf8_decode('C.I.'),1);
+
+    $this->SetY(69);
+    $this->SetX(98);
+    $this->multiCell(46, 16, utf8_decode(''),1, 'C');
+
+    $this->SetY(85);
+    $this->SetX(98);
+    $this->multiCell(46, 5, utf8_decode('C.I.'),1);
+    $this->Text(104, 88, utf8_decode($cedula_identificacion),1, 'L');
+
+    $this->SetY(90);
+    $this->SetX(98);
+    $this->multiCell(14, 5, utf8_decode('DIA'),1);
+    // $this->Text(104, 93, utf8_decode($dia),1, 'L');
+
+    $this->SetY(90);
+    $this->SetX(112);
+    $this->multiCell(18, 5, utf8_decode('MES'),1);
+    // $this->Text(118, 93, utf8_decode($mes),1, 'L');
+
+    $this->SetY(90);
+    $this->SetX(130);
+    $this->multiCell(14, 5, utf8_decode('AÑO'),1);
+    $this->Text(137, 93, utf8_decode($anio),1, 'L');
+
+    $this->Text(7, 72, utf8_decode('ELABORADO'),1, 'L');
+    $this->Text(53, 72, utf8_decode('APROBADO'),1, 'L');
+    $this->Text(99, 72, utf8_decode('FIRMA Y SELLO SOLICITANTE'),1, 'L');
     }
 }
-    // $pdf = new PDF();
-    $pdf = new PDF('L','mm','A5');
+
+    $pdf = new PDF('L','mm',array(150,105));
     $pdf->AliasNbPages();
 
-    //Primera página
+    // Primera página
     $pdf->AddPage();
     $pdf->SetFont('Arial','',15);
-    $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
-    $pdf->Output('rol_pagos_individual.pdf','I');
+    // $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
+    $pdf->Output('anticipos.pdf','I');
 ?>
+

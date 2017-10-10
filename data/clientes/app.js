@@ -39,7 +39,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 				ruc_empresa: {
 					required: true,
 					digits: true,
-					minlength: 13				
+					// minlength: 10				
 				},
 				nombre_comercial: {
 					required: true				
@@ -68,7 +68,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 				ruc_empresa: {
 					required: "Por favor, Ingrese Ruc Empresa",
 					digits: "Por favor, Ingrese solo dígitos",
-					minlength: "Por favor, Especifique mínimo 13 digitos"
+					// minlength: "Por favor, Especifique mínimo 13 digitos"
 				},
 				nombre_comercial: { 	
 					required: "Por favor, Indique Nombre Comercial",			
@@ -116,6 +116,98 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		}
 		// fin
 
+		// // consultar identificacion
+		// $scope.cargadatos = function(estado) {
+		// 	if($('#identificacion').val() == '') {
+		// 		$.gritter.add({
+		// 			title: 'Error... Ingrese una Identificación',
+		// 			class_name: 'gritter-error gritter-center',
+		// 			time: 1000,
+		// 		});
+		// 		$('#identificacion').focus();
+		// 	} else {
+		// 		if($('#select_documento').val() == 'CEDULA') {
+		// 			$.ajax({
+		//                 type: "POST",
+		//                 url: "data/clientes/app.php",          
+		//                 data:{consulta_cedula:'consulta_cedula',txt_ruc:$("#identificacion").val()},
+		//                 dataType: 'json',
+		//                 beforeSend: function() {
+		//                 	$.blockUI({ css: { 
+		// 			            border: 'none', 
+		// 			            padding: '15px', 
+		// 			            backgroundColor: '#000', 
+		// 			            '-webkit-border-radius': '10px', 
+		// 			            '-moz-border-radius': '10px', 
+		// 			            opacity: .5, 
+		// 			            color: '#fff' 
+		// 			        	},
+		// 			            message: '<h3>Consultando, Por favor espere un momento    ' + '<i class="fa fa-spinner fa-spin"></i>' + '</h3>'
+		// 			    	});
+		//                 },
+	 //                    success: function(data) {
+	 //                    	$.unblockUI();
+  //                   		if(data.datosPersona.valid == false) {
+		// 	            		$.gritter.add({
+		// 							title: 'Lo sentimos, Cédula Erronea',
+		// 							class_name: 'gritter-error gritter-center',
+		// 							time: 1000,
+		// 						});
+		// 						$('#identificacion').focus();
+		// 						$('#identificacion').val("");	
+		// 	            	} else {
+		// 	            		if(data.datosPersona.valid == true) {
+		// 		            		$('#nombres_completos').val(data.datosPersona.name);
+		// 		            		$('#ciudad').val(data.datosPersona.residence);
+		// 		            		$('#direccion').val(data.datosPersona.streets);
+		// 		            	}	 		
+		// 	            	}
+		//                 }
+		//             });
+		// 		} else {
+		// 			if($('#select_documento').val() == 'RUC') {
+		// 				$.ajax({
+		// 	                type: "POST",
+		// 	                url: "data/clientes/app.php",          
+		// 	                data:{consulta_ruc:'consulta_ruc',txt_ruc:$("#identificacion").val()},
+		// 	                dataType: 'json',
+		// 	                beforeSend: function() {
+		// 	                	$.blockUI({ css: { 
+		// 				            border: 'none', 
+		// 				            padding: '15px', 
+		// 				            backgroundColor: '#000', 
+		// 				            '-webkit-border-radius': '10px', 
+		// 				            '-moz-border-radius': '10px', 
+		// 				            opacity: .5, 
+		// 				            color: '#fff' 
+		// 				        	},
+		// 				            message: '<h3>Consultando, Por favor espere un momento    ' + '<i class="fa fa-spinner fa-spin"></i>' + '</h3>'
+		// 				    	});
+		// 	                },
+		//                     success: function(data) {
+		//                     	$.unblockUI();
+		//                     	if(data.datosEmpresa.valid == 'false') {
+		// 		            		$.gritter.add({
+		// 								title: 'Lo sentimos", "Usted no dispone de un RUC registrado en el SRI, o el número ingresado es Incorrecto."',
+		// 								class_name: 'gritter-error gritter-center',
+		// 								time: 1000,
+		// 							});
+
+		// 							$('#identificacion').focus();
+		// 							$('#identificacion').val("");
+		// 		            	} else {
+		// 		            		if(data.datosEmpresa.valid == 'true') {
+		// 				            	$('#nombres_completos').val(data.datosEmpresa.razon_social);			            		
+		// 				            }
+		// 		            	}
+		// 	                }
+		// 	            });
+		// 			}	
+		// 		}
+	 //    	} 
+	 //    }
+	 //    // fin
+
 		// verificar ruc
 		$scope.cargadatos = function(estado) {
 			if($('#ruc_empresa').val() == '') {
@@ -126,45 +218,87 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 				});
 				$('#ruc_empresa').focus();
 			} else {
-				 if (estado) {
-				 	$.blockUI({ css: { 
-			            border: 'none', 
-			            padding: '15px', 
-			            backgroundColor: '#000', 
-			            '-webkit-border-radius': '10px', 
-			            '-moz-border-radius': '10px', 
-			            opacity: .5, 
-			            color: '#fff' 
-			        	},
-			            message: '<h3>Consultando, Por favor espere un momento    ' + '<i class="fa fa-spinner fa-spin"></i>' + '</h3>'
-			    	}); 
-		            loaddatosSRI.get({
-		                nrodocumento: $("#ruc_empresa").val(),
-		                tipodocumento: "RUC"
-		            }).$promise.then(function(data) {
-		            	$.unblockUI();
-		            	if(data.datosEmpresa.valid == 'false') {
+				$.ajax({
+	                type: "POST",
+	                url: "data/clientes/app.php",          
+	                data:{consulta_ruc:'consulta_ruc',txt_ruc:$("#ruc_empresa").val()},
+	                dataType: 'json',
+	                beforeSend: function() {
+	                	$.blockUI({ css: { 
+				            border: 'none', 
+				            padding: '15px', 
+				            backgroundColor: '#000', 
+				            '-webkit-border-radius': '10px', 
+				            '-moz-border-radius': '10px', 
+				            opacity: .5, 
+				            color: '#fff' 
+				        	},
+				            message: '<h3>Consultando, Por favor espere un momento    ' + '<i class="fa fa-spinner fa-spin"></i>' + '</h3>'
+				    	});
+	                },
+                    success: function(data) {
+                    	$.unblockUI();
+                    	if(data.datosEmpresa.valid == 'false') {
 		            		$.gritter.add({
-								title: 'Error.... Ruc Erroneo',
+								title: 'Lo sentimos", "Usted no dispone de un RUC registrado en el SRI, o el número ingresado es Incorrecto."',
 								class_name: 'gritter-error gritter-center',
 								time: 1000,
 							});
-							$('#ruc_empresa').focus();
-							$('#form_clientes').each(function(){
-							  this.reset();
-							});
+
+							$('#identificacion').focus();
+							$('#identificacion').val("");
 		            	} else {
-		            		$('#nombre_comercial').val(data.datosEmpresa.nombre_comercial);
-			            	$('#actividad_economica').val(data.datosEmpresa.actividad_economica);
-			            	$('#razon_social').val(data.datosEmpresa.razon_social);
-			            	$('#representante_legal').val(data.establecimientos.adicional.representante_legal);
-			            	$('#cedula').val(data.establecimientos.adicional.cedula);
+		            		if(data.datosEmpresa.valid == 'true') {
+		            			$('#nombre_comercial').val(data.datosEmpresa.nombre_comercial);
+			            		$('#actividad_economica').val(data.datosEmpresa.actividad_economica);
+			            		$('#razon_social').val(data.datosEmpresa.razon_social);
+			            		$('#representante_legal').val(data.establecimientos.adicional.representante_legal);
+			            		$('#cedula').val(data.establecimientos.adicional.cedula);
+				            	// $('#nombres_completos').val(data.datosEmpresa.razon_social);			            		
+				            }
 		            	}
-		            }, function(err) {
-		                console.log(err.data.error);
-		            });
-		        }
-	    	} 
+	                }
+	            });
+			}	
+				 // if (estado) {
+				 // 	$.blockUI({ css: { 
+			  //           border: 'none', 
+			  //           padding: '15px', 
+			  //           backgroundColor: '#000', 
+			  //           '-webkit-border-radius': '10px', 
+			  //           '-moz-border-radius': '10px', 
+			  //           opacity: .5, 
+			  //           color: '#fff' 
+			  //       	},
+			  //           message: '<h3>Consultando, Por favor espere un momento    ' + '<i class="fa fa-spinner fa-spin"></i>' + '</h3>'
+			  //   	}); 
+		   //          loaddatosSRI.get({
+		   //              nrodocumento: $("#ruc_empresa").val(),
+		   //              tipodocumento: "RUC"
+		   //          }).$promise.then(function(data) {
+		   //          	$.unblockUI();
+		   //          	if(data.datosEmpresa.valid == 'false') {
+		   //          		$.gritter.add({
+					// 			title: 'Error.... Ruc Erroneo',
+					// 			class_name: 'gritter-error gritter-center',
+					// 			time: 1000,
+					// 		});
+					// 		$('#ruc_empresa').focus();
+					// 		$('#form_clientes').each(function(){
+					// 		  this.reset();
+					// 		});
+		   //          	} else {
+		   //          		$('#nombre_comercial').val(data.datosEmpresa.nombre_comercial);
+			  //           	$('#actividad_economica').val(data.datosEmpresa.actividad_economica);
+			  //           	$('#razon_social').val(data.datosEmpresa.razon_social);
+			  //           	$('#representante_legal').val(data.establecimientos.adicional.representante_legal);
+			  //           	$('#cedula').val(data.establecimientos.adicional.cedula);
+		   //          	}
+		   //          }, function(err) {
+		   //              console.log(err.data.error);
+		   //          });
+		   //      }
+	    	// } 
 	    }
 	    // fin
 
@@ -177,6 +311,21 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 				// });
 			}, 1000);
 		}
+		// fin
+
+		// buscador registro
+		$("#buscador").keyup(function() {
+		    var campo = $('#buscador').val();
+			jQuery("#table").jqGrid('setGridParam',{url:"data/clientes/xml_clientes.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
+		// fin
+
+		// listar registro
+		$("#btn_listar").click(function() {
+			$('#buscador').val('');
+		    var campo = $('#buscador').val();
+			jQuery("#table").jqGrid('setGridParam',{url:"data/clientes/xml_clientes.php?campo="+campo,page:1}).trigger("reloadGrid");
+		});
 		// fin
 
 		// procesos cargado inicio
@@ -193,13 +342,13 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		});
 		// fin
 
-		// // guardar formulario
+		// guardar formulario
 		$('#btn_0').click(function() {
 			var respuesta = $('#form_clientes').valid();
 
 			if (respuesta == true) {
 				$('#btn_0').attr('disabled', true);
-				var submit = "btn_gardar";
+				var submit = "btn_guardar";
 				var formulario = $("#form_clientes").serialize();
 
 				$.ajax({
@@ -269,16 +418,17 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		jQuery(function($) {
 		    var grid_selector = "#table";
 		    var pager_selector = "#pager";
+		    var campo = $('#buscador').val();
 		    
 		    //cambiar el tamaño para ajustarse al tamaño de la página
-		    $(window).on('resize.jqGrid', function () {
+		    $(window).on('resize.jqGrid', function() {
 		        //$(grid_selector).jqGrid( 'setGridWidth', $("#myModal").width());	        
 		        $(grid_selector).jqGrid( 'setGridWidth', $("#myModal .modal-dialog").width()-30);
 		    });
 		    //cambiar el tamaño de la barra lateral collapse/expand
 		    var parent_column = $(grid_selector).closest('[class*="col-"]');
 		    $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
-		        if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+		        if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
 		            //para dar tiempo a los cambios de DOM y luego volver a dibujar!!!
 		            setTimeout(function() {
 		                $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
@@ -289,7 +439,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		    // buscador clientes
 		    jQuery(grid_selector).jqGrid({	        
 		        datatype: "xml",
-		        url: 'data/clientes/xml_clientes.php',        
+		        url: "data/clientes/xml_clientes.php?campo="+campo,        
 		        colNames: ['ID','RUC','NOMBRE COMERCIAL','ACTIVIDAD ECONÓMICA','RAZÓN SOCIAL','REPRESENTANTE','CÉDULA','MÓVIL','TELÉFONO','DIRECCIÓN','CORREO','SITIO WEB','FACEBOOK','TWITTER','GOOGLE','OBSERVACIONES'],
 		        colModel:[      
 		            {name:'id',index:'id', frozen:true, align:'left', search:false, hidden: true},
@@ -312,7 +462,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		        rowNum: 10,       
 		        width:600,
 		        shrinkToFit: false,
-		        height:200,
+		        height:340,
 		        rowList: [10,20,30],
 		        pager: pager_selector,        
 		        sortname: 'id',
@@ -373,21 +523,21 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		    jQuery(grid_selector).jqGrid('navGrid',pager_selector,
 		    {   
 		        edit: false,
-		        editicon : 'ace-icon fa fa-pencil blue',
+		        editicon: 'ace-icon fa fa-pencil blue',
 		        add: false,
-		        addicon : 'ace-icon fa fa-plus-circle purple',
+		        addicon: 'ace-icon fa fa-plus-circle purple',
 		        del: false,
-		        delicon : 'ace-icon fa fa-trash-o red',
-		        search: true,
-		        searchicon : 'ace-icon fa fa-search orange',
+		        delicon: 'ace-icon fa fa-trash-o red',
+		        search: false,
+		        searchicon: 'ace-icon fa fa-search orange',
 		        refresh: true,
-		        refreshicon : 'ace-icon fa fa-refresh green',
+		        refreshicon: 'ace-icon fa fa-refresh green',
 		        view: true,
-		        viewicon : 'ace-icon fa fa-search-plus grey'
+		        viewicon: 'ace-icon fa fa-search-plus grey'
 		    },
 		    {	        
 		        recreateForm: true,
-		        beforeShowForm : function(e) {
+		        beforeShowForm: function(e) {
 		            var form = $(e[0]);
 		            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 		            style_edit_form(form);
@@ -397,7 +547,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		        closeAfterAdd: true,
 		        recreateForm: true,
 		        viewPagerButtons: false,
-		        beforeShowForm : function(e) {
+		        beforeShowForm: function(e) {
 		            var form = $(e[0]);
 		            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
 		            .wrapInner('<div class="widget-header" />')
@@ -406,18 +556,18 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		    },
 		    {
 		        recreateForm: true,
-		        beforeShowForm : function(e) {
+		        beforeShowForm: function(e) {
 		            var form = $(e[0]);
 		            if(form.data('styled')) return false;      
 		            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 		            style_delete_form(form); 
 		            form.data('styled', true);
 		        },
-		        onClick : function(e) {}
+		        onClick: function(e) {}
 		    },
 		    {
 		        recreateForm: true,
-		        afterShowSearch: function(e){
+		        afterShowSearch: function(e) {
 		            var form = $(e[0]);
 		            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 		            style_search_form(form);
@@ -434,7 +584,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		    {
 		        //view record form
 		        recreateForm: true,
-		        beforeShowForm: function(e){
+		        beforeShowForm: function(e) {
 		            var form = $(e[0]);
 		            form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
 		        }
@@ -502,7 +652,7 @@ angular.module('scotchApp').controller('clientesController', function ($scope, $
 		            'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
 		            'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
 		        };
-		        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+		        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function() {
 		            var icon = $(this);
 		            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 		            if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);

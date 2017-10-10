@@ -335,6 +335,41 @@ angular.module('scotchApp').controller('fotos_clientesController', function ($sc
 	} 
 	// fin
 
+	// eliminar personal
+	$scope.methodborrar = function(id) { 
+		bootbox.confirm({
+			message: "Está Seguro de eliminar este Cliente?",
+			buttons: {
+			  confirm: {
+				 label: "<i class='ace-icon fa fa-check'></i>Confirmar",
+				 className: "btn-sm btn-success",
+			  },
+			  cancel: {
+				 label: "<i class='ace-icon fa fa-times'></i>Cancelar",
+				 className: "btn-sm btn-danger",
+			  }
+			},
+			callback: function(result) {
+				if(result) {
+					$.ajax({
+						url: 'data/fotos_clientes/app.php',
+						type: 'post',
+						data: {borrar_clientes:'borrar_clientes',id:id},
+						dataType: 'json',
+						async: true,
+						success: function (data) {
+							var val = data;
+							if(val == 1) {
+								llenar_tabla_fotos();	
+							}
+						}
+					});	
+				}
+			}
+		});
+	} 
+	// fin
+
 	// llenar tablas de fichas
 	function llenar_tabla_fotos() {
 		$('#dynamic-table').dataTable().fnClearTable();
@@ -347,9 +382,10 @@ angular.module('scotchApp').controller('fotos_clientesController', function ($sc
 			success: function(response) { 
 				var tabla = $('#dynamic-table').DataTable();
 				for (var i = 0; i < response.length; i++) {
-					var vizualizar = "<button type='button' class='btn btn-white btn-primary btn-bold btn-sm' onclick=\"angular.element(this).scope().methodimagen('"+response[i].id+"')\" data-toggle='tooltip' title = 'Visualizar Imagen'><span class='glyphicon glyphicon-picture'> Imagen</button>";
+					var vizualizar = "<button type='button' class='btn btn-white btn-primary btn-bold btn-sm' onclick=\"angular.element(this).scope().methodimagen('"+response[i].id+"')\" data-toggle='tooltip' title = 'Visualizar Imagen'><span class='fa fa-file-image-o'> Foto</button>";
+					var borrar = "<button type='button' class='btn btn-white btn-pink btn-sm'  onclick=\"angular.element(this).scope().methodborrar('"+response[i].id+"')\"><span class='fa fa-trash red'> Borrar</button>";
 					var estado = "<span class='label label-success arrowed-in arrowed-in-right'>Activo</span>";
-					var acciones =  vizualizar;
+					var acciones =  vizualizar + ' ' + borrar;
 
 					tabla.row.add([
 			            response[i]['ruc_empresa'],
@@ -407,6 +443,5 @@ angular.module('scotchApp').controller('fotos_clientesController', function ($sc
 	// inicio
 	llenar_tabla_fotos();
 	// fin
-
 	});
 });

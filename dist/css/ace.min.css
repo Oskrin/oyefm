@@ -1368,7 +1368,11 @@ pre.prettyprint {
     -webkit-box-shadow: none;
     box-shadow: none;
     min-height: 45px;
-    background: url(../images/patronbanner.png);
+    background-color: rgb(1,74,182);
+    z-index: 22;
+    /*background: #307ecc;*/
+    /*background: #438eb9;*/
+    /*background: url(../images/patronbanner.png);*/
 }
 
 .navbar .navbar-text,
@@ -1497,13 +1501,14 @@ pre.prettyprint {
 }
 
 .ace-nav>li.light-blue>a {
-    background-color: #ACD392
+    /*background-color: #ACD392*/
+    background-color: #62a8d1;
 }
 
 .ace-nav>li.light-blue>a:hover,
 .ace-nav>li.light-blue>a:focus,
 .ace-nav>li.open.light-blue>a {
-    background-color: #ACD392
+    background-color: #4693bf
 }
 
 .ace-nav>li.light-blue2>a {
@@ -9960,9 +9965,23 @@ span.input-icon {
     padding-right: 6px
 }
 
+
+
 .input-icon.input-icon-right>input {
-    padding-left: 6px;
-    padding-right: 24px
+    /*padding-left: 6px;
+    padding-right: 24px*/
+
+    border: 1px solid #6fb3e0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 4px!important;
+    font-size: 13px;
+    line-height: 1.3;
+    color: #666!important;
+    z-index: 11;
+    -webkit-transition: width ease .15s;
+    -o-transition: width ease .15s;
+    transition: width ease .15s;
 }
 
 .input-icon>.ace-icon {
@@ -9979,8 +9998,9 @@ span.input-icon {
 }
 
 .input-icon.input-icon-right>.ace-icon {
-    left: auto;
-    right: 3px
+    /*left: auto;
+    right: 3px*/
+    right: auto;
 }
 
 .input-icon>input:focus+.ace-icon {

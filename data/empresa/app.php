@@ -29,7 +29,7 @@
 																			'',
 																			'$_POST[observaciones]',
 																			'1', 
-																			'$fecha');");	
+																			'$fecha')");	
 		$data = 1;
 		echo $data;
 	}
@@ -72,4 +72,28 @@
 		echo $data;
 	}
 	// fin
+
+	if (isset($_POST['cargar_empresa'])) {
+		$resultado = $class->consulta("SELECT * FROM empresa WHERE estado = '1'");
+		while ($row=$class->fetch_array($resultado)) {
+			$data = array('id' => $row['id'],
+						'ruc_empresa' => $row['ruc_empresa'],
+						'propietario' => $row['propietario'],
+						'nombre_empresa' => $row['nombre_empresa'],
+						'slogan' => $row['slogan'],
+						'telefono1' => $row['telefono1'],
+						'telefono2' => $row['telefono2'],
+						'ciudad' => $row['ciudad'],
+						'direccion' => $row['direccion'],
+						'correo' => $row['correo'],
+						'fax' => $row['fax'],
+						'sitio_web' => $row['sitio_web'],
+						'autorizacion_sri' => $row['autorizacion_sri'],
+						'inicio_fac_preimpresa' => $row['inicio_fac_preimpresa'],
+						'item_factura' => $row['item_factura'],
+						'observaciones' => $row['observaciones']
+						);
+		}
+		print_r(json_encode($data));
+	}
 ?>

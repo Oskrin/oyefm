@@ -1,1026 +1,949 @@
- <div class="main-content">
-	<div class="main-content-inner">
-		<div class="page-content">
-			<div class="row">
-				<div class="col-xs-12">
-					<!-- PAGE CONTENT BEGINS -->
-					<div class="widget-box">
-						<div class="widget-header widget-header-blue widget-header-flat">
-							<h4 class="widget-title lighter">Ficha de Ingreso de Programas</h4>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-bell-o blue"></i>
+					<a href="#/menu_programas">Programas</a>
+				</li>
+
+				<li class="active">Registro Fichas Programas</li>
+			</ul>
+		</div>
+		<hr />
+
+		<div class="widget-box">
+			<div class="widget-body">
+				<div class="widget-main">
+					<div id="fuelux-wizard-container">
+						<div>
+							<ul class="steps">
+								<li data-step="1" class="active">
+									<span class="step">1</span>
+									<span class="title">Primera Etapa</span>
+								</li>
+
+								<li data-step="2" class="active">
+									<span class="step">2</span>
+									<span class="title">Segunda Etapa</span>
+								</li>
+
+								<li data-step="3" class="active">
+									<span class="step">3</span>
+									<span class="title">Tercera Etapa</span>
+								</li>
+
+								<li data-step="4" class="active">
+									<span class="step">4</span>
+									<span class="title">Guardar Datos</span>
+								</li>
+							</ul>
 						</div>
-						<div class="widget-body">
-							<div class="widget-main">
-								<div id="fuelux-wizard-container">
-									<div>
-										<ul class="steps">
-											<li data-step="1" class="active">
-												<span class="step">1</span>
-												<span class="title">Primera Etapa</span>
-											</li>
+						<hr/>
 
-											<li data-step="2" class="active">
-												<span class="step">2</span>
-												<span class="title">Segunda Etapa</span>
-											</li>
-
-											<li data-step="3" class="active">
-												<span class="step">3</span>
-												<span class="title">Tercera Etapa</span>
-											</li>
-
-											<li data-step="4" class="active">
-												<span class="step">4</span>
-												<span class="title">Guardar Datos</span>
-											</li>
-										</ul>
-									</div>
-									<hr/>
-									<div class="step-content pos-rel">
-										<!-- INICIO DEL PRIMER FORMULARIO DATOS PERSONALES -->
-										<div class="step-pane active" data-step="1">
-											<form class="form-horizontal" id="form_etapa1">
-												<!-- fin de generar -->
-												<div class="row">
-													<div class="col-sm-12">
-														<div class="col-sm-4">
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Fecha de Aplicación:</label>
-																<div class="col-xs-12 col-sm-6">
-																	<div class="input-group">
-																		<input type="text" id="txt_fecha_aplicacion" name="txt_fecha_aplicacion" class="form-control datepicker" />
-																		<span class="input-group-addon">
-																			<i class="ace-icon fa fa-calendar"></i>
-																		</span>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="col-sm-6">
-															<div class="form-group">
-																<div class="col-xs-12 col-sm-4 col-sm-offset-4">
-																	<label>
-																		<input name="inp_relacion" id="inp_relacion" type="checkbox" value="relacion" class="ace" />
-																		<span class="lbl">&nbsp; Ingresado &nbsp; Estado y Seguimiento</span>
-																	</label>
-																</div>
-															</div>
+						<div class="step-content pos-rel">
+							<div class="step-pane active" data-step="1">
+								<form class="form-horizontal" id="form_etapa1">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Fecha de Aplicación:</label>
+													<div class="col-xs-12 col-sm-6">
+														<div class="input-group">
+															<input type="text" id="txt_fecha_aplicacion" name="txt_fecha_aplicacion" class="form-control datepicker" />
+															<span class="input-group-addon">
+																<i class="ace-icon fa fa-calendar"></i>
+															</span>
 														</div>
 													</div>
 												</div>
+											</div>
 
-
-												<!-- INICIO PRIMER ROW-->
-												<div class="row ">
-													<h3 class="header smaller blue">&nbsp; Datos Principales Primera Etapa:</h3>
-													<div class="col-sm-12">
-														<div class="col-sm-6">
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Diseño el Proyecto:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_diseño" id="txt_diseño" class="form-control letras" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Cédula de Identidad:</label>
-																<div class="col-xs-12 col-sm-4">
-																	<div class="clearfix">
-																		<input type="text" name="txt_cedula" id="txt_cedula" class="form-control numeros" onblur="validarDocumento()"/>
-																	</div>
-																</div>
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo:</label>
-																<div class="col-xs-12 col-sm-4">
-																	<div class="input-group">
-																		<span class="input-group-addon">
-																			<i class="ace-icon fa fa-phone"></i>
-																		</span>
-																		<input type="tel" id="txt_telf_fijo" name="txt_telf_fijo" class="form-control telefonos"/>
-																	</div>
-																</div>	
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Celular:</label>
-																<div class="col-xs-12 col-sm-4">
-																	<div class="input-group">
-																		<span class="input-group-addon">
-																			<i class="ace-icon fa fa-phone"></i>
-																		</span>
-																		<input type="tel" id="txt_telf_celular" name="txt_telf_celular" class="form-control telefonos"/>
-																	</div>
-																</div>	
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">E-mail:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="email" name="txt_email" id="txt_email" class="form-control" />
-																	</div>
-																</div>
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Dirección:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_direccion" id="txt_direccion" class="form-control" plaaceholder="Ingrese la dirección"/>
-																	</div>
-																</div>
-															</div>
-
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Contacto de un Familiar:</label>
-																<div class="col-xs-12 col-sm-4">
-																	<div class="input-group">
-																		<span class="input-group-addon">
-																			<i class="ace-icon fa fa-phone"></i>
-																		</span>
-																		<input type="tel" id="txt_telf_familiar" name="txt_telf_familiar" class="form-control telefonos"/>
-																	</div>
-																</div>	
-															</div>
-														</div>
-
-														<div class="col-sm-6">
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Programa 1:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_nom_pro1" id="txt_nom_pro1" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Programa 2:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_nom_pro2" id="txt_nom_pro2" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Programa 3:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_nom_pro3" id="txt_nom_pro3" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tipo de Programa:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_tipo_pro" id="txt_tipo_pro" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Público Objetivo:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_publico" id="txt_publico" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Temática:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_tematica" id="txt_tematica" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Tiempo que esta Diseñado:</label>
-																<div class="col-xs-12 col-sm-8">
-																	<div class="clearfix">
-																		<input type="text" name="txt_tiempo_dise" id="txt_tiempo_dise" class="form-control numeros" />
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-
-												</div>
-												<!-- FIN PRIMER ROW-->
-
-												<!-- INICIO SEGUNDO ROW -->
-												<div class="row">
-													<h3 class="header smaller blue">&nbsp; Equipo que lo Conforman:</h3>
-													<!-- inicio de la tabla para los equipos que lo conforman	 -->
-													<div class="content">
-														<div class="col-xs-12">
-															<!-- <div id="contenedor"> -->
-															<div id="btn_agregar" class="btn btn-success">Agregar</div>
-															<div id="btnRecorrer" name="btnRecorrer" class="btn btn-success">Recorrer</div>
-															<br>
-															<br>
-																<table class="table table-hover" id="tabla_equipo">
-																	<thead>
-																		<tr class="success" style="font-size: 16px;font-weight: bold">
-																			<td>Nro</td>
-																			<td>Nombre</td>
-																			<td>Telefono</td>
-																			<td>Correo</td>
-																			<td>Cargo/Función</td>
-																			<td>Proceso</td>
-																		</tr>
-																	</thead>
-																	<tbody>
-																	</tbody>
-																</table>
-																<!-- <div id="grid-pager"></div> -->
-															<!-- </div> -->
-														</div>
+											<div class="col-sm-6">
+												<div class="form-group">
+													<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+														<label>
+															<input name="inp_relacion" id="inp_relacion" type="checkbox" value="relacion" class="ace" />
+															<span class="lbl">&nbsp; Ingresado &nbsp; Estado y Seguimiento</span>
+														</label>
 													</div>
 												</div>
-												<!-- FIN SEGUNDO ROW -->
-
-												<!-- INICIO TERCER ROW -->
-												<div class="row">
-													<h3 class="header smaller blue">&nbsp; Detalles del Programa:</h3>
-													<!-- inicio de detalles del programa -->
-													<div class="col-sm-6">
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Horario: De:</label>
-															<div class="col-xs-12 col-sm-3">
-																<div class="input-daterange input-group">
-																	<input type="text" class="form-control" name="inicio_hora" id="inicio_hora" />
-																	<span class="input-group-addon">
-																		<i class="fa fa-exchange"></i>
-																	</span>
-																	<input type="text" name="fin_hora"  id="fin_hora" class="form-control" />
-																</div>
-															</div>
-
-															<div class="col-xs-12 col-sm-5">
-																<div class="col-sm-12">
-																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Demo:</label>
-																	<div class="col-xs-12 col-sm-8">
-																		<div class="clearfix">
-																			<input type="text" name="txt_demo" id="txt_demo" class="form-control" />
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Contenidos:</label>
-															<div class="col-xs-12 col-sm-8">
-																<div class="clearfix">
-																	<input type="text" name="txt_contenido" id="txt_contenido" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
-																</div>
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Género Musical:</label>
-															<div class="col-xs-12 col-sm-4">
-																<div class="clearfix">
-																<select id="select_genero_musical_form" name="select_genero_musical_form" class="select2" data-placeholder="Género...">
-																</select>
-																</div>
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Artistas Nacionales:</label>
-															<div class="col-xs-12 col-sm-1">
-																<div class="clearfix">
-																	<input type="text" name="txt_art_na" id="txt_art_na" class="form-control" placeholder="%" />
-																</div>
-
-															</div>
-
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Artistas Internacionales:</label>
-															<div class="col-xs-12 col-sm-1">
-																<div class="clearfix">
-																	<input type="text" name="txt_art_int" id="txt_art_int" class="form-control" placeholder=" %" />
-																</div>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha de Inicio:</label>
-															<div class="col-xs-12 col-sm-4">
-																<div class="input-group input-group-sm">
-																	<input type="text" id="txt_ini_pro" name="txt_ini_pro" class="form-control datepicker" />
-																	<span class="input-group-addon">
-																		<i class="ace-icon fa fa-calendar"></i>
-																	</span>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-6">
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tiempo de Duración:</label>
-															<div class="col-xs-12 col-sm-3">
-																<div class="clearfix">
-																	<input type="text" name="txt_tiempo_du" id="txt_tiempo_du" class="form-control numeros" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Años" />
-																</div>
-															</div>
-
-															<div class="col-xs-12 col-sm-5">
-																<div class="col-sm-12">
-																	<label class="control-label col-xs-12 col-sm-4 no-padding-right">Código:</label>
-																	<div class="col-xs-12 col-sm-8">
-																		<div class="clearfix">
-																			<input type="text" name="txt_codigo" id="txt_codigo" class="form-control"/>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tipo de Invitados:</label>
-															<div class="col-xs-12 col-sm-8">
-																<div class="clearfix">
-																	<input type="text" name="txt_tipo_inv" id="txt_tipo_inv" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																</div>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Música de los años:</label>
-															<div class="col-xs-12 col-sm-8">
-																<div class="clearfix">
-																	<input type="text" name="txt_musica" id="txt_musica" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
-																</div>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Ingresos Mínimos por Hora:</label>
-															<div class="col-xs-12 col-sm-8">
-																<div class="clearfix">
-																	<input type="text" name="txt_ingresos" id="txt_ingresos" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="$400,00 dólares hora" readonly/>
-																</div>
-															</div>
-														</div>
-
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Calificación:</label>
-															<div class="col-xs-12 col-sm-1">
-																<div class="clearfix">
-																	<input type="text" name="txt_calificacion" id="txt_calificacion" class="form-control" placeholder="" />
-																</div>
-															</div>
-
-															<label class="control-label col-xs-12 col-sm-4 no-padding-right">Producción:</label>
-															<div class="col-xs-12 col-sm-2">
-																<div class="clearfix">
-																	<input type="text" name="txt_produccion" id="txt_produccion" class="form-control" placeholder="Oye Fm" readonly/>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-12">
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-2 no-padding-right">Objetivo:</label>
-															<div class="col-xs-12 col-sm-10">
-																<div class="clearfix">
-																	<textarea class="form-control" id="txtarea_objetivo" placeholder="Objetivos" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-12">
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-2 no-padding-right">Justificación:</label>
-															<div class="col-xs-12 col-sm-10">
-																<div class="clearfix">
-																	<textarea class="form-control" id="txtarea_justificacion" placeholder="Justificación" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-12">
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-2 no-padding-right" >Misión:</label>
-															<div class="col-xs-12 col-sm-10">
-																<div class="clearfix">
-																	<textarea class="form-control" id="txtarea_mision" placeholder="Misión" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<div class="col-sm-12">
-														<div class="form-group">
-															<label class="control-label col-xs-12 col-sm-2 no-padding-right" >Visión:</label>
-															<div class="col-xs-12 col-sm-10">
-																<div class="clearfix">
-																	<textarea class="form-control" id="txtarea_vision" placeholder="Visión" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-										<!-- FIN DEL PRIMER FORMULARIO DATOS PERSONALES -->
-
-										<!-- INICIO DEL SEGUNDO FORMULARIO DIAS DE TRANSMISION -->
-										<div class="step-pane active" data-step="2">
-											<form class="form-horizontal" id="form_etapa2">
-												<div class="row">
-													<h3 class="header smaller blue">&nbsp; Días de Transmisión con Frecuencia:</h3>
-													<div class="col-sm-12">
-														<div class="col-sm-6">
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="pink ace-icon fa fa-bomb">&nbsp; 
-															                <label>
-																				<input name="inp_lunes1" id="inp_lunes1" type="checkbox" value="Lunes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_lunes1" name="txtarea_lunes1" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-													          
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="blue ace-icon fa fa-binoculars">&nbsp;
-															                <label>
-																				<input name="inp_martes1" id="inp_martes1" type="checkbox" value="Martes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_martes1" name="txtarea_martes1" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
-															                <label>
-																				<input name="inp_miercoles1" id="inp_miercoles1" type="checkbox" value="Miercoles" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_miercoles1" name="txtarea_miercoles1" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="green ace-icon fa fa-bell">&nbsp;
-															                <label>
-																				<input name="inp_jueves1" id="inp_jueves1" type="checkbox" value="Jueves" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_jueves1" name="txtarea_jueves1" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="brown ace-icon fa fa-eye">&nbsp;
-															                <label>
-																				<input name="inp_viernes1" id="inp_viernes1" type="checkbox" value="Viernes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_viernes1" name="txtarea_viernes1" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												        </div>
-												        <!-- inicio de la segunda semanas -->
-												        <div class="col-sm-6">
-															<!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="pink ace-icon fa fa-bomb">&nbsp; 
-															                <label>
-																				<input name="inp_lunes2" id="inp_lunes2" type="checkbox" value="Lunes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_lunes2" name="txtarea_lunes2" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="blue ace-icon fa fa-binoculars">&nbsp;
-															                <label>
-																				<input name="inp_martes2" id="inp_martes2" type="checkbox" value="Martes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_martes2" name="txtarea_martes2" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
-															                <label>
-																				<input name="inp_miercoles2" id="inp_miercoles2" type="checkbox" value="Miercoles" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_miercoles2" name="txtarea_miercoles2" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="green ace-icon fa fa-bell">&nbsp;
-															                <label>
-																				<input name="inp_jueves2" id="inp_jueves2" type="checkbox" value="Jueves" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_jueves2" name="txtarea_jueves2" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="brown ace-icon fa fa-eye">&nbsp;
-															                <label>
-																				<input name="inp_viernes2" id="inp_viernes2" type="checkbox" value="Viernes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_viernes2" name="txtarea_viernes2" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												        </div>
-											        </div>
-												</div>
-												<!-- FIN DEL PRIMER ROW -->
-												<!-- INICIO DEL SEGUNDO ROW -->
-												<div class="row">
-												<h3 class="header smaller blue">&nbsp; Frecuencia de Invitados:</h3>
-													<div class="col-sm-12">
-														<div class="col-sm-6">
-															<!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="pink ace-icon fa fa-bomb">&nbsp; 
-															                <label>
-																				<input name="inp_lunes3" id="inp_lunes3" type="checkbox" value="Lunes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_lunes3" name="txtarea_lunes3" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="blue ace-icon fa fa-binoculars">&nbsp;
-															                <label>
-																				<input name="inp_martes3" id="inp_martes3" type="checkbox" value="Martes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_martes3" name="txtarea_martes3" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
-															                <label>
-																				<input name="inp_miercoles3" id="inp_miercoles3" type="checkbox" value="Miercoles" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_miercoles3" name="txtarea_miercoles3" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="green ace-icon fa fa-bell">&nbsp;
-															                <label>
-																				<input name="inp_jueves3" id="inp_jueves3" type="checkbox" value="Jueves" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_jueves3" name="txtarea_jueves3" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="brown ace-icon fa fa-eye">&nbsp;
-															                <label>
-																				<input name="inp_viernes3" id="inp_viernes3" type="checkbox" value="Viernes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_viernes3" name="txtarea_viernes3" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												        </div>
-												        <!-- inicio de la segunda semanas -->
-												        <div class="col-sm-6">
-															<!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="pink ace-icon fa fa-bomb">&nbsp; 
-															                <label>
-																				<input name="inp_lunes4" id="inp_lunes4" type="checkbox" value="Lunes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_lunes4" name="txtarea_lunes4" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-														                <span class="blue ace-icon fa fa-binoculars">&nbsp;
-															                <label>
-																				<input name="inp_martes4" id="inp_martes4" type="checkbox" value="Martes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_martes4" name="txtarea_martes4" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
-															                <label>
-																				<input name="inp_miercoles4" id="inp_miercoles4" type="checkbox" value="Miercoles" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_miercoles4" name="txtarea_miercoles4" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="green ace-icon fa fa-bell">&nbsp;
-															                <label>
-																				<input name="inp_jueves4" id="inp_jueves4" type="checkbox" value="Jueves" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_jueves4" name="txtarea_jueves4" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												            <!-- <div class="form-group"> -->
-													            <div class="input-group">
-													                <span class="input-group-addon">
-													                	<span class="brown ace-icon fa fa-eye">&nbsp;
-															                <label>
-																				<input name="inp_viernes4" id="inp_viernes4" type="checkbox" value="Viernes" class="ace" />
-																				<span class="lbl"></span>
-																			</label>
-																		</span>
-																	</span>
-													                <textarea class="form-control" id="txtarea_viernes4" name="txtarea_viernes4" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
-													            </div>
-												            <!-- </div> -->
-												        </div>
-											        </div>
-												</div>
-												<!-- FIN DEL SEGUNDO ROW -->
-												<!-- INICIO DEL TERCER ROW -->
-												<div class="row">
-													<div class="col-sm-6">
-														<h3 class="header smaller blue">&nbsp; Género Musical:</h3>
-														<!-- inicio de la tabla para los equipos que lo conforman	 -->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_genero" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_genero">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>Codigo</td>
-																				<td>Género</td>
-																				<td>Porcentaje</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<h3 class="header smaller blue">&nbsp; Tipo de Programación:</h3>
-														<!-- inicio de la tabla para la programacion-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_programacion" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_programacion">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>Tipo</td>
-																				<td>Porcentaje</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-												</div>
-												<!-- FIN DEL TERCER ROW -->
-												<!-- INICIO DEL CUARTO ROW -->
-												<div class="row">
-												<h3 class="header smaller blue">&nbsp; ESTRUCTURA DEL PROGRAMA:</h3>
-													<div class="col-sm-6">
-													<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Primera Hora:</h4>
-														<!-- inicio de la tabla para sincronizados de tiemo primera hora-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_hora1" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_hora1">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>De:</td>
-																				<td>Hasta:</td>
-																				<td>Actividad</td>
-																				<td>Responsable</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-													<div class="col-sm-6">
-													<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Segunda Hora:</h4>
-														<!-- inicio de la tabla para sincronizados de tiemo primera hora-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_hora2" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_hora2">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>De:</td>
-																				<td>Hasta:</td>
-																				<td>Actividad</td>
-																				<td>Responsable</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-												</div>
-												<!-- FIN DEL CUARTO ROW -->
-												<!-- INICIO DEL QUINTO ROW -->
-												<div class="row">
-													<div class="col-sm-6">
-													<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Tercera Hora:</h4>
-														<!-- inicio de la tabla para sincronizados de tiemo primera hora-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_hora3" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_hora3">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>De:</td>
-																				<td>Hasta:</td>
-																				<td>Actividad</td>
-																				<td>Responsable</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-													<div class="col-sm-6">
-													<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Cuarta Hora:</h4>
-														<!-- inicio de la tabla para sincronizados de tiemo primera hora-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_hora4" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_hora4">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>De:</td>
-																				<td>Hasta:</td>
-																				<td>Actividad</td>
-																				<td>Responsable</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-												</div>
-												<!-- FIN DEL QUINTO ROW -->
-											</form>
-										</div>
-									<!-- FIN DEL SEGUNDO FORMULARIO DIAS DE TRANSMISION -->
-									<!-- INICIO DEL TERCER FORMULARIO ESTRUCTURA DEL PROGRAMA -->
-										<div class="step-pane active" data-step="3">
-											<h3 class="header smaller blue">&nbsp; Segmentos:</h3>
-											<form class="form-horizontal" id="form_etapa3">
-												<div class="row">
-													<div class="col-sm-12">
-														<!-- inicio de la tabla para sincronizados de tiemo primera hora-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_segmentos" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_segmentos" style="text-align:center;">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>Segmento</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-												</div>
-													<div class="row">
-													<h3 class="header smaller blue">&nbsp; Cliente y Posibles Clientes:</h3>
-													<div class="col-sm-6">
-														<!-- inicio de la tabla para clientes y posibles clientes-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_clientes" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_clientes">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>Clientes Confirmados</td>
-																				<td>Porcentaje</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<!-- inicio de la tabla para clientes y posibles clientes-->
-														<div class="content">
-															<div class="col-xs-12">
-																<!-- <div id="contenedor"> -->
-																<div id="btn_agregar_posibles" class="btn btn-success">Agregar</div>
-																<br>
-																<br>
-																	<table class="table table-hover" id="tabla_posibles">
-																		<thead>
-																			<tr class="success" style="font-size: 16px;font-weight: bold">
-																				<td>Nro</td>
-																				<td>Posibles Clientes Potenciales</td>
-																				<td>Porcentaje</td>
-																				<td>Proceso</td>
-																			</tr>
-																		</thead>
-																		<tbody>
-																		<!-- proceso del llenado de la tabla -->
-																		</tbody>
-																	</table>
-																	<!-- <div id="grid-pager"></div> -->
-																<!-- </div> -->
-															</div><!-- /.col -->
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-									<!-- FIN DEL TERCER FORMULARIO ESTRUCTURA DEL PROGRAMA -->
-										<div class="step-pane active" data-step="4">
-											<div class="center">
-												<h3 class="green">Felicidades!</h3>
-												Presione Finalizar para poder Guardar!
 											</div>
 										</div>
 									</div>
-								</div>
 
-								<!-- boton guardar -->
-								<div class="wizard-actions">
-									<button class="btn btn-prev">
-										<i class="ace-icon fa fa-arrow-left"></i>
-										Atras
-									</button>
-									<button class="btn btn-success btn-next" data-last="Guardar">
-										Siguiente
-										<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-									</button>
+									<div class="row ">
+										<h3 class="header smaller blue">&nbsp; Datos Principales Primera Etapa:</h3>
+										<div class="col-sm-12">
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Diseño el Proyecto:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_diseño" id="txt_diseño" class="form-control letras" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Cédula de Identidad:</label>
+													<div class="col-xs-12 col-sm-4">
+														<div class="clearfix">
+															<input type="text" name="txt_cedula" id="txt_cedula" class="form-control numeros" onblur="validarDocumento()"/>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Fijo:</label>
+													<div class="col-xs-12 col-sm-4">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="ace-icon fa fa-phone"></i>
+															</span>
+															<input type="tel" id="txt_telf_fijo" name="txt_telf_fijo" class="form-control telefonos"/>
+														</div>
+													</div>	
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono Celular:</label>
+													<div class="col-xs-12 col-sm-4">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="ace-icon fa fa-phone"></i>
+															</span>
+															<input type="tel" id="txt_telf_celular" name="txt_telf_celular" class="form-control telefonos"/>
+														</div>
+													</div>	
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">E-mail:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="email" name="txt_email" id="txt_email" class="form-control" />
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Dirección:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_direccion" id="txt_direccion" class="form-control" plaaceholder="Ingrese la dirección"/>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Contacto de un Familiar:</label>
+													<div class="col-xs-12 col-sm-4">
+														<div class="input-group">
+															<span class="input-group-addon">
+																<i class="ace-icon fa fa-phone"></i>
+															</span>
+															<input type="tel" id="txt_telf_familiar" name="txt_telf_familiar" class="form-control telefonos"/>
+														</div>
+													</div>	
+												</div>
+											</div>
+
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Programa 1:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_nom_pro1" id="txt_nom_pro1" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Programa 2:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_nom_pro2" id="txt_nom_pro2" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Nombre del Programa 3:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_nom_pro3" id="txt_nom_pro3" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tipo de Programa:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_tipo_pro" id="txt_tipo_pro" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Público Objetivo:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_publico" id="txt_publico" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Temática:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_tematica" id="txt_tematica" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Tiempo que esta Diseñado:</label>
+													<div class="col-xs-12 col-sm-8">
+														<div class="clearfix">
+															<input type="text" name="txt_tiempo_dise" id="txt_tiempo_dise" class="form-control numeros" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<h3 class="header smaller blue">&nbsp; Equipo que lo Conforman:</h3>
+										<div class="content">
+											<div class="col-xs-12">
+												<div id="btn_agregar" class="btn btn-success">Agregar</div>
+												<div id="btnRecorrer" name="btnRecorrer" class="btn btn-success">Recorrer</div>
+												&nbsp;&nbsp;
+												<table class="table table-hover" id="tabla_equipo">
+													<thead>
+														<tr class="success" style="font-size: 16px;font-weight: bold">
+															<td>Nro</td>
+															<td>Nombre</td>
+															<td>Telefono</td>
+															<td>Correo</td>
+															<td>Cargo/Función</td>
+															<td>Proceso</td>
+														</tr>
+													</thead>
+													<tbody>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<h3 class="header smaller blue">&nbsp; Detalles del Programa:</h3>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Horario: De:</label>
+												<div class="col-xs-12 col-sm-3">
+													<div class="input-daterange input-group">
+														<input type="text" class="form-control" name="inicio_hora" id="inicio_hora" />
+														<span class="input-group-addon">
+															<i class="fa fa-exchange"></i>
+														</span>
+														<input type="text" name="fin_hora"  id="fin_hora" class="form-control" />
+													</div>
+												</div>
+
+												<div class="col-xs-12 col-sm-5">
+													<div class="col-sm-12">
+														<label class="control-label col-xs-12 col-sm-4 no-padding-right">Demo:</label>
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																<input type="text" name="txt_demo" id="txt_demo" class="form-control" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Contenidos:</label>
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														<input type="text" name="txt_contenido" id="txt_contenido" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Género Musical:</label>
+												<div class="col-xs-12 col-sm-4">
+													<div class="clearfix">
+													<select id="select_genero_musical_form" name="select_genero_musical_form" class="select2" data-placeholder="Género...">
+													</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Artistas Nacionales:</label>
+												<div class="col-xs-12 col-sm-1">
+													<div class="clearfix">
+														<input type="text" name="txt_art_na" id="txt_art_na" class="form-control" placeholder="%" />
+													</div>
+												</div>
+
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Artistas Internacionales:</label>
+												<div class="col-xs-12 col-sm-1">
+													<div class="clearfix">
+														<input type="text" name="txt_art_int" id="txt_art_int" class="form-control" placeholder=" %" />
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Fecha de Inicio:</label>
+												<div class="col-xs-12 col-sm-4">
+													<div class="input-group input-group-sm">
+														<input type="text" id="txt_ini_pro" name="txt_ini_pro" class="form-control datepicker" />
+														<span class="input-group-addon">
+															<i class="ace-icon fa fa-calendar"></i>
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tiempo de Duración:</label>
+												<div class="col-xs-12 col-sm-3">
+													<div class="clearfix">
+														<input type="text" name="txt_tiempo_du" id="txt_tiempo_du" class="form-control numeros" onKeyUp="this.value = this.value.toUpperCase();" placeholder="Años" />
+													</div>
+												</div>
+
+												<div class="col-xs-12 col-sm-5">
+													<div class="col-sm-12">
+														<label class="control-label col-xs-12 col-sm-4 no-padding-right">Código:</label>
+														<div class="col-xs-12 col-sm-8">
+															<div class="clearfix">
+																<input type="text" name="txt_codigo" id="txt_codigo" class="form-control"/>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Tipo de Invitados:</label>
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														<input type="text" name="txt_tipo_inv" id="txt_tipo_inv" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Música de los años:</label>
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														<input type="text" name="txt_musica" id="txt_musica" class="form-control" onKeyUp="this.value = this.value.toUpperCase();"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Ingresos Mínimos por Hora:</label>
+												<div class="col-xs-12 col-sm-8">
+													<div class="clearfix">
+														<input type="text" name="txt_ingresos" id="txt_ingresos" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" placeholder="$400,00 dólares hora" readonly/>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Calificación:</label>
+												<div class="col-xs-12 col-sm-1">
+													<div class="clearfix">
+														<input type="text" name="txt_calificacion" id="txt_calificacion" class="form-control" placeholder="" />
+													</div>
+												</div>
+
+												<label class="control-label col-xs-12 col-sm-4 no-padding-right">Producción:</label>
+												<div class="col-xs-12 col-sm-2">
+													<div class="clearfix">
+														<input type="text" name="txt_produccion" id="txt_produccion" class="form-control" placeholder="Oye Fm" readonly/>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-2 no-padding-right">Objetivo:</label>
+												<div class="col-xs-12 col-sm-10">
+													<div class="clearfix">
+														<textarea class="form-control" id="txtarea_objetivo" placeholder="Objetivos" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-2 no-padding-right">Justificación:</label>
+												<div class="col-xs-12 col-sm-10">
+													<div class="clearfix">
+														<textarea class="form-control" id="txtarea_justificacion" placeholder="Justificación" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-2 no-padding-right" >Misión:</label>
+												<div class="col-xs-12 col-sm-10">
+													<div class="clearfix">
+														<textarea class="form-control" id="txtarea_mision" placeholder="Misión" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label class="control-label col-xs-12 col-sm-2 no-padding-right" >Visión:</label>
+												<div class="col-xs-12 col-sm-10">
+													<div class="clearfix">
+														<textarea class="form-control" id="txtarea_vision" placeholder="Visión" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div class="step-pane active" data-step="2">
+								<form class="form-horizontal" id="form_etapa2">
+									<div class="row">
+										<h3 class="header smaller blue">&nbsp; Días de Transmisión con Frecuencia:</h3>
+										<div class="col-sm-12">
+											<div class="col-sm-6">
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="pink ace-icon fa fa-bomb">&nbsp; 
+											                <label>
+																<input name="inp_lunes1" id="inp_lunes1" type="checkbox" value="Lunes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_lunes1" name="txtarea_lunes1" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+										          
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="blue ace-icon fa fa-binoculars">&nbsp;
+											                <label>
+																<input name="inp_martes1" id="inp_martes1" type="checkbox" value="Martes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_martes1" name="txtarea_martes1" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
+											                <label>
+																<input name="inp_miercoles1" id="inp_miercoles1" type="checkbox" value="Miercoles" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_miercoles1" name="txtarea_miercoles1" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="green ace-icon fa fa-bell">&nbsp;
+											                <label>
+																<input name="inp_jueves1" id="inp_jueves1" type="checkbox" value="Jueves" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_jueves1" name="txtarea_jueves1" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+									        
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="brown ace-icon fa fa-eye">&nbsp;
+											                <label>
+																<input name="inp_viernes1" id="inp_viernes1" type="checkbox" value="Viernes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_viernes1" name="txtarea_viernes1" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+									        </div>
+
+									        <div class="col-sm-6">
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="pink ace-icon fa fa-bomb">&nbsp; 
+											                <label>
+																<input name="inp_lunes2" id="inp_lunes2" type="checkbox" value="Lunes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_lunes2" name="txtarea_lunes2" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="blue ace-icon fa fa-binoculars">&nbsp;
+											                <label>
+																<input name="inp_martes2" id="inp_martes2" type="checkbox" value="Martes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_martes2" name="txtarea_martes2" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
+											                <label>
+																<input name="inp_miercoles2" id="inp_miercoles2" type="checkbox" value="Miercoles" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_miercoles2" name="txtarea_miercoles2" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="green ace-icon fa fa-bell">&nbsp;
+											                <label>
+																<input name="inp_jueves2" id="inp_jueves2" type="checkbox" value="Jueves" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_jueves2" name="txtarea_jueves2" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="brown ace-icon fa fa-eye">&nbsp;
+											                <label>
+																<input name="inp_viernes2" id="inp_viernes2" type="checkbox" value="Viernes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_viernes2" name="txtarea_viernes2" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+									        </div>
+								        </div>
+									</div>
+
+									<div class="row">
+									<h3 class="header smaller blue">&nbsp; Frecuencia de Invitados:</h3>
+										<div class="col-sm-12">
+											<div class="col-sm-6">
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="pink ace-icon fa fa-bomb">&nbsp; 
+											                <label>
+																<input name="inp_lunes3" id="inp_lunes3" type="checkbox" value="Lunes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_lunes3" name="txtarea_lunes3" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="blue ace-icon fa fa-binoculars">&nbsp;
+											                <label>
+																<input name="inp_martes3" id="inp_martes3" type="checkbox" value="Martes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_martes3" name="txtarea_martes3" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
+											                <label>
+																<input name="inp_miercoles3" id="inp_miercoles3" type="checkbox" value="Miercoles" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_miercoles3" name="txtarea_miercoles3" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="green ace-icon fa fa-bell">&nbsp;
+											                <label>
+																<input name="inp_jueves3" id="inp_jueves3" type="checkbox" value="Jueves" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_jueves3" name="txtarea_jueves3" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="brown ace-icon fa fa-eye">&nbsp;
+											                <label>
+																<input name="inp_viernes3" id="inp_viernes3" type="checkbox" value="Viernes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_viernes3" name="txtarea_viernes3" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+									        </div>
+
+									        <div class="col-sm-6">
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="pink ace-icon fa fa-bomb">&nbsp; 
+											                <label>
+																<input name="inp_lunes4" id="inp_lunes4" type="checkbox" value="Lunes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_lunes4" name="txtarea_lunes4" placeholder="Tema Días Lunes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+										                <span class="blue ace-icon fa fa-binoculars">&nbsp;
+											                <label>
+																<input name="inp_martes4" id="inp_martes4" type="checkbox" value="Martes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_martes4" name="txtarea_martes4" placeholder="Tema Días Martes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="orange ace-icon fa fa-pencil-square-o">&nbsp;
+											                <label>
+																<input name="inp_miercoles4" id="inp_miercoles4" type="checkbox" value="Miercoles" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_miercoles4" name="txtarea_miercoles4" placeholder="Tema Días Miercoles" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="green ace-icon fa fa-bell">&nbsp;
+											                <label>
+																<input name="inp_jueves4" id="inp_jueves4" type="checkbox" value="Jueves" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_jueves4" name="txtarea_jueves4" placeholder="Tema Días Jueves" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+
+									            <div class="input-group">
+									                <span class="input-group-addon">
+									                	<span class="brown ace-icon fa fa-eye">&nbsp;
+											                <label>
+																<input name="inp_viernes4" id="inp_viernes4" type="checkbox" value="Viernes" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</span>
+													</span>
+									                <textarea class="form-control" id="txtarea_viernes4" name="txtarea_viernes4" placeholder="Tema Días Viernes" onKeyUp="this.value = this.value.toUpperCase();"></textarea>
+									            </div>
+									        </div>
+								        </div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<h3 class="header smaller blue">&nbsp; Género Musical:</h3>
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_genero" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_genero">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>Codigo</td>
+																<td>Género</td>
+																<td>Porcentaje</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-6">
+											<h3 class="header smaller blue">&nbsp; Tipo de Programación:</h3>
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_programacion" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_programacion">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>Tipo</td>
+																<td>Porcentaje</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<h3 class="header smaller blue">&nbsp; ESTRUCTURA DEL PROGRAMA:</h3>
+										<div class="col-sm-6">
+											<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Primera Hora:</h4>
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_hora1" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_hora1">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>De:</td>
+																<td>Hasta:</td>
+																<td>Actividad</td>
+																<td>Responsable</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-6">
+											<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Segunda Hora:</h4>
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_hora2" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_hora2">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>De:</td>
+																<td>Hasta:</td>
+																<td>Actividad</td>
+																<td>Responsable</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Tercera Hora:</h4>
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_hora3" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_hora3">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>De:</td>
+																<td>Hasta:</td>
+																<td>Actividad</td>
+																<td>Responsable</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-6">
+											<h4 class="header smaller pink">&nbsp; Sincronizado de Tiempos Cuarta Hora:</h4>
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_hora4" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_hora4">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>De:</td>
+																<td>Hasta:</td>
+																<td>Actividad</td>
+																<td>Responsable</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div class="step-pane active" data-step="3">
+								<h3 class="header smaller blue">&nbsp; Segmentos:</h3>
+								<form class="form-horizontal" id="form_etapa3">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_segmentos" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_segmentos" style="text-align:center;">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>Segmento</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<h3 class="header smaller blue">&nbsp; Cliente y Posibles Clientes:</h3>
+										<div class="col-sm-6">
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_clientes" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_clientes">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>Clientes Confirmados</td>
+																<td>Porcentaje</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-6">
+											<div class="content">
+												<div class="col-xs-12">
+													<div id="btn_agregar_posibles" class="btn btn-success">Agregar</div>
+													&nbsp;&nbsp;
+													<table class="table table-hover" id="tabla_posibles">
+														<thead>
+															<tr class="success" style="font-size: 16px;font-weight: bold">
+																<td>Nro</td>
+																<td>Posibles Clientes Potenciales</td>
+																<td>Porcentaje</td>
+																<td>Proceso</td>
+															</tr>
+														</thead>
+														<tbody>
+														
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div class="step-pane active" data-step="4">
+								<div class="center">
+									<h3 class="green">Felicidades!</h3>
+									Presione Finalizar para poder Guardar!
 								</div>
-							</div><!-- /.widget-main -->
-						</div><!-- /.widget-body -->
+							</div>
+						</div>
 					</div>
-				</div><!-- /.col -->
-			</div><!-- /.row -->
-		</div><!-- /.page-content -->
+
+					<div class="wizard-actions">
+						<button class="btn btn-prev">
+							<i class="ace-icon fa fa-arrow-left"></i>
+							Atras
+						</button>
+						<button class="btn btn-success btn-next" data-last="Guardar">
+							Siguiente
+							<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div><!-- /.main-content -->
-<!-- MODAL PARA EQUIPO QUE LO CONFORMAN -->
+</div>
+		
 <div id="modal-equipo-conforma" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1032,6 +955,7 @@
 					Agregar Equipo que lo Conforman
 				</div>
 			</div>
+
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-sm-12">
@@ -1045,6 +969,7 @@
 										</div>
 									</div>
 								</div>
+
 								<div class="form-group">
 									<label class="control-label col-xs-12 col-sm-4 no-padding-right">Teléfono:</label>
 									<div class="col-xs-12 col-sm-8">
@@ -1053,6 +978,7 @@
 										</div>
 									</div>	
 								</div>
+
 								<div class="form-group">
 									<label class="control-label col-xs-12 col-sm-4 no-padding-right">E-mail:</label>
 									<div class="col-xs-12 col-sm-8">
@@ -1061,6 +987,7 @@
 										</div>
 									</div>
 								</div>
+
 								<div class="form-group">
 									<label class="control-label col-xs-12 col-sm-4 no-padding-right" >Cargo:</label>
 									<div class="col-xs-12 col-sm-8">
@@ -1085,10 +1012,10 @@
 					Guardar
 				</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
+		</div>
+	</div>
 </div>
-<!-- MODAL PARA EL GÉNERO MUSICAL -->
+
 <div id="modal-genero-musical" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1140,7 +1067,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA EL TIPO DE PROGRAMACION -->
+
 <div id="modal-tipo-programacion" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1192,7 +1119,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA SINCRONIZADO DE TIEMPO PRIMERA HORA -->
+
 <div id="modal-primera-hora" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1256,7 +1183,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA SINCRONIZADO DE TIEMPO SEGUNDA HORA -->
+
 <div id="modal-segunda-hora" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1320,7 +1247,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA SINCRONIZADO DE TIEMPO TERCERA HORA -->
+
 <div id="modal-tercera-hora" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1384,7 +1311,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA SINCRONIZADO DE TIEMPO CUARTA HORA -->
+
 <div id="modal-cuarta-hora" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1448,7 +1375,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA SEGMENTOS, TERCERA ETAPA -->
+
 <div id="modal-segmentos" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1491,7 +1418,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- MODAL PARA CLIENTES -->
+
 <div id="modal-clientes" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1529,6 +1456,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="modal-footer no-margin-top">
 				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
 					<i class="ace-icon fa fa-times"></i>
@@ -1539,10 +1467,10 @@
 					Guardar
 				</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
+		</div>
+	</div>
 </div>
-<!-- MODAL PARA POSIBLES CLIENTES -->
+
 <div id="modal-posibles-clientes" class="modal fade" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -1554,6 +1482,7 @@
 					Agregar Posibles Clientes
 				</div>
 			</div>
+
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-sm-12">
@@ -1590,6 +1519,6 @@
 					Guardar
 				</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
+		</div>
+	</div>
 </div>

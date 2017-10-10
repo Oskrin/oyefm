@@ -8,46 +8,15 @@
 	error_reporting(0);
 	
 	$fecha = $class->fecha_hora();
-	$cont = 0;
-
-	$cadena = " ".$_POST['img'];	
-	$buscar = 'data:image/png;base64,';
-
-	// modificar imagen
-	if (isset($_POST['btn_gardar_imagen']) == "btn_gardar_imagen") {
-		$resp = img_64("imagenes",$_POST['img'],'png',$_POST['id_vendedor']);
-
-		$resp = $class->consulta("UPDATE vendedores SET imagen = '$_POST[id_vendedor].png' WHERE id = '$_POST[id_vendedor]'");	
-		
-		$data = 1;
-		echo $data;
-	}
-	// fin
-
-	// consultar usuarios
-	if(isset($_POST['cargar_tabla'])){
-		$resultado = $class->consulta("SELECT V.id, P.cedula_identificacion, P.nombres_completos, T.nombre FROM  vendedores V, corporativo.personal P, tipo_vendedor T  WHERE V.id_personal = P.id and V.id_tipo_vendedor = T.id AND V.estado = '1'");
-		while ($row=$class->fetch_array($resultado)) {
-			$lista[] = array('id' => $row[0],
-						'cedula_identificacion' => $row[1],
-						'nombres_completos' => $row[2],
-						'nombre' => $row[3]
-						);
-		}
-		echo $lista = json_encode($lista);
-	}
-	// fin
 
 	if (isset($_POST['btn_guardar']) == "btn_guardar") {
 		$id_vendedores = $class->idz();
 		$fecha_corta = $class->fecha();
 
-		$resp = $class->consulta("INSERT INTO vendedores VALUES (			'$id_vendedores',
+		$resp = $class->consulta("INSERT INTO vendedores VALUES (		'$id_vendedores',
 																		'$_POST[codigo]',
-																		'$_POST[id_personal]',
+																		'$_POST[select_empleado]',
 																		'$_POST[select_tipo_vendedor]',
-																		'$fecha_corta',
-																		'',
 																		'$_POST[observaciones]',
 																		'1', '$fecha');");	
 
@@ -90,19 +59,13 @@
 	}
 	// fin
 
-	// busqueda por personal
-	if($_GET['tipo_busqueda'] == 'nombre') {
-		$texto = $_GET['term'];
-		
-		$resultado = $class->consulta("SELECT * FROM corporativo.personal WHERE nombres_completos like '%$texto%' AND estado = '1'");
+	//LLena combo empleados
+	if (isset($_POST['llenar_empleado'])) {
+		$resultado = $class->consulta("SELECT id, nombres_completos FROM corporativo.personal");
+		print'<option value="">&nbsp;</option>';
 		while ($row=$class->fetch_array($resultado)) {
-			$data[] = array(
-		            'id_personal' => $row[0],
-		            'value' => $row[4],
-		            'identificacion' => $row[5]
-		        );
+			 print '<option value="'.$row['id'].'">'.$row['nombres_completos'].'</option>';
 		}
-		echo $data = json_encode($data);
 	}
 	// fin
 
@@ -116,13 +79,13 @@
 	}
 	// fin
 
-	//cargar imagen corporativo.personal
-	if (isset($_POST['llenar_foto'])) {
-		$resultado = $class->consulta("SELECT * FROM vendedores WHERE id = '$_POST[id]'");
+	// cargar ultima codigo 
+	if (isset($_POST['cargar_codigo'])) {
+		$resultado = $class->consulta("SELECT max(codigo_vendedor) FROM vendedores GROUP BY id ORDER BY id asc");
 		while ($row = $class->fetch_array($resultado)) {
-			$data = array('imagen' => $row['imagen']);
+			$data = array('codigo_ficha' => $row[0]);
 		}
 		print_r(json_encode($data));
 	}
-	//fin
+	// fin
 ?>

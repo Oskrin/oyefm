@@ -170,7 +170,7 @@ function Header() {
 
     $this->SetFont('Arial','',9);
     $this->Text(10, 35, 'CLIENTE:',1, 'L');
-    $this->Text(26, 35, utf8_decode($cliente),1, 'L');
+    $this->Text(26, 35, maxCaracter(utf8_decode($cliente),54),1, 'L');
     $this->Text(10, 40, utf8_decode('DIRECCIÓN:'),1, 'L');
     $this->Text(30, 40, utf8_decode($direccion),1, 'L');
     $this->Text(10, 45, 'RUC:',1, 'L');
@@ -206,6 +206,11 @@ function Header() {
     $this->SetY(96);
     $this->SetX(8);
     $this->multiCell(127, 5, 'SON:  '. $letras->ValorEnLetras($total_pagar, 'dolares'),1);
+
+    // $this->SetFont('Arial','',8);
+    // $this->SetY(85);
+    // $this->SetX(31);
+    // $this->multiCell(70, 5, utf8_decode('FORMA DE PAGO: OTROS S.F. $ '.$total_pagar),0,'C');
 
     $this->SetFont('Arial','',8);
     $this->SetY(101);
@@ -255,7 +260,6 @@ function Header() {
     $this->multiCell(30, 5, '$',1,'L');
 
     $this->SetFont('Arial','',8);
-    // $this->Text(22, 122, 'FIRMA AUTORIZADA CLIENTE' ,1, 'L');
     $this->Text(85, 122, 'FIRMA AUTORIZADA CLIENTE' ,1, 'L');
 
     $resp = $class->consulta("SELECT D.codigo, D.descripcion, D.cantidad, D.valor_unitario, D.total_venta FROM detalle_factura_venta D, factura_venta F WHERE D.id_factura_venta = F.id AND F.id = '".$_GET['id']."' ORDER BY D.id asc");
@@ -267,6 +271,8 @@ function Header() {
         $valor_unitario = $row[3];
         $total_venta = $row[4];
 
+        $this->SetFont('Arial','',6);
+
         $this->SetY($posiciony);
         $this->SetX(8);
         $this->multiCell(30,6, utf8_decode($codigo),0);
@@ -275,6 +281,7 @@ function Header() {
         $this->SetX(38);
         $this->multiCell(75, 6, utf8_decode($descripcion),0);
 
+        $this->SetFont('Arial','',7);
         $this->SetY($posiciony);
         $this->SetX(113);
         $this->multiCell(22, 6, utf8_decode($cantidad),0,'C');
@@ -387,7 +394,7 @@ function Header() {
     $this->multiCell(33, 5, $total_pagar,0,'R');
 
     //Logo cabezera
-    $this->Image('pie_factura.jpg',8,127,193);
+    $this->Image('pie_factura4.jpg',8,127,193);
 
     // $this->SetFont('Arial','',6);
     // $this->Text(10, 140, utf8_decode('M&V GRAFIC DELGADO MARIA VERONICA RUC. 1705161428001 AUT.SRI.6541 FECHA DE AUTORIZACIÓN 01 DICIEMBRE 2014 CADUCA 01 DICIEMBRE 2015 DEL 001-001 '),1, 'L');
@@ -408,6 +415,6 @@ function Header() {
     //Primera página
     $pdf->AddPage();
     $pdf->SetFont('Arial','',15);
-    $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
+    // $pdf->Link(10,8,10,10,"http://localhost:8080/oyeadmin/#/");
     $pdf->Output('factura oye fm.pdf','I');
 ?>

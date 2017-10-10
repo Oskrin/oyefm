@@ -32,6 +32,11 @@
 		    	$resp = $class->consulta("UPDATE tipo_vendedor SET nombre = '$_POST[nombre]',observaciones = '$_POST[observaciones]',fecha_creacion = '$fecha' WHERE id = '$_POST[id]'");
 		    	$data = "2";
 		    }
+	    } else {
+	    	if ($_POST['oper'] == "del") {
+	    		$resp = $class->consulta("UPDATE tipo_vendedor SET estado = '2' WHERE id = '$_POST[id]'");
+	    		$data = "4";	
+	    	}	
 	    }
 	}    
 

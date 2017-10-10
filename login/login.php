@@ -9,11 +9,11 @@
 		$resultado = $class->consulta("
 										SELECT *, (SELECT data FROM privilegios P WHERE  U.id= P.id_usuario) as data_privilegio 
 										FROM usuarios U  
-										where U.usuario = '".$_POST['txt_nombre']."' and clave = md5('".$_POST['txt_clave']."')");
+										where U.cedula = '".$_POST['txt_nombre']."' and clave = md5('".$_POST['txt_clave']."')");
 		if($class->num_rows($resultado) == 1) {
 			$row=$class->fetch_array($resultado);
 			$_SESSION['user'] = array(	'id'=>$row[0],
-										'usuario' => $row[1],
+										'usuario' => $row[9],
 										'name' => $row['nombres_completos'],
 										'imagen' => $row[11],
 										'privilegio' => $row['data_privilegio']);

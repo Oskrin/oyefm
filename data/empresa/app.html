@@ -1,6 +1,6 @@
 <div class="main-content">	
 	<div class="main-content-inner">
-	    <div class="breadcrumbs" id="breadcrumbs">
+	    <!-- <div class="breadcrumbs" id="breadcrumbs">
 			<script type="text/javascript">
 				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
 			</script>
@@ -23,22 +23,25 @@
 					</span>
 				</form>
 			</div>
-		</div>
+		</div> -->
 
 	    <div class="page-content">
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="space"></div>
 					<form class="form-horizontal" name="form_empresa" id="form_empresa">
+						<div class="well well-sm">
+							<h3 class=" center red">EMPRESA</h3>
+						</div>
 						<div class="tabbable">
-							<ul class="nav nav-tabs padding-16">
+							<!-- <ul class="nav nav-tabs padding-16">
 								<li class="active">
 									<a data-toggle="tab" href="">
 										<i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
 										Información Básica
 									</a>
 								</li>
-							</ul>
+							</ul> -->
 
 							<div class="tab-content profile-edit-tab-content">
 								<div id="edit-basic" class="tab-pane in active">
@@ -48,13 +51,13 @@
 											<div class="col-sm-6">
 												<div class="form-group">
 													<label class="control-label col-sm-4 no-padding-right">RUC Empresa:</label>
-													<div class="col-sm-4">
+													<div class="col-sm-6">
 														<div class="clearfix">
 															<input type="text" name="identificacion" id="identificacion" placeholder="Consultar..." class="form-control" />
 															<input type="hidden" name="id_empresa" id="id_empresa" class="form-control" />
 														</div>
 													</div>
-													<button class="btn btn-purple btn-sm blue" id="btn_verificar" type="button" onclick="angular.element(this).scope().cargadatos('estado')"><i class="ace-icon fa fa-search"></i></button>
+												<!-- 	<button class="btn btn-purple btn-sm blue" id="btn_verificar" type="button" onclick="angular.element(this).scope().cargadatos('estado')"><i class="ace-icon fa fa-search"></i></button> -->
 												</div>
 
 												<div class="form-group">
@@ -205,10 +208,10 @@
 
 						<div class="clearfix form-actions">
 							<div class="col-md-offset-3 col-md-9">
-								<button class="btn btn-success" type="button" name="btn_0" id="btn_0">
+								<!-- <button class="btn btn-success" type="button" name="btn_0" id="btn_0">
 									<i class="ace-icon fa fa-save bigger-110"></i>
 									Guardar
-								</button>
+								</button> -->
 
 								&nbsp; &nbsp;
 								<button class="btn btn-success" type="button" name="btn_3" id="btn_3">

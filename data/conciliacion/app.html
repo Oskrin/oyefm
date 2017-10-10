@@ -1,0 +1,286 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+			</script>
+
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-folder-open-o blue"></i>
+					<a href="#/menu_pagos">Pagos</a>
+				</li>
+
+				<li class="active">Conciliación Pagos</li>
+			</ul>
+		</div>
+		<hr /> 
+
+		<div class="widget-box">
+            <div class="widget-main"> 
+            	<div class="control">
+            		<div class="col-sm-3">
+						<div class="clearfix">
+							<span class="block input-icon input-icon-right">
+								<input type="text" name="buscador" id="buscador" class="form-control dimensiones" placeholder="Buscar....." onKeyUp="this.value = this.value.toUpperCase();" />
+								<i class="ace-icon fa fa-search blue"></i>
+				            </span>
+						</div>
+					</div>
+
+					<!-- <button class="btn  btn-primary btn-pink posicion" id="btn_abrir" name="btn_abrir" type="button" data-toggle="modal" href="#myModal2"><i class="fa fa-plus-circle"></i> NUEVO</button> -->
+				</div>
+				&nbsp;
+
+				<table id="table"></table>
+				<div id="pager"></div>                                           
+            </div>
+        </div>
+	</div>
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModal">
+	    <div class="modal-dialog modal-lg">
+	      	<div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		          	<h4 class="modal-title">AGREGAR CONCILIACIÓN</h4>
+		        </div>
+
+		        <div class="modal-body">
+		            <form class="form-horizontal" name="form_registro" id="form_registro">
+						<div class="row">
+							&nbsp; &nbsp;
+							<div class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-4 control-label no-padding-right" for="select_forma">Forma Pago:</label>
+										<div class="col-sm-6">
+											<select id="select_forma" name="select_forma" class="select2" data-placeholder="Forma Pago..." class="form-control">
+												<option value="">&nbsp;</option>
+												<option value="EFECTIVO" selected>EFECTIVO</option>
+												<option value="CHEQUE">CHEQUE</option>
+												<option value="DEPÓSITO">DEPÓSITO</option>
+												<option value="TRANSFERENCIA">TRANSFERENCIA</option>
+												<option value="OTRO">OTRO</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+		                                <label class="col-md-5">TOTAL RECIBIDO:</label>
+		                                <div class="col-md-7">
+		                                	<span class="input-icon">
+												<input type="text" id="total_recibido" name="total_recibido" class="form-control" value="0.00" />
+												<i class="ace-icon fa fa fa-usd orange"></i>
+											</span>                                
+		                                </div> 
+		                            </div>
+
+		                            <div class="form-group">
+		                                <label class="col-md-5">TOTAL GASTO REAL:</label>
+		                                <div class="col-md-7">
+		                                	<span class="input-icon">
+												<input type="text" id="total_gasto" name="total_gasto" class="form-control" value="0.00" />
+												<i class="ace-icon fa fa fa-usd orange"></i>
+											</span>                                
+		                                </div> 
+		                            </div>
+
+		                            <div class="form-group">
+		                                <label class="col-md-5">SALDO:</label>
+		                                <div class="col-md-7">
+		                               		<span class="input-icon">
+												<input type="text" id="saldo" name="saldo" class="form-control" value="0.00" />
+												<i class="ace-icon fa fa fa-usd orange"></i>
+											</span>                               
+		                                </div> 
+		                            </div>											
+								</div>
+							</div>	
+						</div>
+					</form>
+		        </div>
+
+		        <div class="modal-footer no-margin-top">
+					<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+						<i class="ace-icon fa fa-times"></i>
+						Cerrar
+					</button>
+
+					<button name="btn_0" id="btn_0" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Registro">
+						<i class="ace-icon fa fa-save"></i>
+						Guardar
+					</button>
+				</div>
+	      	</div>
+	    </div>
+	</div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal2">
+    <div class="modal-dialog modal-sm">
+      	<div class="modal-content">
+	        <div class="table-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<span class="white">&times;</span>
+				</button>
+				Detalle Cheque
+			</div>
+        	<br />
+
+	        <form class="form-horizontal" name="form_registro2" id="form_registro2">
+	        	<div class="row">
+	        		<div class="form-group">
+						<label class="control-label col-sm-4 no-padding-right">N° Cheque:</label>
+						<div class="col-sm-7">
+							<div class="clearfix">
+								<input type="text" name="num_cheque" id="num_cheque" placeholder="" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-4 no-padding-right">N° Cuenta:</label>
+						<div class="col-sm-7">
+							<div class="clearfix">
+								<input type="text" name="num_cuenta" id="num_cuenta" placeholder="" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
+							</div>
+						</div>
+					</div>
+	        	</div>
+	        </form>
+	        
+			<br />
+	        <div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+
+				<button name="btn_guardar2" id="btn_guardar2" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Cheque">
+					<i class="ace-icon fa fa-check"></i>
+					O.K
+				</button>
+			</div>
+      	</div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal3">
+    <div class="modal-dialog modal-sm">
+      	<div class="modal-content">
+	        <div class="table-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<span class="white">&times;</span>
+				</button>
+				Detalle Depósito
+			</div>
+        	<br />
+
+	        <form class="form-horizontal" name="form_registro3" id="form_registro3">
+	        	<div class="row">
+	        		<div class="form-group">
+						<label class="control-label col-sm-4 no-padding-right">N° Depósito:</label>
+						<div class="col-sm-7">
+							<div class="clearfix">
+								<input type="text" name="num_deposito" id="num_deposito" placeholder="" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-4 no-padding-right">Banco:</label>
+						<div class="col-sm-7">
+							<div class="clearfix">
+								<select id="select_banco" name="select_banco" class="select2" data-placeholder="Banco...">
+									<option value="">&nbsp;</option>	
+								</select>
+							</div>
+						</div>	
+					</div>
+	        	</div>
+	        </form>
+	        
+			<br />
+	        <div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+				<button name="btn_guardar3" id="btn_guardar3" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Depósito">
+					<i class="ace-icon fa fa-check"></i>
+					O.K
+				</button>
+			</div>
+      	</div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal4">
+    <div class="modal-dialog modal-sm">
+      	<div class="modal-content">
+	        <div class="table-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<span class="white">&times;</span>
+				</button>
+				Detalle Transferencia
+			</div>
+        	<br />
+
+	        <form class="form-horizontal" name="form_registro4" id="form_registro4">
+	        	<div class="row">
+	        		<div class="form-group">
+						<label class="control-label col-sm-5 no-padding-right">N° Transferencia:</label>
+						<div class="col-sm-6">
+							<div class="clearfix">
+								<input type="text" name="num_transferencia" id="num_transferencia" placeholder="" class="form-control" onKeyUp="this.value = this.value.toUpperCase();" />
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-4 no-padding-right">Origen:</label>
+						<div class="col-sm-7">
+							<div class="clearfix">
+								<select id="select_banco2" name="select_banco2" class="select2" data-placeholder="Banco...">
+									<option value="">&nbsp;</option>	
+								</select>
+							</div>
+						</div>	
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-4 no-padding-right">Destino:</label>
+						<div class="col-sm-7">
+							<div class="clearfix">
+								<select id="select_banco3" name="select_banco3" class="select2" data-placeholder="Banco...">
+									<option value="">&nbsp;</option>	
+								</select>
+							</div>
+						</div>	
+					</div>
+	        	</div>
+	        </form>
+	        
+			<br />
+	        <div class="modal-footer no-margin-top">
+				<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal" data-toggle="tooltip" title="Cerrar ventana">
+					<i class="ace-icon fa fa-times"></i>
+					Cerrar
+				</button>
+				<button name="btn_guardar4" id="btn_guardar4" class="btn btn-sm btn-success pull-right" data-toggle="tooltip" title="Guardar Transferencia">
+					<i class="ace-icon fa fa-check"></i>
+					O.K
+				</button>
+			</div>
+      	</div>
+    </div>
+</div>
+
+
+
+
+
+

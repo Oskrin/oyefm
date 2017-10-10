@@ -55,7 +55,7 @@
 																							'$_POST[txt_forma]',
 																							'$_POST[txt_contactado_con]',
 																							'$_POST[select_usuarios]',
-																							'1', '$fecha');");
+																							'1', '$fecha')");
 	}
 
 	
@@ -69,7 +69,7 @@
 																							'$_POST[txt_forma2]', 
 																							'$_POST[txt_preconfirmado_con]',
 																							'$_POST[select_usuarios2]',
-																							'1', '$fecha');");
+																							'1', '$fecha')");
 	}
 
 	if(isset($_POST['inp_confirmado']) == 'on') {
@@ -82,7 +82,7 @@
 			 																				'$_POST[txt_forma3]',
 			 																				'$_POST[txt_confirmado_con]',
 			 																				'$_POST[select_usuarios3]',
-																							'1', '$fecha');");
+																							'1', '$fecha')");
 	}
 
 
@@ -96,7 +96,7 @@
 																							'$_POST[txt_telf3]',
 																							'$_POST[txt_direccion]',
 																							'$_POST[txt_email]',
-																							'1', '$fecha');");
+																							'1', '$fecha')");
 
 		$resp = $class->consulta("INSERT INTO agenda_invitados.datos_adicionales VALUES (	'$id_adicionales',
 																							'$id_ficha',
@@ -118,7 +118,7 @@
 	 																						'$_POST[txta_sugerencia]',
 																							'$_POST[txt_video]',
 																							'$_POST[observaciones]',
-																							'1', '$fecha');");
+																							'1', '$fecha')");
 
 
 	// 	if ($resp) {
@@ -133,24 +133,28 @@
 	//LLena los programas en el Combo
 	if (isset($_POST['llenar_programas'])) {
 		$id = $class->idz();
-		$resultado = $class->consulta("SELECT id, upper(codigo) as codigo, nombre FROM agenda_invitados.programas where estado='1';");
+		$resultado = $class->consulta("SELECT id, upper(codigo) as codigo, nombre FROM agenda_invitados.programas where estado='1'");
 		print'<option value="">&nbsp;</option>';
 		while ($row=$class->fetch_array($resultado)) {
 			 print '<option value="'.$row['id'].'">'.$row['nombre'].'</option>';
 		}
 	}
+	// fin
+	
 	//LLena todos los usuarios
 	if (isset($_POST['llenar_usuarios'])) {
 		$id = $class->idz();
-		$resultado = $class->consulta("SELECT id, id_cargo, nombre FROM agenda_invitados.usuario where estado='1';");
+		$resultado = $class->consulta("SELECT id, id_cargo, nombre FROM agenda_invitados.usuario where estado='1'");
 		print'<option value="">&nbsp;</option>';
 		while ($row=$class->fetch_array($resultado)) {
 			print '<option value="'.$row['id'].'">'.$row['nombre'].'</option>';
 		}
 	}
+	// fin
+
 	//para la consulta de los datos de los programas
 	if(isset($_POST['consultar_datos_programas'])){
-		$resultado = $class->consulta("SELECT id, codigo, nombre, estado, fecha_creacion FROM agenda_invitados.programas where id='$_POST[id]';");
+		$resultado = $class->consulta("SELECT id, codigo, nombre, estado, fecha_creacion FROM agenda_invitados.programas where id='$_POST[id]'");
 		while ($row=$class->fetch_array($resultado)) {
 			$data['programa'] = array('id' => $row['id'], 'codigo'=>$row['codigo'], 'nombre'=>$row['nombre']);
 		}
@@ -160,15 +164,19 @@
 		//}
 		print_r(json_encode($data));
 	}
+	// fin
+
 	//cargar id fichas invitados
 	if(isset($_POST['id_ficha'])) {
 		$id_ficha = $class->idz();
 		$data = $id_ficha;
 		echo $data;
 	}
+	// fin
+
 	// consultar ficha de ingreso invitados
 	if(isset($_POST['cargar_tabla_fichas'])){
-		$resultado = $class->consulta("select D.id_ficha, D.nom_invitado, D.contacto, D.inst_empresa from agenda_invitados.datos_invitado D  where D.estado = '1'");
+		$resultado = $class->consulta("SELECT D.id_ficha, D.nom_invitado, D.contacto, D.inst_empresa FROM agenda_invitados.datos_invitado D WHERE D.estado = '1'");
 		while ($row=$class->fetch_array($resultado)) {
 			$lista[] = array('id' => $row['id_ficha'],
 						'nom_invitado' => $row['nom_invitado'],
@@ -179,10 +187,12 @@
 		}
 		echo $lista = json_encode($lista);
 	}
+	// fin
+
 	// consultar ficha de invitados
 	if(isset($_POST['llenar_datos_invitados'])) {
 		$arr_data = array();
-		$resultado = $class->consulta("SELECT * FROM agenda_invitados.datos_invitado WHERE id_ficha = '$_POST[id]' and estado = '1'");
+		$resultado = $class->consulta("SELECT * FROM agenda_invitados.datos_invitado WHERE id_ficha = '$_POST[id]' AND estado = '1'");
 		while ($row=$class->fetch_array($resultado)) {
 		    $arr_data[] = $row['2'];
 		    $arr_data[] = $row['3'];
@@ -199,10 +209,12 @@
 		}
 		echo json_encode($arr_data);
 	}
+	// Fin
+
 	// consultar ficha de ingreso personal
 	if(isset($_POST['llenar_datos_adicionales'])) {
 		$arr_data = array();
-		$resultado = $class->consulta("SELECT * FROM agenda_invitados.datos_adicionales WHERE id_ficha = '$_POST[id]' and estado = '1'");
+		$resultado = $class->consulta("SELECT * FROM agenda_invitados.datos_adicionales WHERE id_ficha = '$_POST[id]' AND estado = '1'");
 		while ($row=$class->fetch_array($resultado)) {
 		    $arr_data[] = $row['2'];
 		    $arr_data[] = $row['3'];
@@ -220,15 +232,16 @@
 		}
 		echo json_encode($arr_data);
 	}
+	// fin
 
 	// consultar archivos fichas de ingreso
 	if(isset($_POST['cargar_imagenes'])) {
 		$arr_data = array();
-		$resultado = $class->consulta("SELECT * FROM agenda_invitados.imagenes WHERE id_ficha = '$_POST[id]' and estado = '1'");
+		$resultado = $class->consulta("SELECT * FROM agenda_invitados.imagenes WHERE id_ficha = '$_POST[id]' AND estado = '1'");
 		while ($row=$class->fetch_array($resultado)) {
 		    $arr_data[] = $row['2'];
 		}
 		echo json_encode($arr_data);
 	}
-	
+	// fin
 ?>
