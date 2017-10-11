@@ -475,6 +475,13 @@
 
 							<span class="menu-text">Pagos</span>
 							<b class="arrow"></b>
+					<li ng-class =	"{'active open': $route.current.activetab == 'ficha_programas'}">
+						<a href="" class="dropdown-toggle">
+							<i class="menu-icon fa fa-folder-open-o"></i>
+							<span class="menu-text">
+								Programas
+							</span>
+							<b class="arrow fa fa-angle-down"></b>
 						</a>
 					</li>
 
