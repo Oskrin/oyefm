@@ -5,160 +5,42 @@
 	}
 ?>
 <!DOCTYPE html>
+
+
 <html lang="es">
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>Login</title>
-		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-		<link rel="stylesheet" href="../dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../dist/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="../dist/css/fontdc.css" />
-		<link rel="stylesheet" href="../dist/css/animate.min.css" />
-		<link rel="stylesheet" href="../dist/css/jquery.gritter.min.css" />
-		<link rel="stylesheet" href="../dist/css/ace.min.css" />
-		<link rel="stylesheet" href="../dist/css/ace-rtl.min.css" />
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+</head>
+<body ng-app="loginApp" ng-cloak>
+  <div ng-controller="AppCtrl" layout="column" style="height:600px" ng-cloak>
 
-		<style type="text/css">
-			img {
-			    width: 100%;
-			    height: auto;
-			}
+  <md-toolbar md-scroll-shrink ng-if="true">
+    <div class="md-toolbar-tools">
+        <span>OYEFM ECUADOR</span>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <md-icon>favorite</md-icon>
+        </md-button>
+      </div>
+  </md-toolbar>
+  <md-content flex>
 
-			.campo {
-				height: 22px; 
-			}
+  </md-content>
+</div>
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-			.label_login {
-				font-size: 12px;
-			}
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
-			.banner_superior {
-				height: 85px;
-			}
-
-			.logo {
-				color: #fff;
-				font-size: 30px;
-				font-style: oblique;
-				margin-left: 70px;
-			}
-
-			.logo_conceptual {
-				/*margin-left: 1400px;*/
-				/*color:red; */
-			   font-size:25px;
-			   font-family:Courier;
-			   /*font-weight:bold;*/
-			   /*font-style:italic;*/
-			   padding-left: 40px;
-			   line-height:30px;
-			   letter-spacing:5px;
-			   /*text-decoration:underline;*/
-			   text-transform:capitalize;
-			   text-align:right;
-			   text-indent:30px;
-			}
-		</style>
-	</head>
-	<body >
-		<div class="main-container">
-			<div class="main-content">
-				<div id="navbar" class="navbar navbar-default banner_superior">
-					<script type="text/javascript">
-						try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-					</script>
-					<div class="navbar-container" id="navbar-container">
-						<div class="navbar-header pull-left">
-							<h1 class="logo"><b>OYEFM Ecuador</b></h1>
-						</div>
-					</div>
-					
-				</div>
-				<div class="col-sm-10 col-sm-offset-1">
-					<h1 class="logo_conceptual"><b>Conceptual Business Group</b></h1>
-					<div class="login-container ">
-						<div class="center animated bounceInRight">
-							<br />
-							<br />
-							<h4 class="blue" id="id-company-text">Ingreso de Usuario al sistema</h4>
-							<hr>
-						</div>
-						<div class="space-6"></div>
-						<div class="position-relative">
-							<div id="login-box" class="login-box visible widget-box no-border animated bounceInLeft">
-								<div class="widget-body">
-									<div class="widget-main">
-										<p >
-											Por favor Ingrese su número de Cédula y contraseña
-										</p>
-										
-										<div class="space-6"></div>
-										<form id="form_proceso" name="form_proceso" class="form-horizontal">
-											
-
-											<fieldset>
-												<div class="form-group">
-													<label class="control-label col-sm-3 label_login">Cédula:</label>
-													<div class="col-sm-6">
-														<div class="clearfix">
-															<input type="text" name="txt_nombre" id="txt_nombre" placeholder="" class="form-control campo" />
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-sm-3 label_login">Contraseña:</label>
-													<div class="col-sm-6">
-														<div class="clearfix">
-															<input type="password" name="txt_clave" id="txt_clave" placeholder="" class="form-control campo" />
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-sm-3"></div>
-													<div class="col-sm-6"><a href="">&nbsp;&nbsp;&nbsp;¿Olvidó su contraseña?</a></div>	   
-					                            </div>
-					                            <div class="form-group">
-													<div class="col-sm-4"></div>
-													<div class="col-sm-6"><button type="submit" id="btn_ingresar" name="btn_ingresar" class="width-60 btn btn-sm btn-success">
-														<span class="bigger-110">Ingresar</span></div>	   
-					                            </div>
-												<div class="space"></div>
-											</fieldset>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<img src="../images/banner oscar.jpg">
-				</div>
-				<div class="footer">
-					<div class="footer-inner">
-						<div class="footer-content">
-							<span class="bigger-120">
-								<span class="green bolder">Conceptual Business Group</span>
-								Applicación &copy; 2016-2017
-							</span>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='../dist/js/jquery.min.js'>"+"<"+"/script>");
-		</script>
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='../dist/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="../dist/js/jquery.validate.min.js"></script>
-		<script src="../dist/js/jquery.gritter.min.js"></script>
-		<script src="../dist/js/lockr.min.js"></script>
-		
-		<script src="login.js"></script>
-        
-	</body>
+  <script type="text/javascript" src="./app.js"></script>
+  
+</body>
 </html>
