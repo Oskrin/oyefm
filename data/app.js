@@ -1,7 +1,7 @@
-var dcapp = angular.module('scotchApp', ['ngRoute','ngResource','ngStorage','ngImgCrop']);
+var dcapp = angular.module('scotchApp', ['ngRoute','ngResource','ngStorage','ngImgCrop', 'ngMaterial', 'ngMessages', 'route-segment', 'view-segment']);
 
 // configure our routes
-dcapp.config(function($routeProvider) {
+dcapp.config(function($routeProvider, $locationProvider) {
     $routeProvider
         // route page initial
         .when('/', {
@@ -472,6 +472,9 @@ dcapp.config(function($routeProvider) {
             controller  : 'configuracionController',
             activetab: 'configuracion'
         })
+        .otherwise({
+            redirectTo: '/'
+        });
 });
 
 dcapp.factory('Auth', function($location) {
