@@ -501,6 +501,24 @@ dcapp.factory('Auth', function($location) {
 });
 
 
+
+dcapp.controller('menuController', function ($scope) {
+  $scope.menuList = [
+    {name: 'Inicio', url: '/', icon: 'home'},
+    {name: 'Parametros', url: '/facturero', icon: 'home'},
+    {name: 'Compañia', url: '/areas', icon: 'home'},
+    {name: 'Cargos', url: '/cargos', icon: 'home'},
+    {name: 'Corporativo', url: '/menu_corporativo', icon: 'home'},
+    {name: 'Ventas', url: '/menu_ventas', icon: 'home'},
+    {name: 'Clientes', url: '/menu_clientes', icon: 'home'},
+    {name: 'Empleados', url: '/menu_empleados', icon: 'home'},
+    {name: 'Invitados', url: '/menu_invitados', icon: 'home'},
+    {name: 'Programas', url: '/menu_programas', icon: 'home'},
+    {name: 'Nómina', url: '/menu_nomina', icon: 'home'},
+    {name: 'Rol de Pagos', url: '/menu_rol_pagos', icon: 'home'},
+  ];
+});
+
 dcapp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (event) {
         var rutablock = $location.path();
