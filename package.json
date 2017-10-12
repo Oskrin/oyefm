@@ -1,0 +1,24 @@
+{
+  "name": "oyefm",
+  "version": "1.0.0",
+  "description": "AdministracionOyeFm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oskrin/oyefm.git"
+  },
+  "keywords": [
+    "administracion",
+    "oyefm",
+    "radio"
+  ],
+  "author": "ConceptualBussinesGroup",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oskrin/oyefm/issues"
+  },
+  "homepage": "https://github.com/Oskrin/oyefm#readme"
+}
