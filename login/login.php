@@ -24,4 +24,7 @@
 			print_r(json_encode(array('status' => 'error', 'problem' => 'user no valid')));
 		}		
 	}
+  if(isset($_POST['consultarUsuario'])) {
+    print_r(json_encode($_SESSION['user']));
+  };
 ?>

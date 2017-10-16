@@ -504,19 +504,37 @@ dcapp.factory('Auth', function($location) {
 
 dcapp.controller('menuController', function ($scope) {
   $scope.menuList = [
-    {name: 'Inicio', url: '/', icon: 'home'},
-    {name: 'Parametros', url: '/facturero', icon: 'home'},
-    {name: 'Compañia', url: '/areas', icon: 'home'},
+    {name: 'Inicio', url: '/', icon: 'dashboard'},
+    {name: 'Parametros', url: '/facturero', icon: 'settings'},
+    {name: 'Compañia', url: '/areas', icon: 'business'},
     {name: 'Cargos', url: '/cargos', icon: 'home'},
-    {name: 'Corporativo', url: '/menu_corporativo', icon: 'home'},
-    {name: 'Ventas', url: '/menu_ventas', icon: 'home'},
-    {name: 'Clientes', url: '/menu_clientes', icon: 'home'},
-    {name: 'Empleados', url: '/menu_empleados', icon: 'home'},
-    {name: 'Invitados', url: '/menu_invitados', icon: 'home'},
-    {name: 'Programas', url: '/menu_programas', icon: 'home'},
-    {name: 'Nómina', url: '/menu_nomina', icon: 'home'},
-    {name: 'Rol de Pagos', url: '/menu_rol_pagos', icon: 'home'},
+    {name: 'Corporativo', url: '/menu_corporativo', icon: 'class'},
+    {name: 'Ventas', url: '/menu_ventas', icon: 'store'},
+    {name: 'Clientes', url: '/menu_clientes', icon: 'perm_identity'},
+    {name: 'Empleados', url: '/menu_empleados', icon: 'supervisor_account'},
+    {name: 'Invitados', url: '/menu_invitados', icon: 'insert_invitation'},
+    {name: 'Programas', url: '/menu_programas', icon: 'next_week'},
+    {name: 'Nómina', url: '/menu_nomina', icon: 'group_work'},
+    {name: 'Rol de Pagos', url: '/menu_rol_pagos', icon: 'description'},
+    {name: 'Ordenes', url: '/menu_ordenes', icon: 'featured_play_list'},
+    {name: 'Agenda', url: '/menu_agenda', icon: 'date_ranger'},
+    {name: 'Pagos', url: '/menu_pagos', icon: 'monetization_on'},
+    {name: 'Usuarios', url: '/menu_usuarios', icon: 'contacts'},
+    {name: 'Reportes', url: '/menu_reportes', icon: 'picture_as_pdf'}
   ];
+});
+
+dcapp.controller('toolbarController', function ($scope) {
+  $.ajax({
+    url:'login/login.php',
+    type:'POST',
+    dataType:'json',
+    data:{consultarUsuario: true},
+    success:function(data) {
+      console.log('test', data);
+      $scope.infoUsuario = data;     
+    }
+  });
 });
 
 dcapp.run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {

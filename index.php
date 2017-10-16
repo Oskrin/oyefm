@@ -45,8 +45,10 @@
       <link rel="stylesheet" href="dist/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
       <script src="dist/js/ace-extra.min.js"></script>
       <!-- Angular Material style sheet -->
-      <link rel="stylesheet" href="./node_modules/angular-material/angular-material.min.css">
+      <link rel="stylesheet" href="./node_modules/material-design-lite/material.min.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <link rel="stylesheet" href="./node_modules/angular-material/angular-material.min.css">
+      <script src="./node_modules/material-design-lite/material.min.js"></script>
       <script src="./node_modules/angular/angular.js"></script>
       <script src="./node_modules/angular-aria/angular-aria.js"></script>
       <script src="./node_modules/angular-animate/angular-animate.js"></script>
@@ -138,36 +140,42 @@
       <script src="data/configuracion/app.js"></script>       
     </head>
 
-    <body ng-controller="mainController" class="no-skin">
-      <md-toolbar layout="row" md-theme="teal" md-theme-watch="true">
-        <div style="max-width:250px;" flex></div>
-        <div flex>
-          <div class="md-toolbar-tools toolbar-center">
-            
+    <body ng-controller="mainController" class="no-skin" layout='row'>
+      <div layout='column' layout-fill>
+        <md-toolbar ng-controller="toolbarController"  layout-align="center center">
+          <div class="md-toolbar-tools">
+            <h1>Administracion OYEFM</h1>
+            <span flex></span>
+            <span class="mdl-chip mdl-chip--contact">
+              <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">{{infoUsuario.usuario | limitTo: 1 | uppercase}}</span>
+              <span class="mdl-chip__text">{{infoUsuario.usuario}}</span>
+            </span>
+            <div>         
+              <md-button id="menu-lower-left" class="md-icon-button" aria-label="Eat cake">
+                <md-icon>more_vert</md-icon>
+              </md-button>
+              <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-lower-left">
+                <li class="mdl-menu__item"><a href="#!/configuracion">Configuración</a></li>
+                <li class="mdl-menu__item"><a href="login/exit.php">Salir</a></li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div style="max-width:250px;" flex></div>
-      </md-toolbar>
-      <md-content layout="row" flex>        
-        <md-sidenav style="max-width:250px;" layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"  flex>
-          <md-content layout="column" ng-controller="menuController">
-            <img src="images/menu.png">
-            <md-subheader class="md-no-sticky text-center">Menu</md-subheader>            
-            <md-list-item ng-href="#!{{item.url}}" ng-repeat="item in menuList">
-                <p>{{item.name}}</p>
-                <md-icon>{{item.icon}}</md-icon>
-            </md-list-item>
-          </md-content>
-        </md-sidenav>
-        <md-content flex class="md-padding" layout="column" >
-          <div class="page-content ng-view">
-                   
-          </div>
+        </md-toolbar>
+        <md-content layout="row" flex>  
+          <md-sidenav style="max-width:275px;" layout="column" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')"  flex>
+            <md-content layout="column" ng-controller="menuController">
+              <img src="images/menu.png">
+              <md-list-item ng-href="#!{{item.url}}" ng-repeat="item in menuList">
+                  <p>{{item.name}}</p>
+                  <md-icon class="md-grem">{{item.icon}}</md-icon>
+              </md-list-item>
+            </md-content>
+          </md-sidenav>
+          <md-content flex class="md-padding" ng-view></md-content>
         </md-content>
-      </md-content>
-      
+      </div>      
       <script type="text/javascript">
-          window.jQuery || document.write("<script src='dist/js/jquery.min.js'>" + "<" + "/script>");
+        window.jQuery || document.write("<script src='dist/js/jquery.min.js'>" + "<" + "/script>");
       </script>
 
       <script type="text/javascript">

@@ -1,0 +1,4 @@
+md-list-item, md-list-item .md-list-item-inner {
+    min-height: 15px!important;
+    height: 42px!important;
+}
