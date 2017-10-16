@@ -32,7 +32,7 @@ app.controller('AppCtrl', function($scope, $location, $timeout, $interval, $wind
                 $interval(function() {
                     $.unblockUI();
                     Lockr.set('users', data['privilegio']);
-                    $window.location = '../#/'; 
+                    $window.location = '../#!/'; 
                 }, 2000);
             } else{
                 if (data['status'] == 'error') {
