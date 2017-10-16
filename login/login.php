@@ -19,7 +19,7 @@
 										'privilegio' => $row['data_privilegio']);
 
 			$resultado = $class->consulta("UPDATE usuarios SET chat = '1' WHERE id = '$row[0]'");
-                        print_r(json_encode(array('status' => 'ok', 'privilegio' => $row['data_privilegio'])));
+                        print_r(json_encode(array('status' => 'ok', 'id' => $row[0], 'name' => $row[2], 'usuario' => $row[9], 'imagen' => $row[11], 'privilegio' => $row['data_privilegio'])));
 		} else {
 			print_r(json_encode(array('status' => 'error', 'problem' => 'user no valid')));
 		}		

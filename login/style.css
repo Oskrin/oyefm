@@ -1,0 +1,99 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400);
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: 'Roboto', sans-serif;
+            }
+            
+            .login {
+                margin-top: 3em;
+                width: 350px;
+                margin: 4em auto;
+                padding: 3em 2em 2em 2em;
+                background: #ffffff;
+                border: 1px solid #ebebeb;
+                box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.50) 0px 1px 2px 0px;
+                /*text-align: center;*/
+            }
+            
+           
+            footer p {
+                color: #888;
+                font-size: 13px;
+                letter-spacing: .4px;
+            }
+            
+            /*form {
+                width: 340px;
+                margin: 4em auto;
+                padding: 3em 2em 2em 2em;
+                background: #ffffff;
+                border: 1px solid #ebebeb;
+                box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.50) 0px 1px 2px 0px;
+            }*/
+            
+            md-input-container:not(.md-input-invalid) > md-icon.email {
+                color: green;
+            }
+            
+            md-input-container.md-icon-float {
+                margin-bottom: 10px;
+            }
+            
+            md-input-container:not(.md-input-invalid) > md-icon.name {
+                color: #4a89dc;
+            }
+            
+            md-input-container.md-input-invalid > md-icon.email,
+            .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+                color: red;
+            }
+            
+            md-input-container ng-messages,
+            md-input-container [ng-messages] {
+                padding-left: 36px;
+            }
+            
+            .md-button.md-raised:not([disabled]) {
+                width: 100%;
+                margin-top: 40px;
+                background-color: #4a89dc;
+                height: 48px;
+                color: white;
+            }
+            
+            .md-button.md-primary.md-raised:not([disabled]):hover,
+            .md-button.md-primary.md-fab:not([disabled]):hover {
+                background-color: #357DDC;
+            }
+            
+            footer a {
+                color: #4a89dc;
+                text-decoration: none;
+                transition: all .2s ease;
+            }
+            
+            footer a:hover {
+                color: #666;
+                text-decoration: underline;
+            }
+            
+            footer img {
+                width: 180px;
+                transition: all .2s ease;
+            }
+            
+            footer img:hover {
+                opacity: .83;
+            }
+            
+            footer img:focus,
+            footer a:focus {
+                outline: none;
+            }
+            
+            .dib2 {
+                float: left;
+                width: 90px;
+                margin: 5px 15px;
+            }
